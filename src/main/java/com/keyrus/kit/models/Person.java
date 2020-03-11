@@ -1,5 +1,7 @@
 package com.keyrus.kit.models;
 
+import com.keyrus.kit.models.enums.Nationality;
+
 public class Person {
 
     private Long id;
@@ -8,14 +10,14 @@ public class Person {
     private String bloodType;
     private Boolean suspicious;
     private Boolean confirmed;
-    private String nationality;
+    private Nationality nationality;
     private String doc;
     private Integer age;
 
     public Person() {
     }
 
-    public Person(Long id, String name, String phoneNumber, String bloodType, Boolean suspicious, Boolean confirmed, String nationality, String doc, Integer age) {
+    public Person(Long id, String name, String phoneNumber, String bloodType, Boolean suspicious, Boolean confirmed, Nationality nationality, String doc, Integer age) {
         this.id = id;
         this.name = name;
         this.phoneNumber = phoneNumber;
@@ -75,11 +77,11 @@ public class Person {
         this.confirmed = confirmed;
     }
 
-    public String getNationality() {
+    public Nationality getNationality() {
         return nationality;
     }
 
-    public void setNationality(String nationality) {
+    public void setNationality(Nationality nationality) {
         this.nationality = nationality;
     }
 
