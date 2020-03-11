@@ -1,6 +1,6 @@
 package com.keyrus.kit.models;
 
-public class Patient {
+public class Patient extends Person{
 
 
     private Long id;

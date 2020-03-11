@@ -1,6 +1,6 @@
 package com.keyrus.kit.models;
 
-public class Dna extends Person{
+public class Dna {
 
     private Long id;
     private String dna;
