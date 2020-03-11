@@ -1,9 +1,12 @@
 package com.keyrus.kit.models;
 
-public class Dna {
+public class Dna extends Person{
 
     private Long id;
     private String dna;
+
+    public Dna() {
+    }
 
     public Dna(Long id, String dna) {
         this.id = id;

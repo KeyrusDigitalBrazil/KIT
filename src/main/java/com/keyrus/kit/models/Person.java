@@ -1,5 +1,6 @@
 package com.keyrus.kit.models;
 
+import com.keyrus.kit.models.enums.BloodType;
 import com.keyrus.kit.models.enums.Nationality;
 
 public class Person {
@@ -7,26 +8,32 @@ public class Person {
     private Long id;
     private String name;
     private String phoneNumber;
-    private String bloodType;
-    private Boolean suspicious;
-    private Boolean confirmed;
+    private BloodType bloodType;
     private Nationality nationality;
     private String doc;
     private Integer age;
+    private Dna dna;
 
     public Person() {
     }
 
-    public Person(Long id, String name, String phoneNumber, String bloodType, Boolean suspicious, Boolean confirmed, Nationality nationality, String doc, Integer age) {
+    public Person(Long id, String name, String phoneNumber, BloodType bloodType, Nationality nationality, String doc, Integer age, Dna dna) {
         this.id = id;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.bloodType = bloodType;
-        this.suspicious = suspicious;
-        this.confirmed = confirmed;
         this.nationality = nationality;
         this.doc = doc;
         this.age = age;
+        this.dna = dna;
+    }
+
+    public Dna getDna() {
+        return dna;
+    }
+
+    public void setDna(Dna dna) {
+        this.dna = dna;
     }
 
     public Long getId() {
@@ -53,28 +60,12 @@ public class Person {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getBloodType() {
+    public BloodType getBloodType() {
         return bloodType;
     }
 
-    public void setBloodType(String bloodType) {
+    public void setBloodType(BloodType bloodType) {
         this.bloodType = bloodType;
-    }
-
-    public Boolean getSuspicious() {
-        return suspicious;
-    }
-
-    public void setSuspicious(Boolean suspicious) {
-        this.suspicious = suspicious;
-    }
-
-    public Boolean getConfirmed() {
-        return confirmed;
-    }
-
-    public void setConfirmed(Boolean confirmed) {
-        this.confirmed = confirmed;
     }
 
     public Nationality getNationality() {
