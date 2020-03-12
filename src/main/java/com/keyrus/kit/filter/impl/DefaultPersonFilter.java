@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 public class DefaultPersonFilter implements PersonFilter {
 
     private List<Patient> patientList;
-    private List<Dna> dnaList;
 
     @Override
     public Patient getPersonByDoc(String doc) {
@@ -21,7 +20,7 @@ public class DefaultPersonFilter implements PersonFilter {
 
     @Override
     public Dna getDnaById(Long id) {
-        return dnaList.stream().filter(dna -> dna.getId() == id).findFirst().get();
+        return patientList.stream().filter(patient -> patient.getDna().getId() == id).map(patient -> patient.getDna()).findFirst().get();
     }
 
     @Override
@@ -68,7 +67,4 @@ public class DefaultPersonFilter implements PersonFilter {
         this.patientList = patientList;
     }
 
-    public void setDnaList(List<Dna> dnaList) {
-        this.dnaList = dnaList;
-    }
 }
