@@ -1,30 +1,32 @@
 package com.keyrus.kit.filter;
 
 import com.keyrus.kit.models.Dna;
-import com.keyrus.kit.models.Person;
+import com.keyrus.kit.models.Patient;
+import com.keyrus.kit.models.enums.BloodType;
+import com.keyrus.kit.models.enums.Nationality;
 
 import java.util.List;
 
-public interface PersonService {
+public interface PersonFilter {
 
-    Person getPersonByDoc(String doc);
+    Patient getPersonByDoc(String doc);
 
     Dna getDnaById(Long id);
 
-    List<Person> getInfected();
+    List<Patient> getInfected();
 
-    List<Person> getInfectedByNationality();
+    List<Patient> getInfectedByNationality(Nationality nationality);
 
-    List<Person> getSuspicious();
+    List<Patient> getSuspicious();
 
-    List<Person> getSuspiciousByNationality();
+    List<Patient> getSuspiciousByNationality(Nationality nationality);
 
-    List<Person> getNotInfected();
+    List<Patient> getNotInfected();
 
-    List<Person> getNotInfectedByNationality();
+    List<Patient> getNotInfectedByNationality(Nationality nationality);
 
-    List<Person> getPatientCombineByBlood();
+    List<Patient> getPatientCombineByBlood(BloodType bloodType);
 
-    List<Person> getPatientCombineByBloodAndNationality();
+    List<Patient> getPatientCombineByBloodAndNationality(BloodType bloodType, Nationality nationality);
 
 }
