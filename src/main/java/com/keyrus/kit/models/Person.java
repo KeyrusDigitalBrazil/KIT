@@ -12,7 +12,7 @@ public class Person {
     private Nationality nationality;
     private String doc;
     private Integer age;
-    private Dna dna;
+    private Dna dna = new Dna();
 
     public Person() {
     }
