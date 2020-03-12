@@ -17,7 +17,7 @@ public class DefaultPersonService implements PersonService {
 
                 // Generate List for Brazil
                 new Patient(1L, "José Alves", "+55(11)91234-5678", BloodType.A_NEGATIVE, Nationality.BRA,
-                        "081.723.670-82", 25, new Dna(1L, "3D8F825"), 1L, Boolean.FALSE, Boolean.FALSE),
+                        "08172367082", 25, new Dna(1L, "3D8F825"), 1L, Boolean.FALSE, Boolean.FALSE),
                 new Patient(2L, "Haythem Chutador de Anão", "+55(13)94325-8547", BloodType.AB_POSITIVE, Nationality.BRA,
                         "528.720.710-75", 34, new Dna(2L, "AC0C4F6"), 2L, Boolean.FALSE, Boolean.FALSE),
                 new Patient(3L, "Mariana Clara", "+55(15)98574-2369", BloodType.B_POSITIVE, Nationality.BRA,

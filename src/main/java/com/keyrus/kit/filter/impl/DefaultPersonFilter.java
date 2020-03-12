@@ -15,7 +15,8 @@ public class DefaultPersonFilter implements PersonFilter {
 
     @Override
     public Patient getPersonByDoc(String doc) {
-        return patientList.stream().filter(patient -> patient.getDoc().equals(doc)).findFirst().get();
+        String docReplace = doc.replaceAll("[^a-zA-Z0-9 ]", "");
+        return patientList.stream().filter(patient -> patient.getDoc().equals(docReplace)).findFirst().get();
     }
 
     @Override
@@ -63,6 +64,7 @@ public class DefaultPersonFilter implements PersonFilter {
         return patientList.parallelStream().filter(patient -> patient.getNationality().equals(nationality) && patient.getBloodType().equals(bloodType)).collect(Collectors.toList());
     }
 
+    @Override
     public void setPatientList(List<Patient> patientList) {
         this.patientList = patientList;
     }

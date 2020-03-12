@@ -29,4 +29,6 @@ public interface PersonFilter {
 
     List<Patient> getPatientCombineByBloodAndNationality(BloodType bloodType, Nationality nationality);
 
+    void setPatientList(List<Patient> patientList);
+
 }
