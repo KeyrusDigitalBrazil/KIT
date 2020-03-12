@@ -1,10 +1,14 @@
 package com.keyrus.kit.models;
 
+import com.keyrus.kit.models.enums.BloodType;
+import com.keyrus.kit.models.enums.Nationality;
+
 public class Patient extends Person{
 
 
     private Long id;
     private Boolean suspicious;
+
     private Boolean confirmed;
 
     public Patient() {
@@ -14,6 +18,14 @@ public class Patient extends Person{
         this.suspicious = suspicious;
         this.confirmed = confirmed;
         this.id = id;
+    }
+
+    public Patient(Long id, String name, String phoneNumber, BloodType bloodType, Nationality nationality,
+                   String doc, Integer age, Dna dna, Long id1, Boolean suspicious, Boolean confirmed) {
+        super(id, name, phoneNumber, bloodType, nationality, doc, age, dna);
+        this.id = id1;
+        this.suspicious = suspicious;
+        this.confirmed = confirmed;
     }
 
     public Long getId() {
