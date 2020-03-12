@@ -20,47 +20,47 @@ public class DefaultPersonFilter implements PersonFilter {
 
     @Override
     public Dna getDnaById(Long id) {
-        return patientList.stream().filter(patient -> patient.getDna().getId() == id).map(patient -> patient.getDna()).findFirst().get();
+        return patientList.stream().filter(patient -> patient.getDna().getId().equals(id)).map(patient -> patient.getDna()).findFirst().get();
     }
 
     @Override
     public List<Patient> getInfected() {
-        return patientList.stream().filter(patient -> patient.getConfirmed() == Boolean.TRUE).collect(Collectors.toList());
+        return patientList.stream().filter(patient -> patient.getConfirmed().equals(Boolean.TRUE)).collect(Collectors.toList());
     }
 
     @Override
     public List<Patient> getInfectedByNationality(Nationality nationality) {
-        return patientList.stream().filter(patient -> (patient.getConfirmed() == Boolean.TRUE && patient.getNationality().equals(nationality))).collect(Collectors.toList());
+        return patientList.stream().filter(patient -> (patient.getConfirmed().equals(Boolean.TRUE) && patient.getNationality().equals(nationality))).collect(Collectors.toList());
     }
 
     @Override
     public List<Patient> getSuspicious() {
-        return patientList.stream().filter(patient -> patient.getSuspicious() == Boolean.TRUE).collect(Collectors.toList());
+        return patientList.stream().filter(patient -> patient.getSuspicious().equals(Boolean.TRUE)).collect(Collectors.toList());
     }
 
     @Override
     public List<Patient> getSuspiciousByNationality(Nationality nationality) {
-        return null;
+        return patientList.parallelStream().filter(patient -> patient.getNationality().equals(nationality) && patient.getSuspicious().equals(Boolean.TRUE)).collect(Collectors.toList());
     }
 
     @Override
     public List<Patient> getNotInfected() {
-        return null;
+        return patientList.parallelStream().filter(patient -> patient.getSuspicious().equals(Boolean.FALSE)).collect(Collectors.toList());
     }
 
     @Override
     public List<Patient> getNotInfectedByNationality(Nationality nationality) {
-        return null;
+        return patientList.parallelStream().filter(patient -> patient.getNationality().equals(nationality) && patient.getSuspicious().equals(Boolean.FALSE)).collect(Collectors.toList());
     }
 
     @Override
     public List<Patient> getPatientCombineByBlood(BloodType bloodType) {
-        return null;
+        return patientList.parallelStream().filter(patient -> patient.getBloodType().equals(bloodType)).collect(Collectors.toList());
     }
 
     @Override
     public List<Patient> getPatientCombineByBloodAndNationality(BloodType bloodType, Nationality nationality) {
-        return null;
+        return patientList.parallelStream().filter(patient -> patient.getNationality().equals(nationality) && patient.getBloodType().equals(bloodType)).collect(Collectors.toList());
     }
 
     public void setPatientList(List<Patient> patientList) {
