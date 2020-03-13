@@ -8,7 +8,6 @@ public class Patient extends Person{
 
     private Long id;
     private Boolean suspicious;
-
     private Boolean confirmed;
 
     public Patient() {
@@ -55,11 +54,13 @@ public class Patient extends Person{
     @Override
     public String toString() {
         return "====================================================================================================" +
-                "DNA : " + id +
-                "'\', Blood Type: " + suspicious +
-                "'\', Nationality" + confirmed +
-                "'\', Age:" +
-                super.toString() +
-                '}';
+                "\n Name: " + super.getName() +
+                "\n DNA : " + getDna().getDna() +
+                "\n Blood Type: "  + super.getBloodType() +
+                "\n Nationality: " + super.getNationality() +
+                "\n Age: " + super.getAge() +
+                "\n Particle 781N0: " + suspicious +
+                "\n Particle 781NC: " + confirmed +
+                "\n====================================================================================================";
     }
 }

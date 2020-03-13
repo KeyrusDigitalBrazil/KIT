@@ -9,4 +9,6 @@ public interface MenuUtils {
     void clearConsole();
 
     void showMenusSearchByDoc();
+
+    void showMenusSearchByDna();
 }

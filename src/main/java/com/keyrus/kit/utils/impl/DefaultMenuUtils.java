@@ -29,4 +29,10 @@ public class DefaultMenuUtils implements MenuUtils {
         System.out.println("====================================================================================================");
         System.out.println("Insert your doc number");
     }
+
+    @Override
+    public void showMenusSearchByDna() {
+        System.out.println("====================================================================================================");
+        System.out.println("Insert your dna");
+    }
 }
