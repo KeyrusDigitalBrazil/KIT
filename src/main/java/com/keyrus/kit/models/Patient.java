@@ -54,10 +54,11 @@ public class Patient extends Person{
 
     @Override
     public String toString() {
-        return "Patient{" +
-                "id=" + id +
-                ", suspicious=" + suspicious +
-                ", confirmed=" + confirmed +
+        return "====================================================================================================" +
+                "DNA : " + id +
+                "'\', Blood Type: " + suspicious +
+                "'\', Nationality" + confirmed +
+                "'\', Age:" +
                 super.toString() +
                 '}';
     }
