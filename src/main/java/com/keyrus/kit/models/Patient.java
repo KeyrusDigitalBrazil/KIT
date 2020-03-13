@@ -51,4 +51,14 @@ public class Patient extends Person{
     public void setConfirmed(Boolean confirmed) {
         this.confirmed = confirmed;
     }
+
+    @Override
+    public String toString() {
+        return "Patient{" +
+                "id=" + id +
+                ", suspicious=" + suspicious +
+                ", confirmed=" + confirmed +
+                super.toString() +
+                '}';
+    }
 }

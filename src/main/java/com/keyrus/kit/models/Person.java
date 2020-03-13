@@ -91,4 +91,18 @@ public class Person {
     public void setAge(Integer age) {
         this.age = age;
     }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", bloodType=" + bloodType +
+                ", nationality=" + nationality +
+                ", doc='" + doc + '\'' +
+                ", age=" + age +
+                ", dna=" + dna +
+                '}';
+    }
 }
