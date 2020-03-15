@@ -3,7 +3,7 @@ package com.keyrus.kit.models;
 import com.keyrus.kit.models.enums.BloodType;
 import com.keyrus.kit.models.enums.Nationality;
 
-public class Patient extends Person{
+public class Patient extends Person {
 
 
     private Long id;
@@ -56,11 +56,11 @@ public class Patient extends Person{
         return "====================================================================================================" +
                 "\n Name: " + super.getName() +
                 "\n DNA : " + getDna().getDna() +
-                "\n Blood Type: "  + super.getBloodType() +
+                "\n Blood Type: " + super.getBloodType() +
                 "\n Nationality: " + super.getNationality() +
                 "\n Age: " + super.getAge() +
                 "\n Particle 781N0: " + suspicious +
                 "\n Particle 781NC: " + confirmed +
-                "\n====================================================================================================";
+                "\n====================================================================================================\n";
     }
 }

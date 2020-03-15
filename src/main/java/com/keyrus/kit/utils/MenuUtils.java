@@ -11,4 +11,18 @@ public interface MenuUtils {
     void showMenusSearchByDoc();
 
     void showMenusSearchByDna();
+
+    void showMenusSearchInfected();
+
+    void showMenusSearchByNationality();
+
+    void showMenusSearchSuspicious();
+
+    void showMenusSearchNotInfected();
+
+    void showError();
+
+    void showInput();
+
+
 }

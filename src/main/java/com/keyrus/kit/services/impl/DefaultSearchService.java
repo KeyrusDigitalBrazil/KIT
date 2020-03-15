@@ -2,6 +2,7 @@ package com.keyrus.kit.services.impl;
 
 import com.keyrus.kit.filter.PersonFilter;
 import com.keyrus.kit.filter.impl.DefaultPersonFilter;
+import com.keyrus.kit.models.enums.Nationality;
 import com.keyrus.kit.services.PersonService;
 import com.keyrus.kit.services.SearchService;
 import com.keyrus.kit.utils.MenuUtils;
@@ -43,10 +44,25 @@ public class DefaultSearchService implements SearchService {
                         generateInitialMenu();
                         break;
                     case "3":
+                        menuUtils.showMenusSearchInfected();
+                        Scanner infected = new Scanner(System.in);
+                        String infectedScanner = infected.nextLine();
+                        searchInfected(infectedScanner);
+                        generateInitialMenu();
                         break;
                     case "4":
+                        menuUtils.showMenusSearchSuspicious();
+                        Scanner suspicious = new Scanner(System.in);
+                        String suspiciousScanner = suspicious.nextLine();
+                        searchSuspicious(suspiciousScanner);
+                        generateInitialMenu();
                         break;
                     case "5":
+                        menuUtils.showMenusSearchNotInfected();
+                        Scanner notInfected = new Scanner(System.in);
+                        String notInfectedScanner = notInfected.nextLine();
+                        searchNotInfected(notInfectedScanner);
+                        generateInitialMenu();
                         break;
                     case "6":
                         break;
@@ -54,15 +70,12 @@ public class DefaultSearchService implements SearchService {
                         System.out.println("Thanks for your time");
                         break;
                     default:
-                        System.out.println("Input a valid option");
+                        menuUtils.showInput();
                         generateInitialMenu();
                 }
 
-            }catch (Exception e){
-                System.out.println("====================================================================================================");
-                System.out.println("                                         ERROR");
-                System.out.println("====================================================================================================");
-
+            } catch (Exception e) {
+                menuUtils.showError();
             }
 
         }
@@ -80,4 +93,69 @@ public class DefaultSearchService implements SearchService {
         personFilter.setPatientList(personService.generatorPatient());
     }
 
+    private void searchInfected(String id) {
+        switch (id) {
+            case "1":
+                System.out.println(personFilter.getInfected());
+                break;
+            case "2":
+                menuUtils.showMenusSearchByNationality();
+                Scanner infected = new Scanner(System.in);
+                String infectedScanner = infected.nextLine();
+                System.out.println(personFilter.getInfectedByNationality(Nationality.valueOf(infectedScanner)));
+                break;
+            case "0":
+                break;
+            default:
+                menuUtils.showInput();
+                menuUtils.showMenusSearchInfected();
+                Scanner infectedError = new Scanner(System.in);
+                String infectedErrorScanner = infectedError.nextLine();
+                searchInfected(infectedErrorScanner);
+        }
+    }
+
+    private void searchSuspicious(String id) {
+        switch (id) {
+            case "1":
+                System.out.println(personFilter.getSuspicious());
+                break;
+            case "2":
+                menuUtils.showMenusSearchByNationality();
+                Scanner infected = new Scanner(System.in);
+                String infectedScanner = infected.nextLine();
+                System.out.println(personFilter.getSuspiciousByNationality((Nationality.valueOf(infectedScanner))));
+                break;
+            case "0":
+                break;
+            default:
+                menuUtils.showInput();
+                menuUtils.showMenusSearchInfected();
+                Scanner infectedError = new Scanner(System.in);
+                String infectedErrorScanner = infectedError.nextLine();
+                searchSuspicious(infectedErrorScanner);
+        }
+    }
+
+    private void searchNotInfected(String id) {
+        switch (id) {
+            case "1":
+                System.out.println(personFilter.getNotInfected());
+                break;
+            case "2":
+                menuUtils.showMenusSearchByNationality();
+                Scanner notInfected = new Scanner(System.in);
+                String notInfectedScanner = notInfected.nextLine();
+                System.out.println(personFilter.getNotInfectedByNationality((Nationality.valueOf(notInfectedScanner))));
+                break;
+            case "0":
+                break;
+            default:
+                menuUtils.showInput();
+                menuUtils.showMenusSearchInfected();
+                Scanner notInfectedError = new Scanner(System.in);
+                String notInfectedErrorScanner = notInfectedError.nextLine();
+                searchSuspicious(notInfectedErrorScanner);
+        }
+    }
 }
