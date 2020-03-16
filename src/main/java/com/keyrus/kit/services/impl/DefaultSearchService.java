@@ -2,7 +2,9 @@ package com.keyrus.kit.services.impl;
 
 import com.keyrus.kit.filter.PersonFilter;
 import com.keyrus.kit.filter.impl.DefaultPersonFilter;
+import com.keyrus.kit.models.Dna;
 import com.keyrus.kit.models.Patient;
+import com.keyrus.kit.models.enums.BloodType;
 import com.keyrus.kit.models.enums.Nationality;
 import com.keyrus.kit.services.PersonService;
 import com.keyrus.kit.services.SearchService;
@@ -11,6 +13,8 @@ import com.keyrus.kit.utils.impl.DefaultMenuUtils;
 
 import java.util.List;
 import java.util.Scanner;
+
+import static com.keyrus.kit.models.enums.BloodType.getBloodType;
 
 public class DefaultSearchService implements SearchService {
 
@@ -35,14 +39,16 @@ public class DefaultSearchService implements SearchService {
                         menuUtils.showMenusSearchByDoc();
                         Scanner doc = new Scanner(System.in);
                         String docScanner = doc.nextLine();
-                        System.out.println(personFilter.getPersonByDoc(docScanner));
+                        Patient patient = personFilter.getPersonByDoc(docScanner);
+                        validEmptyResult(patient);
                         generateInitialMenu();
                         break;
                     case "2":
                         menuUtils.showMenusSearchByDna();
                         Scanner dna = new Scanner(System.in);
                         String dnaScanner = dna.nextLine();
-                        System.out.println(personFilter.getDnaById(Long.parseLong(dnaScanner)));
+                        Dna dnaFilter = personFilter.getDnaById(Long.parseLong(dnaScanner));
+                        validEmptyResult(dnaFilter);
                         generateInitialMenu();
                         break;
                     case "3":
@@ -67,6 +73,11 @@ public class DefaultSearchService implements SearchService {
                         generateInitialMenu();
                         break;
                     case "6":
+                        menuUtils.showMenuSearchByBloodTypeOpt();
+                        Scanner scnSix = new Scanner(System.in);
+                        String optSix = scnSix.nextLine();
+                        searchByBlood(optSix);
+                        generateInitialMenu();
                         break;
                     case "0":
                         System.out.println("Thanks for your time");
@@ -97,15 +108,15 @@ public class DefaultSearchService implements SearchService {
     public void searchInfected(String id) {
         switch (id) {
             case "1":
-                List<Patient> patients =  personFilter.getInfected();
-                patients.forEach(System.out::println);
+                List<Patient> patients = personFilter.getInfected();
+                validEmptyResultList(patients);
                 break;
             case "2":
                 menuUtils.showMenusSearchByNationality();
                 Scanner infected = new Scanner(System.in);
                 String infectedScanner = infected.nextLine();
                 List<Patient> patientsNationality = personFilter.getInfectedByNationality(Nationality.valueOf(infectedScanner));
-                patientsNationality.forEach(System.out::println);
+                validEmptyResultList(patientsNationality);
                 break;
             case "0":
                 break;
@@ -122,15 +133,15 @@ public class DefaultSearchService implements SearchService {
     public void searchSuspicious(String id) {
         switch (id) {
             case "1":
-                List<Patient> patients =  personFilter.getSuspicious();
-                patients.forEach(System.out::println);
+                List<Patient> patients = personFilter.getSuspicious();
+                validEmptyResultList(patients);
                 break;
             case "2":
                 menuUtils.showMenusSearchByNationality();
                 Scanner infected = new Scanner(System.in);
                 String infectedScanner = infected.nextLine();
                 List<Patient> patientsNationality = personFilter.getSuspiciousByNationality((Nationality.valueOf(infectedScanner)));
-                patientsNationality.forEach(System.out::println);
+                validEmptyResultList(patientsNationality);
                 break;
             case "0":
                 break;
@@ -147,15 +158,15 @@ public class DefaultSearchService implements SearchService {
     public void searchNotInfected(String id) {
         switch (id) {
             case "1":
-                List<Patient> patients =  personFilter.getNotInfected();
-                patients.forEach(System.out::println);
+                List<Patient> patients = personFilter.getNotInfected();
+                validEmptyResultList(patients);
                 break;
             case "2":
                 menuUtils.showMenusSearchByNationality();
                 Scanner notInfected = new Scanner(System.in);
                 String notInfectedScanner = notInfected.nextLine();
                 List<Patient> patientsNationality = personFilter.getNotInfectedByNationality((Nationality.valueOf(notInfectedScanner)));
-                patientsNationality.forEach(System.out::println);
+                validEmptyResultList(patientsNationality);
                 break;
             case "0":
                 break;
@@ -165,6 +176,60 @@ public class DefaultSearchService implements SearchService {
                 Scanner notInfectedError = new Scanner(System.in);
                 String notInfectedErrorScanner = notInfectedError.nextLine();
                 searchNotInfected(notInfectedErrorScanner);
+        }
+    }
+
+    @Override
+    public void searchByBlood(String opt) {
+        switch (opt) {
+            case "1":
+                menuUtils.showMenuSearchByBloodType();
+                Scanner scnSix = new Scanner(System.in);
+                String optSix = scnSix.nextLine();
+                List<Patient> patients = personFilter.getPatientCombineByBlood(getBloodType(optSix));
+                validEmptyResultList(patients);
+                break;
+            case "2":
+                menuUtils.showMenusSearchByNationality();
+                Scanner nationality = new Scanner(System.in);
+                String nationalityOpt = nationality.nextLine();
+                menuUtils.showMenuSearchByBloodType();
+                Scanner blood = new Scanner(System.in);
+                String bloodOpt = blood.nextLine();
+                List<Patient> patientsNationality = personFilter.getPatientCombineByBloodAndNationality(getBloodType(bloodOpt), Nationality.valueOf(nationalityOpt));
+                validEmptyResultList(patientsNationality);
+                break;
+            case "0":
+                break;
+            default:
+                menuUtils.showInput();
+                menuUtils.showMenusSearchInfected();
+                Scanner notInfectedError = new Scanner(System.in);
+                String notInfectedErrorScanner = notInfectedError.nextLine();
+                searchNotInfected(notInfectedErrorScanner);
+        }
+    }
+
+    @Override
+    public void validEmptyResult(Object object) {
+        if(object instanceof Patient || object instanceof Dna) {
+            if(object == null) {
+                menuUtils.showEmptyResult();
+            } else {
+                System.out.println(object);
+            }
+        } else {
+            menuUtils.showError();
+        }
+
+    }
+
+    @Override
+    public void validEmptyResultList(List<Patient> patients) {
+        if(patients.isEmpty()) {
+            menuUtils.showEmptyResult();
+        } else {
+            patients.forEach(System.out::println);
         }
     }
 }

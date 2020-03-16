@@ -15,6 +15,13 @@ public enum  BloodType {
 
     BloodType(String label) { this.label = label; }
 
+    public static BloodType getBloodType(String type) {
+        for (BloodType bt : BloodType.values()) {
+            if (bt.label.equals(type)) return bt;
+        }
+        throw new IllegalArgumentException("Blood Type not found");
+    }
+
     @Override
     public String toString() { return label; }
 }

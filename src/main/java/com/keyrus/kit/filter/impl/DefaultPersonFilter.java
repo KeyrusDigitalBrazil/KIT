@@ -6,6 +6,7 @@ import com.keyrus.kit.models.Patient;
 import com.keyrus.kit.models.enums.BloodType;
 import com.keyrus.kit.models.enums.Nationality;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -56,6 +57,9 @@ public class DefaultPersonFilter implements PersonFilter {
 
     @Override
     public List<Patient> getPatientCombineByBlood(BloodType bloodType) {
+        if(BloodType.O_NEGATIVE.equals(bloodType))
+            return patientList;
+
         return patientList.parallelStream().filter(patient -> patient.getBloodType().equals(bloodType)).collect(Collectors.toList());
     }
 

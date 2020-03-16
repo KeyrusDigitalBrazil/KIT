@@ -20,6 +20,12 @@ public interface MenuUtils {
 
     void showMenusSearchNotInfected();
 
+    void showMenuSearchByBloodTypeOpt();
+
+    void showMenuSearchByBloodType();
+
+    void showEmptyResult();
+
     void showError();
 
     void showInput();
