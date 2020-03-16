@@ -4,6 +4,7 @@ import com.keyrus.kit.models.Dna;
 import com.keyrus.kit.models.Patient;
 import com.keyrus.kit.models.enums.BloodType;
 import com.keyrus.kit.models.enums.Nationality;
+import com.keyrus.kit.models.enums.Risk;
 import com.keyrus.kit.services.PersonService;
 
 import java.util.Arrays;
@@ -73,9 +74,86 @@ public class DefaultPersonService implements PersonService {
                 new Patient(24L, "Miboun", "+216(14)2554-8588", BloodType.A_POSITIVE, Nationality.TUN,
                         "01751021041", 19, new Dna(24L, "5DD5E05"), 24L, Boolean.TRUE, Boolean.FALSE),
                 new Patient(25L, "salamaleico", "+216(15)5474-2563", BloodType.A_NEGATIVE, Nationality.TUN,
-                        "28308741029", 37, new Dna(25L, "77B48AD"), 25L, Boolean.TRUE, Boolean.TRUE)
+                        "28308741029", 37, new Dna(25L, "77B48AD"), 25L, Boolean.TRUE, Boolean.TRUE),
+
+                // Generate List for Deutschland
+                new Patient(26L, "Kroos", "+49(11)996859663", BloodType.O_NEGATIVE, Nationality.DEU,
+                        "74014696006", 55, new Dna(26L, "F5F5D13"), 26L, Boolean.FALSE, Boolean.TRUE),
+                new Patient(27L, "Klose", "+49(11)996851258", BloodType.AB_POSITIVE, Nationality.DEU,
+                        "51571059083", 60, new Dna(27L, "80BC753"), 27L, Boolean.FALSE, Boolean.FALSE),
+                new Patient(28L, "Boateng", "+49(11)2536112", BloodType.A_POSITIVE, Nationality.DEU,
+                        "94965148045", 23, new Dna(28L, "F72C20A"), 28L, Boolean.TRUE, Boolean.TRUE),
+                new Patient(29L, "Reus", "+49(11)32459874", BloodType.O_POSITIVE, Nationality.DEU,
+                        "89312978071", 17, new Dna(29L, "850B851"), 29L, Boolean.FALSE, Boolean.TRUE),
+                new Patient(30L, "Lahn", "+49(11)45781232", BloodType.O_NEGATIVE, Nationality.DEU,
+                        "61258981050", 23, new Dna(30L, "672C998"), 30L, Boolean.FALSE, Boolean.TRUE),
+
+                // Generate List for France
+                new Patient(31L, "Ui UI", "+33(11)996859663", BloodType.A_POSITIVE, Nationality.FRA,
+                        "49928135002", 55, new Dna(31L, "8E57009"), 31L, Boolean.TRUE, Boolean.TRUE),
+                new Patient(32L, "Benzema", "+33(11)36985214", BloodType.AB_POSITIVE, Nationality.FRA,
+                        "29928801088", 23, new Dna(32L, "31CE68F"), 32L, Boolean.FALSE, Boolean.TRUE),
+                new Patient(33L, "Cortouis", "+33(11)2536112", BloodType.A_POSITIVE, Nationality.FRA,
+                        "64983387099", 27, new Dna(33L, "1E6462F"), 33L, Boolean.TRUE, Boolean.TRUE),
+                new Patient(34L, "Karin", "+33(11)9876543", BloodType.O_NEGATIVE, Nationality.FRA,
+                        "72389796087", 33, new Dna(34L, "F3D8C18"), 34L, Boolean.FALSE, Boolean.TRUE),
+                new Patient(35L, "Juca", "+33(11)12345678", BloodType.O_NEGATIVE, Nationality.FRA,
+                        "14678225072", 42, new Dna(35L, "D3A4A3E"), 35L, Boolean.FALSE, Boolean.TRUE),
+
+                //Generate List for Portugal
+                new Patient(36L, "C Ronaldo", "+351(11)996869050", BloodType.O_NEGATIVE, Nationality.PRT,
+                        "47305051071", 57, new Dna(36L, "6E615F9"), 36L, Boolean.FALSE, Boolean.FALSE),
+                new Patient(37L, "Biro Biro", "+351(11)996869040", BloodType.AB_POSITIVE, Nationality.PRT,
+                        "30112322026", 25, new Dna(37L, "34BC171"), 37L, Boolean.TRUE, Boolean.TRUE),
+                new Patient(38L, "Beto", "+351(11)996869075", BloodType.AB_POSITIVE, Nationality.PRT,
+                        "04547085056", 32, new Dna(38L, "9C0106E"), 38L, Boolean.FALSE, Boolean.FALSE),
+                new Patient(39L, "Alfredo", "+351(11)996869352", BloodType.A_POSITIVE, Nationality.PRT,
+                        "09185372072", 80, new Dna(39L, "475898F"), 39L, Boolean.FALSE, Boolean.TRUE),
+                new Patient(40L, "Bruno", "+351(11)995196565", BloodType.B_NEGATIVE, Nationality.PRT,
+                        "92462197087", 14, new Dna(40L, "A3D3506"), 40L, Boolean.TRUE, Boolean.TRUE),
+
+                //Generate List for Canada
+                new Patient(41L, "Leon", "+1(11)99648446123", BloodType.AB_POSITIVE, Nationality.CA,
+                        "86949453043", 36, new Dna(41L, "A416109"), 41L, Boolean.FALSE, Boolean.FALSE),
+                new Patient(42L, "Nilce", "+1(11)45213698", BloodType.B_NEGATIVE, Nationality.CA,
+                        "57171211053", 38, new Dna(42L, "0EE1DEF"), 42L, Boolean.TRUE, Boolean.TRUE),
+                new Patient(43L, "Jones", "+1(11)453214759", BloodType.B_POSITIVE, Nationality.CA,
+                        "15663971033", 55, new Dna(43L, "B6D0493"), 43L, Boolean.TRUE, Boolean.TRUE),
+                new Patient(44L, "Luan", "+1(11)254136987", BloodType.O_POSITIVE, Nationality.CA,
+                        "85109723036", 80, new Dna(44L, "2299F60"), 44L, Boolean.FALSE, Boolean.FALSE),
+                new Patient(45L, "Anão", "+1(11)352", BloodType.AB_POSITIVE, Nationality.CA,
+                        "07877161034", 9, new Dna(45L, "W3D3506"), 40L, Boolean.TRUE, Boolean.TRUE),
+
+                //Generate List for Afeganistão
+                new Patient(46L, "Buri", "+93(11)99648446123", BloodType.A_POSITIVE, Nationality.AFG,
+                        "98778666090", 24, new Dna(46L, "C301E94"), 46L, Boolean.FALSE, Boolean.TRUE),
+                new Patient(47L, "Salim", "+93(11)651655165", BloodType.B_POSITIVE, Nationality.AFG,
+                        "85090709033", 18, new Dna(47L, "B98245A"), 47L, Boolean.FALSE, Boolean.FALSE),
+                new Patient(48L, "Mahoe", "+93(11)32165165", BloodType.O_NEGATIVE, Nationality.AFG,
+                        "70859572048", 17, new Dna(48L, "035495A"), 48L, Boolean.TRUE, Boolean.TRUE),
+                new Patient(49L, "Joao", "+93(11)9515", BloodType.O_POSITIVE, Nationality.AFG,
+                        "08477869006", 10, new Dna(49L, "FC662A1"), 49L, Boolean.FALSE, Boolean.FALSE),
+                new Patient(50L, "Hao", "+93(11)123", BloodType.O_NEGATIVE, Nationality.AFG,
+                        "53658940069", 79, new Dna(50L, "4AA521C"), 50L, Boolean.TRUE, Boolean.TRUE)
         );
 
+        patients.forEach(patient -> calculateRiskAge(patient));
+
         return patients;
+    }
+
+    @Override
+    public void calculateRiskAge(Patient patient){
+        Integer age = patient.getAge();
+
+        if(age >= 0 && age <= 20){
+            patient.setRisk(Risk.LOW);
+        }
+        if(age >= 25 && age <= 35){
+            patient.setRisk(Risk.MEDIUM);
+        }
+        else if(age > 35){
+            patient.setRisk(Risk.HIGH);
+        }
     }
 }

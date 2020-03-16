@@ -2,6 +2,7 @@ package com.keyrus.kit.models;
 
 import com.keyrus.kit.models.enums.BloodType;
 import com.keyrus.kit.models.enums.Nationality;
+import com.keyrus.kit.models.enums.Risk;
 
 public class Patient extends Person {
 
@@ -9,6 +10,7 @@ public class Patient extends Person {
     private Long id;
     private Boolean suspicious;
     private Boolean confirmed;
+    private Risk risk;
 
     public Patient() {
     }
@@ -50,6 +52,10 @@ public class Patient extends Person {
     public void setConfirmed(Boolean confirmed) {
         this.confirmed = confirmed;
     }
+
+    public Risk getRisk() { return risk; }
+
+    public void setRisk(Risk risk) { this.risk = risk; }
 
     @Override
     public String toString() {
