@@ -53,13 +53,9 @@ public class Patient extends Person {
         this.confirmed = confirmed;
     }
 
-    public Risk getRisk() {
-        return risk;
-    }
+    public Risk getRisk() { return risk; }
 
-    public void setRisk(Risk risk) {
-        this.risk = risk;
-    }
+    public void setRisk(Risk risk) { this.risk = risk; }
 
     @Override
     public String toString() {
