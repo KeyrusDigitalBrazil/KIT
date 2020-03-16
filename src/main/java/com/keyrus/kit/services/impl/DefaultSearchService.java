@@ -2,12 +2,14 @@ package com.keyrus.kit.services.impl;
 
 import com.keyrus.kit.filter.PersonFilter;
 import com.keyrus.kit.filter.impl.DefaultPersonFilter;
+import com.keyrus.kit.models.Patient;
 import com.keyrus.kit.models.enums.Nationality;
 import com.keyrus.kit.services.PersonService;
 import com.keyrus.kit.services.SearchService;
 import com.keyrus.kit.utils.MenuUtils;
 import com.keyrus.kit.utils.impl.DefaultMenuUtils;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class DefaultSearchService implements SearchService {
@@ -95,13 +97,15 @@ public class DefaultSearchService implements SearchService {
     public void searchInfected(String id) {
         switch (id) {
             case "1":
-                System.out.println(personFilter.getInfected());
+                List<Patient> patients =  personFilter.getInfected();
+                patients.forEach(System.out::println);
                 break;
             case "2":
                 menuUtils.showMenusSearchByNationality();
                 Scanner infected = new Scanner(System.in);
                 String infectedScanner = infected.nextLine();
-                System.out.println(personFilter.getInfectedByNationality(Nationality.valueOf(infectedScanner)));
+                List<Patient> patientsNationality = personFilter.getInfectedByNationality(Nationality.valueOf(infectedScanner));
+                patientsNationality.forEach(System.out::println);
                 break;
             case "0":
                 break;
@@ -118,13 +122,15 @@ public class DefaultSearchService implements SearchService {
     public void searchSuspicious(String id) {
         switch (id) {
             case "1":
-                System.out.println(personFilter.getSuspicious());
+                List<Patient> patients =  personFilter.getSuspicious();
+                patients.forEach(System.out::println);
                 break;
             case "2":
                 menuUtils.showMenusSearchByNationality();
                 Scanner infected = new Scanner(System.in);
                 String infectedScanner = infected.nextLine();
-                System.out.println(personFilter.getSuspiciousByNationality((Nationality.valueOf(infectedScanner))));
+                List<Patient> patientsNationality = personFilter.getSuspiciousByNationality((Nationality.valueOf(infectedScanner)));
+                patientsNationality.forEach(System.out::println);
                 break;
             case "0":
                 break;
@@ -141,13 +147,15 @@ public class DefaultSearchService implements SearchService {
     public void searchNotInfected(String id) {
         switch (id) {
             case "1":
-                System.out.println(personFilter.getNotInfected());
+                List<Patient> patients =  personFilter.getNotInfected();
+                patients.forEach(System.out::println);
                 break;
             case "2":
                 menuUtils.showMenusSearchByNationality();
                 Scanner notInfected = new Scanner(System.in);
                 String notInfectedScanner = notInfected.nextLine();
-                System.out.println(personFilter.getNotInfectedByNationality((Nationality.valueOf(notInfectedScanner))));
+                List<Patient> patientsNationality = personFilter.getNotInfectedByNationality((Nationality.valueOf(notInfectedScanner)));
+                patientsNationality.forEach(System.out::println);
                 break;
             case "0":
                 break;
@@ -156,7 +164,7 @@ public class DefaultSearchService implements SearchService {
                 menuUtils.showMenusSearchInfected();
                 Scanner notInfectedError = new Scanner(System.in);
                 String notInfectedErrorScanner = notInfectedError.nextLine();
-                searchSuspicious(notInfectedErrorScanner);
+                searchNotInfected(notInfectedErrorScanner);
         }
     }
 }
