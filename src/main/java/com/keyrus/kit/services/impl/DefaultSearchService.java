@@ -79,8 +79,6 @@ public class DefaultSearchService implements SearchService {
             }
 
         }
-
-        generateInitialMenu();
     }
 
     @Override
@@ -93,7 +91,8 @@ public class DefaultSearchService implements SearchService {
         personFilter.setPatientList(personService.generatorPatient());
     }
 
-    private void searchInfected(String id) {
+    @Override
+    public void searchInfected(String id) {
         switch (id) {
             case "1":
                 System.out.println(personFilter.getInfected());
@@ -115,7 +114,8 @@ public class DefaultSearchService implements SearchService {
         }
     }
 
-    private void searchSuspicious(String id) {
+    @Override
+    public void searchSuspicious(String id) {
         switch (id) {
             case "1":
                 System.out.println(personFilter.getSuspicious());
@@ -137,7 +137,8 @@ public class DefaultSearchService implements SearchService {
         }
     }
 
-    private void searchNotInfected(String id) {
+    @Override
+    public void searchNotInfected(String id) {
         switch (id) {
             case "1":
                 System.out.println(personFilter.getNotInfected());
