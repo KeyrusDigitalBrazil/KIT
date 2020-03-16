@@ -4,6 +4,7 @@ import com.keyrus.kit.models.Dna;
 import com.keyrus.kit.models.Patient;
 import com.keyrus.kit.models.enums.BloodType;
 import com.keyrus.kit.models.enums.Nationality;
+import com.keyrus.kit.models.enums.Risk;
 import com.keyrus.kit.services.PersonService;
 
 import java.util.Arrays;
@@ -76,6 +77,23 @@ public class DefaultPersonService implements PersonService {
                         "28308741029", 37, new Dna(25L, "77B48AD"), 25L, Boolean.TRUE, Boolean.TRUE)
         );
 
+        patients.forEach(patient -> calculateRiskAge(patient));
+
         return patients;
+    }
+
+    @Override
+    public void calculateRiskAge(Patient patient){
+        Integer age = patient.getAge();
+
+        if(age >= 0 && age <= 20){
+            patient.setRisk(Risk.LOW);
+        }
+        if(age >= 25 && age <= 35){
+            patient.setRisk(Risk.MEDIUM);
+        }
+        else if(age > 35){
+            patient.setRisk(Risk.HIGH);
+        }
     }
 }

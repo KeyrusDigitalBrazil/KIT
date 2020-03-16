@@ -7,4 +7,6 @@ import java.util.List;
 public interface PersonService {
 
     List<Patient> generatorPatient();
+
+    void calculateRiskAge(Patient patient);
 }
