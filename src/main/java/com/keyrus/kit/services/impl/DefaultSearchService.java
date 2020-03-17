@@ -208,6 +208,10 @@ public class DefaultSearchService implements SearchService {
 
     @Override
     public void validEmptyResult(Object object) {
+        if(object instanceof Patient) {
+            personService.validQuarantine((Patient) object);
+        }
+
         if(object instanceof Patient || object instanceof Dna) {
             if(object == null) {
                 menuUtils.showEmptyResult();
@@ -217,7 +221,6 @@ public class DefaultSearchService implements SearchService {
         } else {
             menuUtils.showError();
         }
-
     }
 
     @Override
@@ -225,7 +228,12 @@ public class DefaultSearchService implements SearchService {
         if(patients.isEmpty()) {
             menuUtils.showEmptyResult();
         } else {
+            patients.forEach(this::accept);
             patients.forEach(System.out::println);
         }
+    }
+
+    private void accept(Patient patient) {
+        personService.validQuarantine(patient);
     }
 }

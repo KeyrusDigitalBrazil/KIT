@@ -10,6 +10,7 @@ public class Patient extends Person {
     private Long id;
     private Boolean suspicious;
     private Boolean confirmed;
+    private Boolean quarantine;
     private Risk risk;
 
     public Patient() {
@@ -53,9 +54,21 @@ public class Patient extends Person {
         this.confirmed = confirmed;
     }
 
-    public Risk getRisk() { return risk; }
+    public Risk getRisk() {
+        return risk;
+    }
 
-    public void setRisk(Risk risk) { this.risk = risk; }
+    public void setRisk(Risk risk) {
+        this.risk = risk;
+    }
+
+    public Boolean getQuarantine() {
+        return quarantine;
+    }
+
+    public void setQuarantine(Boolean quarantine) {
+        this.quarantine = quarantine;
+    }
 
     @Override
     public String toString() {
@@ -68,6 +81,7 @@ public class Patient extends Person {
                 "\n Particle 781N0: " + suspicious +
                 "\n Particle 781NC: " + confirmed +
                 "\n Risk: " + risk +
+                "\n Quarantine: " + quarantine +
                 "\n====================================================================================================\n";
     }
 }

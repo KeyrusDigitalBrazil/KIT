@@ -9,4 +9,6 @@ public interface PersonService {
     List<Patient> generatorPatient();
 
     void calculateRiskAge(Patient patient);
+
+    void validQuarantine(Patient patient);
 }

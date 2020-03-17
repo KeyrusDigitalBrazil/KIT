@@ -9,6 +9,7 @@ import com.keyrus.kit.services.PersonService;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 public class DefaultPersonService implements PersonService {
 
@@ -139,11 +140,19 @@ public class DefaultPersonService implements PersonService {
 
         patients.forEach(patient -> calculateRiskAge(patient));
 
+        patients.forEach(patient -> {
+            if (patient.getSuspicious()) {
+                patient.setQuarantine(Boolean.TRUE);
+            } else {
+                patient.setQuarantine(Boolean.FALSE);
+            }
+        });
+
         return patients;
     }
 
     @Override
-    public void calculateRiskAge(Patient patient){
+    public void calculateRiskAge(Patient patient) {
         Integer age = patient.getAge();
 
         if(age >= 10 && age <= 25){
@@ -154,6 +163,19 @@ public class DefaultPersonService implements PersonService {
         }
         else{
             patient.setRisk(Risk.HIGH);
+        }
+    }
+
+    @Override
+    public void validQuarantine(Patient patient) {
+        if (patient.getSuspicious()) {
+            Random randBool = new Random();
+            boolean value = randBool.nextBoolean();
+            if (value) {
+                patient.setQuarantine(Boolean.TRUE);
+            } else {
+                patient.setQuarantine(Boolean.FALSE);
+            }
         }
     }
 }
