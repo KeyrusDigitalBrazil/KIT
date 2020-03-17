@@ -12,6 +12,10 @@ public interface SearchService {
 
     void generateData();
 
+    String generateStringScanner();
+
+    void searchByDoc(String doc);
+
     void searchInfected(String id);
 
     void searchSuspicious(String id);
@@ -19,6 +23,8 @@ public interface SearchService {
     void searchNotInfected(String id);
 
     void searchByBlood(String id);
+
+    void searchAllPatients();
 
     void validEmptyResult(Object object);
 

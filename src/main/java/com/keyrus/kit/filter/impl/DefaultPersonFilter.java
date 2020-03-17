@@ -69,6 +69,10 @@ public class DefaultPersonFilter implements PersonFilter {
     }
 
     @Override
+    public List<Patient> getPatientAll() {
+        return patientList;
+    }
+    @Override
     public void setPatientList(List<Patient> patientList) {
         this.patientList = patientList;
     }

@@ -11,11 +11,11 @@ public class DefaultMenuUtils implements MenuUtils {
 
     @Override
     public void showMenuPrincipal() {
-        System.out.println("====================================================================================================");
-        System.out.println("                                     Search Patients                                                ");
-        System.out.println("====================================================================================================");
-        System.out.println("Options: 1 - Doc | 2 - DNA | 3 - Infected | 4 - Suspicious | 5 - Not Infected | 6 - Blood | 0 - Quit");
-        System.out.println("====================================================================================================");
+        System.out.println("==========================================================================================================================");
+        System.out.println("                                                     Search Patients                                                ");
+        System.out.println("==========================================================================================================================");
+        System.out.println("Options: 1 - Doc | 2 - DNA | 3 - Infected | 4 - Suspicious | 5 - Not Infected | 6 - Blood | 7 - All Patients | 0 - Quit");
+        System.out.println("==========================================================================================================================");
     }
 
     @Override

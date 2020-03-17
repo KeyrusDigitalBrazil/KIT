@@ -146,13 +146,13 @@ public class DefaultPersonService implements PersonService {
     public void calculateRiskAge(Patient patient){
         Integer age = patient.getAge();
 
-        if(age >= 0 && age <= 20){
+        if(age >= 10 && age <= 25){
             patient.setRisk(Risk.LOW);
         }
-        if(age >= 25 && age <= 35){
+        else if(age >= 25 && age <= 35){
             patient.setRisk(Risk.MEDIUM);
         }
-        else if(age > 35){
+        else{
             patient.setRisk(Risk.HIGH);
         }
     }
