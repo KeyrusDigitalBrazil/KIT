@@ -21,8 +21,17 @@ public class DefaultPersonFilter implements PersonFilter {
     }
 
     @Override
-    public Dna getDnaById(Long id) {
-        return patientList.stream().filter(patient -> patient.getDna().getId().equals(id)).map(patient -> patient.getDna()).findFirst().get();
+    public String getDnaById(Long id) {
+        String result = patientList.stream().filter(patient -> patient.getDna().getId().equals(id)).map(patient -> patient.getDna()).findFirst().get().toString();
+        result += (patientList.stream().filter(patient -> patient.getDna().getId().equals(id)).findFirst().get().toString());
+        return result;
+    }
+
+    @Override
+    public String getDnaByCode(String id) {
+        String result = patientList.stream().filter(patient -> patient.getDna().getDna().equals(id)).map(patient -> patient.getDna()).findFirst().get().toString();
+        result += (patientList.stream().filter(patient -> patient.getDna().getDna().equals(id)).findFirst().get().toString());
+        return result;
     }
 
     @Override

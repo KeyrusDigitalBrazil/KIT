@@ -10,7 +10,11 @@ public interface MenuUtils {
 
     void showMenusSearchByDoc();
 
+    void showMenusSearchByDnaOpt();
+
     void showMenusSearchByDna();
+
+    void showMenusSearchByDnaCode();
 
     void showMenusSearchInfected();
 

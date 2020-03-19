@@ -25,9 +25,9 @@ public class DefaultMenuUtils implements MenuUtils {
     }
 
     @Override
-    public void showMenusSearchByDoc() {
+    public void showMenusSearchByDnaOpt() {
         System.out.println("====================================================================================================");
-        System.out.println("                                     Insert your DOC number                                         ");
+        System.out.println("                 Options: 1 - Search DNA id | 2 - Search DNA code  | 0 - Quit           ");
         System.out.println("====================================================================================================");
 
     }
@@ -36,6 +36,21 @@ public class DefaultMenuUtils implements MenuUtils {
     public void showMenusSearchByDna() {
         System.out.println("====================================================================================================");
         System.out.println("                                     Insert your DNA ID                                             ");
+        System.out.println("====================================================================================================");
+
+    }
+
+    @Override
+    public void showMenusSearchByDnaCode() {
+        System.out.println("====================================================================================================");
+        System.out.println("                                     Insert your DNA CODE                                         ");
+        System.out.println("====================================================================================================");
+    }
+
+    @Override
+    public void showMenusSearchByDoc() {
+        System.out.println("====================================================================================================");
+        System.out.println("                                     Insert your DOC code                                         ");
         System.out.println("====================================================================================================");
 
     }

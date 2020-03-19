@@ -11,7 +11,9 @@ public interface PersonFilter {
 
     Patient getPersonByDoc(String doc);
 
-    Dna getDnaById(Long id);
+    String getDnaById(Long id);
+
+    String getDnaByCode(String id);
 
     List<Patient> getInfected();
 

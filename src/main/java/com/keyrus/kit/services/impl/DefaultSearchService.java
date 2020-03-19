@@ -27,9 +27,9 @@ public class DefaultSearchService implements SearchService {
         generateData();
 
         String option = "";
-        generateInitialMenu();
 
         while (!option.equals("0")) {
+            generateInitialMenu();
             Scanner opt = new Scanner(System.in);
             option = opt.nextLine();
 
@@ -38,36 +38,29 @@ public class DefaultSearchService implements SearchService {
                     case "1":
                         menuUtils.showMenusSearchByDoc();
                         searchByDoc(generateStringScanner());
-                        generateInitialMenu();
                         break;
                     case "2":
-                        menuUtils.showMenusSearchByDna();
+                        menuUtils.showMenusSearchByDnaOpt();
                         searchDna(generateStringScanner());
-                        generateInitialMenu();
                         break;
                     case "3":
                         menuUtils.showMenusSearchInfected();
                         searchInfected(generateStringScanner());
-                        generateInitialMenu();
                         break;
                     case "4":
                         menuUtils.showMenusSearchSuspicious();
                         searchSuspicious(generateStringScanner());
-                        generateInitialMenu();
                         break;
                     case "5":
                         menuUtils.showMenusSearchNotInfected();
                         searchNotInfected(generateStringScanner());
-                        generateInitialMenu();
                         break;
                     case "6":
                         menuUtils.showMenuSearchByBloodTypeOpt();
                         searchByBlood(generateStringScanner());
-                        generateInitialMenu();
                         break;
                     case "7":
                         searchAllPatients();
-                        generateInitialMenu();
                         break;
                     case "0":
                         System.out.println("Thanks for your time");
@@ -108,10 +101,29 @@ public class DefaultSearchService implements SearchService {
         validEmptyResult(patient);
     }
 
+    @Override
     public void searchDna(String doc){
-        Long dna = Long.parseLong(doc);
-        validEmptyResult(personFilter.getDnaById(dna));
+        switch (doc) {
+            case "1":
+                menuUtils.showMenusSearchByDna();
+                String str =  generateStringScanner();
+                String dnaById = personFilter.getDnaById(Long.parseLong(str));
+                System.out.println(dnaById);
+                break;
+            case "2":
+                menuUtils.showMenusSearchByDnaCode();
+                String dnaByCode = personFilter.getDnaByCode(generateStringScanner());
+                System.out.println(dnaByCode);
+                break;
+            case "0":
+                break;
+            default:
+                menuUtils.showInput();
+                menuUtils.showMenusSearchInfected();
+                searchInfected(generateStringScanner());
+        }
     }
+
     @Override
     public void searchInfected(String id) {
         switch (id) {

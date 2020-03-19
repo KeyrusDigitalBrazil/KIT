@@ -12,6 +12,8 @@ public interface SearchService {
 
     void generateData();
 
+    void searchDna(String doc);
+
     String generateStringScanner();
 
     void searchByDoc(String doc);
