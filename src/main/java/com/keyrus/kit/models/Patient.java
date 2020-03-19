@@ -4,23 +4,15 @@ import com.keyrus.kit.models.enums.BloodType;
 import com.keyrus.kit.models.enums.Nationality;
 import com.keyrus.kit.models.enums.Risk;
 
+import java.util.Objects;
+
 public class Patient extends Person {
 
-
-    private Long id;
-    private Boolean suspicious;
-    private Boolean confirmed;
-    private Boolean quarantine;
-    private Risk risk;
-
-    public Patient() {
-    }
-
-    public Patient(Boolean suspicious, Boolean confirmed, Long id) {
-        this.suspicious = suspicious;
-        this.confirmed = confirmed;
-        this.id = id;
-    }
+    protected Long id;
+    protected Boolean suspicious;
+    protected Boolean confirmed;
+    protected Boolean quarantine;
+    protected Risk risk;
 
     public Patient(Long id, String name, String phoneNumber, BloodType bloodType, Nationality nationality,
                    String doc, Integer age, Dna dna, Long id1, Boolean suspicious, Boolean confirmed) {
@@ -54,14 +46,6 @@ public class Patient extends Person {
         this.confirmed = confirmed;
     }
 
-    public Risk getRisk() {
-        return risk;
-    }
-
-    public void setRisk(Risk risk) {
-        this.risk = risk;
-    }
-
     public Boolean getQuarantine() {
         return quarantine;
     }
@@ -70,11 +54,19 @@ public class Patient extends Person {
         this.quarantine = quarantine;
     }
 
+    public Risk getRisk() {
+        return risk;
+    }
+
+    public void setRisk(Risk risk) {
+        this.risk = risk;
+    }
+
     @Override
     public String toString() {
         return "====================================================================================================" +
                 "\n Name: " + super.getName() +
-                "\n DNA : " + getDna().getDna() +
+                "\n DNA: " + getDna().getDna() +
                 "\n Blood Type: " + super.getBloodType() +
                 "\n Nationality: " + super.getNationality() +
                 "\n Age: " + super.getAge() +
@@ -83,5 +75,24 @@ public class Patient extends Person {
                 "\n Risk: " + risk +
                 "\n Quarantine: " + quarantine +
                 "\n====================================================================================================\n";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Patient)) return false;
+        if (!super.equals(o)) return false;
+        Patient patient = (Patient) o;
+        return  patient.getId().equals(super.id) &&
+                getId().equals(patient.getId()) &&
+                getSuspicious().equals(patient.getSuspicious()) &&
+                getConfirmed().equals(patient.getConfirmed()) &&
+                getQuarantine().equals(patient.getQuarantine()) &&
+                getRisk() == patient.getRisk();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getId(), getSuspicious(), getConfirmed(), getQuarantine(), getRisk());
     }
 }
