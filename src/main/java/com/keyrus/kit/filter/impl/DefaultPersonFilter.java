@@ -6,7 +6,6 @@ import com.keyrus.kit.models.Patient;
 import com.keyrus.kit.models.enums.BloodType;
 import com.keyrus.kit.models.enums.Nationality;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,7 +15,7 @@ public class DefaultPersonFilter implements PersonFilter {
 
     @Override
     public Patient getPersonByDoc(String doc) {
-        String docReplace = doc.replaceAll("[^a-zA-Z0-9 ]", "");
+        String docReplace = cleanString(doc);
         return patientList.stream().filter(patient -> patient.getDoc().equals(docReplace)).findFirst().get();
     }
 
@@ -66,7 +65,7 @@ public class DefaultPersonFilter implements PersonFilter {
 
     @Override
     public List<Patient> getPatientCombineByBlood(BloodType bloodType) {
-        if(BloodType.O_NEGATIVE.equals(bloodType))
+        if (BloodType.O_NEGATIVE.equals(bloodType))
             return patientList;
 
         return patientList.parallelStream().filter(patient -> patient.getBloodType().equals(bloodType)).collect(Collectors.toList());
@@ -81,9 +80,15 @@ public class DefaultPersonFilter implements PersonFilter {
     public List<Patient> getPatientAll() {
         return patientList;
     }
+
     @Override
     public void setPatientList(List<Patient> patientList) {
         this.patientList = patientList;
+    }
+
+    @Override
+    public String cleanString(String doc) {
+        return doc.replace("[^a-zA-Z0-9]", "");
     }
 
 }

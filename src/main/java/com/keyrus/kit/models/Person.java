@@ -3,19 +3,18 @@ package com.keyrus.kit.models;
 import com.keyrus.kit.models.enums.BloodType;
 import com.keyrus.kit.models.enums.Nationality;
 
+import java.util.Objects;
+
 public class Person {
 
-    private Long id;
-    private String name;
-    private String phoneNumber;
-    private BloodType bloodType;
-    private Nationality nationality;
-    private String doc;
-    private Integer age;
-    private Dna dna = new Dna();
-
-    public Person() {
-    }
+    protected Long id;
+    protected String name;
+    protected String phoneNumber;
+    protected BloodType bloodType;
+    protected Nationality nationality;
+    protected String doc;
+    protected Integer age;
+    protected Dna dna;
 
     public Person(Long id, String name, String phoneNumber, BloodType bloodType, Nationality nationality, String doc, Integer age, Dna dna) {
         this.id = id;
@@ -28,81 +27,69 @@ public class Person {
         this.dna = dna;
     }
 
-    public Dna getDna() {
-        return dna;
-    }
-
-    public void setDna(Dna dna) {
-        this.dna = dna;
-    }
-
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getPhoneNumber() {
         return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
     }
 
     public BloodType getBloodType() {
         return bloodType;
     }
 
-    public void setBloodType(BloodType bloodType) {
-        this.bloodType = bloodType;
-    }
-
     public Nationality getNationality() {
         return nationality;
-    }
-
-    public void setNationality(Nationality nationality) {
-        this.nationality = nationality;
     }
 
     public String getDoc() {
         return doc;
     }
 
-    public void setDoc(String doc) {
-        this.doc = doc;
-    }
-
     public Integer getAge() {
         return age;
     }
 
-    public void setAge(Integer age) {
-        this.age = age;
+    public Dna getDna() {
+        return dna;
     }
 
     @Override
     public String toString() {
-        return "Person{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", bloodType=" + bloodType +
-                ", nationality=" + nationality +
-                ", doc='" + doc + '\'' +
-                ", age=" + age +
-                ", dna=" + dna +
+        return "Person { " +
+                " ID = " + id +
+                ", Name = '" + name + '\'' +
+                ", Phone Number = '" + phoneNumber + '\'' +
+                ", Blood Type = " + bloodType +
+                ", Nationality = " + nationality +
+                ", DOC = '" + doc + '\'' +
+                ", Age = " + age +
+                ", DNA = " + dna +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Person)) return false;
+        Person person = (Person) o;
+        return getId().equals(person.getId()) &&
+                getName().equals(person.getName()) &&
+                getPhoneNumber().equals(person.getPhoneNumber()) &&
+                getBloodType() == person.getBloodType() &&
+                getNationality() == person.getNationality() &&
+                getDoc().equals(person.getDoc()) &&
+                getAge().equals(person.getAge()) &&
+                getDna().equals(person.getDna());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getName(), getPhoneNumber(), getBloodType(), getNationality(), getDoc(), getAge(), getDna());
     }
 }
