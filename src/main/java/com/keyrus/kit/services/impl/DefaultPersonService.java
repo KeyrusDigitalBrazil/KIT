@@ -14,6 +14,8 @@ import java.util.stream.Stream;
 
 public class DefaultPersonService implements PersonService {
 
+    private Random randBool = new Random();
+
     @Override
     public Set<Patient> generatorPatient() {
         Set<Patient> patients = Stream.of(
@@ -124,7 +126,7 @@ public class DefaultPersonService implements PersonService {
                 new Patient(44L, "Luan", "+1(11)254136987", BloodType.O_POSITIVE, Nationality.CA,
                         "85109723036", 80, new Dna(44L, "2299F60"), 44L, Boolean.FALSE, Boolean.FALSE),
                 new Patient(45L, "Anão", "+1(11)352", BloodType.AB_POSITIVE, Nationality.CA,
-                        "07877161034", 9, new Dna(45L, "W3D3506"), 40L, Boolean.TRUE, Boolean.TRUE),
+                        "07877161034", 9, new Dna(45L, "W3D3506"), 45L, Boolean.TRUE, Boolean.TRUE),
 
                 //Generate List for Afeganistão
                 new Patient(46L, "Buri", "+93(11)99648446123", BloodType.A_POSITIVE, Nationality.AFG,
@@ -137,23 +139,23 @@ public class DefaultPersonService implements PersonService {
                         "08477869006", 10, new Dna(49L, "FC662A1"), 49L, Boolean.FALSE, Boolean.FALSE),
                 new Patient(50L, "Hao", "+93(11)123", BloodType.O_NEGATIVE, Nationality.AFG,
                         "53658940069", 79, new Dna(50L, "4AA521C"), 50L, Boolean.TRUE, Boolean.TRUE),
-                /**
-                 * Duplicate Object for test of Set Collection
-                 */
+
+                // Duplicate Object for test of Set Collection
                 new Patient(41L, "Leon", "+1(11)99648446123", BloodType.AB_POSITIVE, Nationality.CA,
                         "86949453043", 36, new Dna(41L, "A416109"), 41L, Boolean.FALSE, Boolean.FALSE)
 
         ).collect(Collectors.toSet());
 
-        patients.forEach(patient -> calculateRiskAge(patient));
+        patients.forEach(this::calculateRiskAge);
 
         patients.forEach(patient -> {
-            if (patient.getSuspicious()) {
+            if (patient.getSuspicious().equals(Boolean.TRUE)) {
                 patient.setQuarantine(Boolean.TRUE);
             } else {
                 patient.setQuarantine(Boolean.FALSE);
             }
         });
+
         return patients;
     }
 
@@ -172,8 +174,7 @@ public class DefaultPersonService implements PersonService {
 
     @Override
     public void validQuarantine(Patient patient) {
-        if (patient.getSuspicious()) {
-            Random randBool = new Random();
+        if (patient.getSuspicious().equals(Boolean.TRUE)) {
             boolean value = randBool.nextBoolean();
             if (value) {
                 patient.setQuarantine(Boolean.TRUE);
