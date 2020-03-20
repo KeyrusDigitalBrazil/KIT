@@ -3,6 +3,7 @@ package com.keyrus.kit.services;
 import com.keyrus.kit.models.Patient;
 
 import java.util.List;
+import java.util.Set;
 
 public interface PersonService {
 
@@ -10,7 +11,7 @@ public interface PersonService {
      * Generate initial patient data
      * @return List of com.keyrus.kit.models.Patient
      */
-    List<Patient> generatorPatient();
+    Set<Patient> generatorPatient();
 
     /**
      * Calc of risk by agr for patient

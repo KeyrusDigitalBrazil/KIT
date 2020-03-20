@@ -7,15 +7,15 @@ import com.keyrus.kit.models.enums.Nationality;
 import com.keyrus.kit.models.enums.Risk;
 import com.keyrus.kit.services.PersonService;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class DefaultPersonService implements PersonService {
 
     @Override
-    public List<Patient> generatorPatient() {
-        List<Patient> patients = Arrays.asList(
+    public Set<Patient> generatorPatient() {
+        Set<Patient> patients = Stream.of(
 
                 // Generate List for Brazil
                 new Patient(1L, "José Alves", "+55(11)91234-5678", BloodType.A_NEGATIVE, Nationality.BRA,
@@ -136,7 +136,7 @@ public class DefaultPersonService implements PersonService {
                         "08477869006", 10, new Dna(49L, "FC662A1"), 49L, Boolean.FALSE, Boolean.FALSE),
                 new Patient(50L, "Hao", "+93(11)123", BloodType.O_NEGATIVE, Nationality.AFG,
                         "53658940069", 79, new Dna(50L, "4AA521C"), 50L, Boolean.TRUE, Boolean.TRUE)
-        );
+        ).collect(Collectors.toSet());
 
         patients.forEach(patient -> calculateRiskAge(patient));
 
