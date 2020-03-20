@@ -6,7 +6,7 @@ import com.keyrus.kit.models.enums.Risk;
 
 import java.util.Objects;
 
-public class Patient extends Person {
+public class Patient extends Person implements Comparable<Patient>{
 
     protected Long id;
     protected Boolean suspicious;
@@ -65,6 +65,7 @@ public class Patient extends Person {
     @Override
     public String toString() {
         return "====================================================================================================" +
+                "\n ID: " + id +
                 "\n Name: " + super.getName() +
                 "\n DNA: " + getDna().getDna() +
                 "\n Blood Type: " + super.getBloodType() +
@@ -90,5 +91,10 @@ public class Patient extends Person {
     @Override
     public int hashCode() {
         return Objects.hash(super.getId(), getId(), super.getDoc(), getDoc());
+    }
+
+    @Override
+    public int compareTo(Patient o) {
+        return (int) (this.id - o.getId());
     }
 }

@@ -8,6 +8,7 @@ import com.keyrus.kit.models.enums.Nationality;
 
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class DefaultPersonFilter implements PersonFilter {
@@ -36,50 +37,50 @@ public class DefaultPersonFilter implements PersonFilter {
 
     @Override
     public Set<Patient> getInfected() {
-        return patientList.stream().filter(patient -> patient.getConfirmed().equals(Boolean.TRUE)).collect(Collectors.toSet());
+        return patientList.stream().filter(patient -> patient.getConfirmed().equals(Boolean.TRUE)).collect(Collectors.toCollection(TreeSet::new));
     }
 
     @Override
     public Set<Patient> getInfectedByNationality(Nationality nationality) {
-        return patientList.stream().filter(patient -> (patient.getConfirmed().equals(Boolean.TRUE) && patient.getNationality().equals(nationality))).collect(Collectors.toSet());
+        return patientList.stream().filter(patient -> (patient.getConfirmed().equals(Boolean.TRUE) && patient.getNationality().equals(nationality))).collect(Collectors.toCollection(TreeSet::new));
     }
 
     @Override
     public Set<Patient> getSuspicious() {
-        return patientList.stream().filter(patient -> patient.getSuspicious().equals(Boolean.TRUE)).collect(Collectors.toSet());
+        return patientList.stream().filter(patient -> patient.getSuspicious().equals(Boolean.TRUE)).collect(Collectors.toCollection(TreeSet::new));
     }
 
     @Override
     public Set<Patient> getSuspiciousByNationality(Nationality nationality) {
-        return patientList.parallelStream().filter(patient -> patient.getNationality().equals(nationality) && patient.getSuspicious().equals(Boolean.TRUE)).collect(Collectors.toSet());
+        return patientList.parallelStream().filter(patient -> patient.getNationality().equals(nationality) && patient.getSuspicious().equals(Boolean.TRUE)).collect(Collectors.toCollection(TreeSet::new));
     }
 
     @Override
     public Set<Patient> getNotInfected() {
-        return patientList.parallelStream().filter(patient -> patient.getSuspicious().equals(Boolean.FALSE)).collect(Collectors.toSet());
+        return patientList.parallelStream().filter(patient -> patient.getSuspicious().equals(Boolean.FALSE)).collect(Collectors.toCollection(TreeSet::new));
     }
 
     @Override
     public Set<Patient> getNotInfectedByNationality(Nationality nationality) {
-        return patientList.parallelStream().filter(patient -> patient.getNationality().equals(nationality) && patient.getSuspicious().equals(Boolean.FALSE)).collect(Collectors.toSet());
+        return patientList.parallelStream().filter(patient -> patient.getNationality().equals(nationality) && patient.getSuspicious().equals(Boolean.FALSE)).collect(Collectors.toCollection(TreeSet::new));
     }
 
     @Override
     public Set<Patient> getPatientCombineByBlood(BloodType bloodType) {
         if (BloodType.O_NEGATIVE.equals(bloodType))
-            return patientList;
+            return new TreeSet<>(patientList);
 
-        return patientList.parallelStream().filter(patient -> patient.getBloodType().equals(bloodType)).collect(Collectors.toSet());
+        return patientList.parallelStream().filter(patient -> patient.getBloodType().equals(bloodType)).collect(Collectors.toCollection(TreeSet::new));
     }
 
     @Override
     public Set<Patient> getPatientCombineByBloodAndNationality(BloodType bloodType, Nationality nationality) {
-        return patientList.parallelStream().filter(patient -> patient.getNationality().equals(nationality) && patient.getBloodType().equals(bloodType)).collect(Collectors.toSet());
+        return patientList.parallelStream().filter(patient -> patient.getNationality().equals(nationality) && patient.getBloodType().equals(bloodType)).collect(Collectors.toCollection(TreeSet::new));
     }
 
     @Override
     public Set<Patient> getPatientAll() {
-        return patientList;
+        return new TreeSet<>(patientList);
     }
 
     @Override
