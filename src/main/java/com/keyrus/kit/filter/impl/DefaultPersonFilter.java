@@ -1,12 +1,16 @@
 package com.keyrus.kit.filter.impl;
 
+import com.keyrus.kit.data.PatientDnaData;
 import com.keyrus.kit.filter.PersonFilter;
 import com.keyrus.kit.models.Dna;
 import com.keyrus.kit.models.Patient;
+import com.keyrus.kit.models.Person;
 import com.keyrus.kit.models.enums.BloodType;
 import com.keyrus.kit.models.enums.Nationality;
+import com.keyrus.kit.utils.MenuUtils;
+import com.keyrus.kit.utils.impl.DefaultMenuUtils;
 
-import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
@@ -15,24 +19,40 @@ public class DefaultPersonFilter implements PersonFilter {
 
     private Set<Patient> patientList;
 
+    private MenuUtils menuUtils = new DefaultMenuUtils();
+
     @Override
     public Patient getPersonByDoc(String doc) {
         String docReplace = cleanString(doc);
-        return patientList.stream().filter(patient -> patient.getDoc().equals(docReplace)).findFirst().get();
+        return patientList.stream().filter(patient -> patient.getDoc().equals(docReplace)).findFirst().orElse(null);
     }
 
     @Override
     public String getDnaById(Long id) {
-        String result = patientList.stream().filter(patient -> patient.getDna().getId().equals(id)).map(patient -> patient.getDna()).findFirst().get().toString();
-        result += (patientList.stream().filter(patient -> patient.getDna().getId().equals(id)).findFirst().get().toString());
-        return result;
+        Optional<Dna> dna = patientList.stream().filter(p -> p.getDna().getId().equals(id)).map(Person::getDna).findFirst();
+        Optional<Patient> patient = patientList.stream().filter(p -> p.getDna().getId().equals(id)).findFirst();
+
+        if (patient.isPresent() && dna.isPresent()) {
+            PatientDnaData patientDnaData = new PatientDnaData(patient.get(), dna.get());
+            return patientDnaData.toString();
+        }
+
+        menuUtils.showEmptyResult();
+        return "";
     }
 
     @Override
-    public String getDnaByCode(String id) {
-        String result = patientList.stream().filter(patient -> patient.getDna().getDna().equals(id)).map(patient -> patient.getDna()).findFirst().get().toString();
-        result += (patientList.stream().filter(patient -> patient.getDna().getDna().equals(id)).findFirst().get().toString());
-        return result;
+    public String getDnaByCode(String code) {
+        Optional<Dna> dna = patientList.stream().filter(p -> p.getDna().getDna().equals(code)).map(Person::getDna).findFirst();
+        Optional<Patient> patient = patientList.stream().filter(p -> p.getDna().getDna().equals(code)).findFirst();
+
+        if (patient.isPresent() && dna.isPresent()) {
+            PatientDnaData patientDnaData = new PatientDnaData(patient.get(), dna.get());
+            return patientDnaData.toString();
+        }
+
+        menuUtils.showEmptyResult();
+        return "";
     }
 
     @Override
