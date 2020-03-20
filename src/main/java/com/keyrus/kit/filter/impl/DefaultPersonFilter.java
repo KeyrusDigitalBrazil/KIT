@@ -7,11 +7,12 @@ import com.keyrus.kit.models.enums.BloodType;
 import com.keyrus.kit.models.enums.Nationality;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class DefaultPersonFilter implements PersonFilter {
 
-    private List<Patient> patientList;
+    private Set<Patient> patientList;
 
     @Override
     public Patient getPersonByDoc(String doc) {
@@ -34,55 +35,55 @@ public class DefaultPersonFilter implements PersonFilter {
     }
 
     @Override
-    public List<Patient> getInfected() {
-        return patientList.stream().filter(patient -> patient.getConfirmed().equals(Boolean.TRUE)).collect(Collectors.toList());
+    public Set<Patient> getInfected() {
+        return patientList.stream().filter(patient -> patient.getConfirmed().equals(Boolean.TRUE)).collect(Collectors.toSet());
     }
 
     @Override
-    public List<Patient> getInfectedByNationality(Nationality nationality) {
-        return patientList.stream().filter(patient -> (patient.getConfirmed().equals(Boolean.TRUE) && patient.getNationality().equals(nationality))).collect(Collectors.toList());
+    public Set<Patient> getInfectedByNationality(Nationality nationality) {
+        return patientList.stream().filter(patient -> (patient.getConfirmed().equals(Boolean.TRUE) && patient.getNationality().equals(nationality))).collect(Collectors.toSet());
     }
 
     @Override
-    public List<Patient> getSuspicious() {
-        return patientList.stream().filter(patient -> patient.getSuspicious().equals(Boolean.TRUE)).collect(Collectors.toList());
+    public Set<Patient> getSuspicious() {
+        return patientList.stream().filter(patient -> patient.getSuspicious().equals(Boolean.TRUE)).collect(Collectors.toSet());
     }
 
     @Override
-    public List<Patient> getSuspiciousByNationality(Nationality nationality) {
-        return patientList.parallelStream().filter(patient -> patient.getNationality().equals(nationality) && patient.getSuspicious().equals(Boolean.TRUE)).collect(Collectors.toList());
+    public Set<Patient> getSuspiciousByNationality(Nationality nationality) {
+        return patientList.parallelStream().filter(patient -> patient.getNationality().equals(nationality) && patient.getSuspicious().equals(Boolean.TRUE)).collect(Collectors.toSet());
     }
 
     @Override
-    public List<Patient> getNotInfected() {
-        return patientList.parallelStream().filter(patient -> patient.getSuspicious().equals(Boolean.FALSE)).collect(Collectors.toList());
+    public Set<Patient> getNotInfected() {
+        return patientList.parallelStream().filter(patient -> patient.getSuspicious().equals(Boolean.FALSE)).collect(Collectors.toSet());
     }
 
     @Override
-    public List<Patient> getNotInfectedByNationality(Nationality nationality) {
-        return patientList.parallelStream().filter(patient -> patient.getNationality().equals(nationality) && patient.getSuspicious().equals(Boolean.FALSE)).collect(Collectors.toList());
+    public Set<Patient> getNotInfectedByNationality(Nationality nationality) {
+        return patientList.parallelStream().filter(patient -> patient.getNationality().equals(nationality) && patient.getSuspicious().equals(Boolean.FALSE)).collect(Collectors.toSet());
     }
 
     @Override
-    public List<Patient> getPatientCombineByBlood(BloodType bloodType) {
+    public Set<Patient> getPatientCombineByBlood(BloodType bloodType) {
         if (BloodType.O_NEGATIVE.equals(bloodType))
             return patientList;
 
-        return patientList.parallelStream().filter(patient -> patient.getBloodType().equals(bloodType)).collect(Collectors.toList());
+        return patientList.parallelStream().filter(patient -> patient.getBloodType().equals(bloodType)).collect(Collectors.toSet());
     }
 
     @Override
-    public List<Patient> getPatientCombineByBloodAndNationality(BloodType bloodType, Nationality nationality) {
-        return patientList.parallelStream().filter(patient -> patient.getNationality().equals(nationality) && patient.getBloodType().equals(bloodType)).collect(Collectors.toList());
+    public Set<Patient> getPatientCombineByBloodAndNationality(BloodType bloodType, Nationality nationality) {
+        return patientList.parallelStream().filter(patient -> patient.getNationality().equals(nationality) && patient.getBloodType().equals(bloodType)).collect(Collectors.toSet());
     }
 
     @Override
-    public List<Patient> getPatientAll() {
+    public Set<Patient> getPatientAll() {
         return patientList;
     }
 
     @Override
-    public void setPatientList(List<Patient> patientList) {
+    public void setPatientList(Set<Patient> patientList) {
         this.patientList = patientList;
     }
 

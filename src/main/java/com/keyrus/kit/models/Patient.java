@@ -81,18 +81,14 @@ public class Patient extends Person {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Patient)) return false;
-        if (!super.equals(o)) return false;
         Patient patient = (Patient) o;
         return  patient.getId().equals(super.id) &&
                 getId().equals(patient.getId()) &&
-                getSuspicious().equals(patient.getSuspicious()) &&
-                getConfirmed().equals(patient.getConfirmed()) &&
-                getQuarantine().equals(patient.getQuarantine()) &&
-                getRisk() == patient.getRisk();
+                getDoc().equals(patient.getDoc());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getId(), getSuspicious(), getConfirmed(), getQuarantine(), getRisk());
+        return Objects.hash(super.getId(), getId(), super.getDoc(), getDoc());
     }
 }

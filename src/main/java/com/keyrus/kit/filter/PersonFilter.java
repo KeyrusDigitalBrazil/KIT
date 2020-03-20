@@ -1,16 +1,17 @@
 package com.keyrus.kit.filter;
 
-import com.keyrus.kit.models.Dna;
 import com.keyrus.kit.models.Patient;
 import com.keyrus.kit.models.enums.BloodType;
 import com.keyrus.kit.models.enums.Nationality;
 
 import java.util.List;
+import java.util.Set;
 
 public interface PersonFilter {
 
     /**
      * Get patient by doc number
+     *
      * @param doc
      * @return com.keyrus.kit.models.Patient
      */
@@ -18,6 +19,7 @@ public interface PersonFilter {
 
     /**
      * Get DNA by ID
+     *
      * @param id
      * @return String
      */
@@ -25,6 +27,7 @@ public interface PersonFilter {
 
     /**
      * Get DNA by code
+     *
      * @param id
      * @return String
      */
@@ -32,72 +35,83 @@ public interface PersonFilter {
 
     /**
      * Get patients infected
-     * @return List of com.keyrus.kit.models.Patient
+     *
+     * @return Set of com.keyrus.kit.models.Patient
      */
-    List<Patient> getInfected();
+    Set<Patient> getInfected();
 
     /**
      * Get patients infected by nationality
+     *
      * @param nationality
-     * @return List of com.keyrus.kit.models.Patient
+     * @return Set of com.keyrus.kit.models.Patient
      */
-    List<Patient> getInfectedByNationality(Nationality nationality);
+    Set<Patient> getInfectedByNationality(Nationality nationality);
 
     /**
      * Get patients suspicious
-     * @return List of com.keyrus.kit.models.Patient
+     *
+     * @return Set of com.keyrus.kit.models.Patient
      */
-    List<Patient> getSuspicious();
+    Set<Patient> getSuspicious();
 
     /**
      * Get patients suspicious
+     *
      * @param nationality
-     * @return List of com.keyrus.kit.models.Patient
+     * @return Set of com.keyrus.kit.models.Patient
      */
-    List<Patient> getSuspiciousByNationality(Nationality nationality);
+    Set<Patient> getSuspiciousByNationality(Nationality nationality);
 
     /**
      * Get patients not infected
-     * @return List of com.keyrus.kit.models.Patient
+     *
+     * @return Set of com.keyrus.kit.models.Patient
      */
-    List<Patient> getNotInfected();
+    Set<Patient> getNotInfected();
 
     /**
      * Get patients not infected
+     *
      * @param nationality
-     * @return List of com.keyrus.kit.models.Patient
+     * @return Set of com.keyrus.kit.models.Patient
      */
-    List<Patient> getNotInfectedByNationality(Nationality nationality);
+    Set<Patient> getNotInfectedByNationality(Nationality nationality);
 
     /**
      * Get patients by blood type
+     *
      * @param bloodType
-     * @return List of com.keyrus.kit.models.Patient
+     * @return Set of com.keyrus.kit.models.Patient
      */
-    List<Patient> getPatientCombineByBlood(BloodType bloodType);
+    Set<Patient> getPatientCombineByBlood(BloodType bloodType);
 
     /**
      * Get patients by blood type and nationality
+     *
      * @param bloodType
      * @param nationality
-     * @return List of com.keyrus.kit.models.Patient
+     * @return Set of com.keyrus.kit.models.Patient
      */
-    List<Patient> getPatientCombineByBloodAndNationality(BloodType bloodType, Nationality nationality);
+    Set<Patient> getPatientCombineByBloodAndNationality(BloodType bloodType, Nationality nationality);
 
     /**
      * Get all patients
-     * @return List of com.keyrus.kit.models.Patient
+     *
+     * @return Set of com.keyrus.kit.models.Patient
      */
-    List<Patient> getPatientAll();
+    Set<Patient> getPatientAll();
 
     /**
-     * Set patient list
+     * Set patient Set
+     *
      * @param patientList
      */
-    void setPatientList(List<Patient> patientList);
+    void setPatientList(Set<Patient> patientList);
 
     /**
      * Remove mask in doc
+     *
      * @param doc
      * @return String
      */

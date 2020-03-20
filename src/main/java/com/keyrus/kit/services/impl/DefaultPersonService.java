@@ -7,7 +7,8 @@ import com.keyrus.kit.models.enums.Nationality;
 import com.keyrus.kit.models.enums.Risk;
 import com.keyrus.kit.services.PersonService;
 
-import java.util.*;
+import java.util.Random;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -135,7 +136,13 @@ public class DefaultPersonService implements PersonService {
                 new Patient(49L, "Joao", "+93(11)9515", BloodType.O_POSITIVE, Nationality.AFG,
                         "08477869006", 10, new Dna(49L, "FC662A1"), 49L, Boolean.FALSE, Boolean.FALSE),
                 new Patient(50L, "Hao", "+93(11)123", BloodType.O_NEGATIVE, Nationality.AFG,
-                        "53658940069", 79, new Dna(50L, "4AA521C"), 50L, Boolean.TRUE, Boolean.TRUE)
+                        "53658940069", 79, new Dna(50L, "4AA521C"), 50L, Boolean.TRUE, Boolean.TRUE),
+                /**
+                 * Duplicate Object for test of Set Collection
+                 */
+                new Patient(41L, "Leon", "+1(11)99648446123", BloodType.AB_POSITIVE, Nationality.CA,
+                        "86949453043", 36, new Dna(41L, "A416109"), 41L, Boolean.FALSE, Boolean.FALSE)
+
         ).collect(Collectors.toSet());
 
         patients.forEach(patient -> calculateRiskAge(patient));
@@ -147,7 +154,6 @@ public class DefaultPersonService implements PersonService {
                 patient.setQuarantine(Boolean.FALSE);
             }
         });
-
         return patients;
     }
 
@@ -155,13 +161,11 @@ public class DefaultPersonService implements PersonService {
     public void calculateRiskAge(Patient patient) {
         Integer age = patient.getAge();
 
-        if(age >= 10 && age <= 25){
+        if (age >= 10 && age <= 25) {
             patient.setRisk(Risk.LOW);
-        }
-        else if(age >= 25 && age <= 35){
+        } else if (age >= 25 && age <= 35) {
             patient.setRisk(Risk.MEDIUM);
-        }
-        else{
+        } else {
             patient.setRisk(Risk.HIGH);
         }
     }

@@ -3,6 +3,7 @@ package com.keyrus.kit.services;
 import com.keyrus.kit.models.Patient;
 
 import java.util.List;
+import java.util.Set;
 
 public interface SearchService {
 
@@ -85,5 +86,5 @@ public interface SearchService {
      *
      * @param patients
      */
-    void validEmptyResultList(List<Patient> patients);
+    void validEmptyResultList(Set<Patient> patients);
 }

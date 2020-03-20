@@ -13,6 +13,7 @@ import com.keyrus.kit.utils.impl.DefaultMenuUtils;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 import static com.keyrus.kit.models.enums.BloodType.getBloodType;
 
@@ -128,12 +129,12 @@ public class DefaultSearchService implements SearchService {
     public void searchInfected(String id) {
         switch (id) {
             case "1":
-                List<Patient> patients = personFilter.getInfected();
+                Set<Patient> patients = personFilter.getInfected();
                 validEmptyResultList(patients);
                 break;
             case "2":
                 menuUtils.showMenusSearchByNationality();
-                List<Patient> patientsNationality = personFilter.getInfectedByNationality(Nationality.valueOf(generateStringScanner()));
+                Set<Patient> patientsNationality = personFilter.getInfectedByNationality(Nationality.valueOf(generateStringScanner()));
                 validEmptyResultList(patientsNationality);
                 break;
             case "0":
@@ -149,12 +150,12 @@ public class DefaultSearchService implements SearchService {
     public void searchSuspicious(String id) {
         switch (id) {
             case "1":
-                List<Patient> patients = personFilter.getSuspicious();
+                Set<Patient> patients = personFilter.getSuspicious();
                 validEmptyResultList(patients);
                 break;
             case "2":
                 menuUtils.showMenusSearchByNationality();
-                List<Patient> patientsNationality = personFilter.getSuspiciousByNationality((Nationality.valueOf(generateStringScanner())));
+                Set<Patient> patientsNationality = personFilter.getSuspiciousByNationality((Nationality.valueOf(generateStringScanner())));
                 validEmptyResultList(patientsNationality);
                 break;
             case "0":
@@ -170,12 +171,12 @@ public class DefaultSearchService implements SearchService {
     public void searchNotInfected(String id) {
         switch (id) {
             case "1":
-                List<Patient> patients = personFilter.getNotInfected();
+                Set<Patient> patients = personFilter.getNotInfected();
                 validEmptyResultList(patients);
                 break;
             case "2":
                 menuUtils.showMenusSearchByNationality();
-                List<Patient> patientsNationality = personFilter.getNotInfectedByNationality((Nationality.valueOf(generateStringScanner())));
+                Set<Patient> patientsNationality = personFilter.getNotInfectedByNationality((Nationality.valueOf(generateStringScanner())));
                 validEmptyResultList(patientsNationality);
                 break;
             case "0":
@@ -192,7 +193,7 @@ public class DefaultSearchService implements SearchService {
         switch (opt) {
             case "1":
                 menuUtils.showMenuSearchByBloodType();
-                List<Patient> patients = personFilter.getPatientCombineByBlood(getBloodType(generateStringScanner()));
+                Set<Patient> patients = personFilter.getPatientCombineByBlood(getBloodType(generateStringScanner()));
                 validEmptyResultList(patients);
                 break;
             case "2":
@@ -200,7 +201,7 @@ public class DefaultSearchService implements SearchService {
                 String nationalityOpt = generateStringScanner();
                 menuUtils.showMenuSearchByBloodType();
                 String bloodOpt = generateStringScanner();
-                List<Patient> patientsNationality = personFilter.getPatientCombineByBloodAndNationality(getBloodType(bloodOpt), Nationality.valueOf(nationalityOpt));
+                Set<Patient> patientsNationality = personFilter.getPatientCombineByBloodAndNationality(getBloodType(bloodOpt), Nationality.valueOf(nationalityOpt));
                 validEmptyResultList(patientsNationality);
                 break;
             case "0":
@@ -214,7 +215,7 @@ public class DefaultSearchService implements SearchService {
 
     @Override
     public void searchAllPatients(){
-        List<Patient> patients = personFilter.getPatientAll();
+        Set<Patient> patients = personFilter.getPatientAll();
         patients.forEach(System.out::println);
     }
 
@@ -236,7 +237,7 @@ public class DefaultSearchService implements SearchService {
     }
 
     @Override
-    public void validEmptyResultList(List<Patient> patients) {
+    public void validEmptyResultList(Set<Patient> patients) {
         if(patients.isEmpty()) {
             menuUtils.showEmptyResult();
         } else {
