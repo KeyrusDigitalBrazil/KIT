@@ -64,7 +64,7 @@ public class Patient extends Person implements Comparable<Patient>{
 
     @Override
     public String toString() {
-        return "====================================================================================================" +
+        return "==========================================================================================================================" +
                 "\n ID: " + id +
                 "\n Name: " + super.getName() +
                 "\n DNA: " + getDna().getDna() +
@@ -75,7 +75,7 @@ public class Patient extends Person implements Comparable<Patient>{
                 "\n Particle 781NC: " + confirmed +
                 "\n Risk: " + risk +
                 "\n Quarantine: " + quarantine +
-                "\n====================================================================================================\n";
+                "\n==========================================================================================================================\n";
     }
 
     @Override
