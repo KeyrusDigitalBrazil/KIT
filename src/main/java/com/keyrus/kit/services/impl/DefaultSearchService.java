@@ -1,5 +1,7 @@
 package com.keyrus.kit.services.impl;
 
+import com.keyrus.kit.exceptions.BloodTypeException;
+import com.keyrus.kit.exceptions.NationalityException;
 import com.keyrus.kit.filter.PersonFilter;
 import com.keyrus.kit.filter.impl.DefaultPersonFilter;
 import com.keyrus.kit.models.Dna;
@@ -11,7 +13,6 @@ import com.keyrus.kit.services.SearchService;
 import com.keyrus.kit.utils.MenuUtils;
 import com.keyrus.kit.utils.impl.DefaultMenuUtils;
 
-import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -68,12 +69,23 @@ public class DefaultSearchService implements SearchService {
                         break;
                     default:
                         menuUtils.showInput();
-                        generateInitialMenu();
                 }
 
+            }catch (NumberFormatException  e) {
+                menuUtils.showErrorNumber();
+                menuUtils.showException(e.toString());
+            }catch (BloodTypeException e){
+                menuUtils.showErrorBloodType();
+                menuUtils.showException(e.toString());
+            }catch (NationalityException e){
+                menuUtils.showErrorCountry();
+                menuUtils.showException(e.toString());
+            }catch (IllegalArgumentException e) {
+                menuUtils.showError();
+                menuUtils.showException(e.toString());
             } catch (Exception e) {
                 menuUtils.showError();
-                generateInitialMenu();
+                menuUtils.showException(e.toString());
             }
 
         }
@@ -90,24 +102,24 @@ public class DefaultSearchService implements SearchService {
     }
 
     @Override
-    public String generateStringScanner(){
+    public String generateStringScanner() {
         Scanner doc = new Scanner(System.in);
         String docScanner = doc.nextLine();
         return docScanner;
     }
 
     @Override
-    public void searchByDoc(String doc){
+    public void searchByDoc(String doc) {
         Patient patient = personFilter.getPersonByDoc(doc);
         validEmptyResult(patient);
     }
 
     @Override
-    public void searchDna(String doc){
+    public void searchDna(String doc) {
         switch (doc) {
             case "1":
                 menuUtils.showMenusSearchByDna();
-                String str =  generateStringScanner();
+                String str = generateStringScanner();
                 String dnaById = personFilter.getDnaById(Long.parseLong(str));
                 System.out.println(dnaById);
                 break;
@@ -120,8 +132,8 @@ public class DefaultSearchService implements SearchService {
                 break;
             default:
                 menuUtils.showInput();
-                menuUtils.showMenusSearchInfected();
-                searchInfected(generateStringScanner());
+                menuUtils.showMenusSearchByDnaOpt();
+                searchDna(generateStringScanner());
         }
     }
 
@@ -134,7 +146,7 @@ public class DefaultSearchService implements SearchService {
                 break;
             case "2":
                 menuUtils.showMenusSearchByNationality();
-                Set<Patient> patientsNationality = personFilter.getInfectedByNationality(Nationality.valueOf(generateStringScanner()));
+                Set<Patient> patientsNationality = personFilter.getInfectedByNationality(Nationality.getNationality(generateStringScanner()));
                 validEmptyResultList(patientsNationality);
                 break;
             case "0":
@@ -155,14 +167,14 @@ public class DefaultSearchService implements SearchService {
                 break;
             case "2":
                 menuUtils.showMenusSearchByNationality();
-                Set<Patient> patientsNationality = personFilter.getSuspiciousByNationality((Nationality.valueOf(generateStringScanner())));
+                Set<Patient> patientsNationality = personFilter.getSuspiciousByNationality((Nationality.getNationality(generateStringScanner())));
                 validEmptyResultList(patientsNationality);
                 break;
             case "0":
                 break;
             default:
                 menuUtils.showInput();
-                menuUtils.showMenusSearchInfected();
+                menuUtils.showMenusSearchSuspicious();
                 searchSuspicious(generateStringScanner());
         }
     }
@@ -176,14 +188,14 @@ public class DefaultSearchService implements SearchService {
                 break;
             case "2":
                 menuUtils.showMenusSearchByNationality();
-                Set<Patient> patientsNationality = personFilter.getNotInfectedByNationality((Nationality.valueOf(generateStringScanner())));
+                Set<Patient> patientsNationality = personFilter.getNotInfectedByNationality((Nationality.getNationality(generateStringScanner())));
                 validEmptyResultList(patientsNationality);
                 break;
             case "0":
                 break;
             default:
                 menuUtils.showInput();
-                menuUtils.showMenusSearchInfected();
+                menuUtils.showMenusSearchNotInfected();
                 searchNotInfected(generateStringScanner());
         }
     }
@@ -201,32 +213,32 @@ public class DefaultSearchService implements SearchService {
                 String nationalityOpt = generateStringScanner();
                 menuUtils.showMenuSearchByBloodType();
                 String bloodOpt = generateStringScanner();
-                Set<Patient> patientsNationality = personFilter.getPatientCombineByBloodAndNationality(getBloodType(bloodOpt), Nationality.valueOf(nationalityOpt));
+                Set<Patient> patientsNationality = personFilter.getPatientCombineByBloodAndNationality(getBloodType(bloodOpt), Nationality.getNationality(nationalityOpt));
                 validEmptyResultList(patientsNationality);
                 break;
             case "0":
                 break;
             default:
                 menuUtils.showInput();
-                menuUtils.showMenusSearchInfected();
+                menuUtils.showMenuSearchByBloodTypeOpt();
                 searchNotInfected(generateStringScanner());
         }
     }
 
     @Override
-    public void searchAllPatients(){
+    public void searchAllPatients() {
         Set<Patient> patients = personFilter.getPatientAll();
         patients.forEach(System.out::println);
     }
 
     @Override
     public void validEmptyResult(Object object) {
-        if(object instanceof Patient) {
+        if (object instanceof Patient) {
             personService.validQuarantine((Patient) object);
         }
 
-        if(object instanceof Patient || object instanceof Dna) {
-            if(object == null) {
+        if (object instanceof Patient || object instanceof Dna) {
+            if (object == null) {
                 menuUtils.showEmptyResult();
             } else {
                 System.out.println(object);
@@ -238,7 +250,7 @@ public class DefaultSearchService implements SearchService {
 
     @Override
     public void validEmptyResultList(Set<Patient> patients) {
-        if(patients.isEmpty()) {
+        if (patients.isEmpty()) {
             menuUtils.showEmptyResult();
         } else {
             patients.forEach(this::accept);

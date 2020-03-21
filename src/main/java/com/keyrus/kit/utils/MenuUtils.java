@@ -68,8 +68,20 @@ public interface MenuUtils {
     void showError();
 
     /**
+     * Show error for NumberFormatException
+     */
+    void showErrorNumber();
+
+    /**
      * Show invalid option
      */
     void showInput();
+    /**
+     * Show Exception message
+     */
+    void showException(String msg);
 
+    void showErrorCountry();
+
+    void showErrorBloodType();
 }

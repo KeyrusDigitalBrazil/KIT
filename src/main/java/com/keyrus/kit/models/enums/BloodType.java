@@ -1,5 +1,7 @@
 package com.keyrus.kit.models.enums;
 
+import com.keyrus.kit.exceptions.BloodTypeException;
+
 public enum  BloodType {
 
     A_POSITIVE("A+"),
@@ -15,13 +17,14 @@ public enum  BloodType {
 
     BloodType(String label) { this.label = label; }
 
-    public static BloodType getBloodType(String type) {
+    public static BloodType getBloodType(String type)  {
         for (BloodType bt : BloodType.values()) {
-            if (bt.label.equals(type)) return bt;
+            if (bt.label.equals(type.toUpperCase())) return bt;
         }
-        throw new IllegalArgumentException("Blood Type not found");
+        throw new BloodTypeException("Blood Type not found");
     }
 
     @Override
     public String toString() { return label; }
+
 }

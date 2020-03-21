@@ -98,9 +98,57 @@ public class DefaultMenuUtils implements MenuUtils {
     }
 
     @Override
+    public void showErrorNumber() {
+        System.out.println("==========================================================================================================================");
+        System.out.println("                                           ERROR - Insert a DNA ID valid                                                  ");
+        System.out.println("==========================================================================================================================");
+    }
+
+    @Override
     public void showInput() {
         System.out.println("==========================================================================================================================");
         System.out.println("                                                 Input a valid option                                                     ");
+        System.out.println("==========================================================================================================================");
+    }
+
+    @Override
+    public void showException(String msg) {
+        System.out.println(msg);
+    }
+
+    @Override
+    public void showErrorCountry() {
+        System.out.println("==========================================================================================================================");
+        System.out.println("                                                        ERROR                                                             ");
+        System.out.println("                                               Insert a country code valid                                                ");
+        System.out.println("" +
+                "                                                     BRA for Brazil,\n" +
+                "                                                     COM for Colombia,\n" +
+                "                                                     CHN for China,\n" +
+                "                                                     ITA for Italy,\n" +
+                "                                                     TUN for Tunisia,\n" +
+                "                                                     DEU for Germany,\n" +
+                "                                                     FRA for France,\n" +
+                "                                                     PRT for Portugal,\n" +
+                "                                                     CA  for Canada,\n" +
+                "                                                     AFG  for Afghanistan");
+        System.out.println("==========================================================================================================================");
+    }
+
+    @Override
+    public void showErrorBloodType() {
+        System.out.println("==========================================================================================================================");
+        System.out.println("                                                        ERROR                                                             ");
+        System.out.println("                                               Insert a Blood code valid                                                ");
+        System.out.println(" " +
+                "                                                          A+ for Blood A+,\n" +
+                "                                                          A- for Blood A-,\n" +
+                "                                                          B+ for Blood B+,\n" +
+                "                                                          B- for Blood B-,\n" +
+                "                                                          AB+ for Blood AB+,\n" +
+                "                                                          AB- for Blood AB-,\n" +
+                "                                                          O+ for Blood O+,\n" +
+                "                                                          O- for Blood O-");
         System.out.println("==========================================================================================================================");
     }
 
