@@ -2,7 +2,6 @@ package com.keyrus.kit.services;
 
 import com.keyrus.kit.models.Patient;
 
-import java.util.List;
 import java.util.Set;
 
 public interface SearchService {

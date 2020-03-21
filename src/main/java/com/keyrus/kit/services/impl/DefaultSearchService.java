@@ -6,7 +6,6 @@ import com.keyrus.kit.filter.PersonFilter;
 import com.keyrus.kit.filter.impl.DefaultPersonFilter;
 import com.keyrus.kit.models.Dna;
 import com.keyrus.kit.models.Patient;
-import com.keyrus.kit.models.enums.BloodType;
 import com.keyrus.kit.models.enums.Nationality;
 import com.keyrus.kit.services.PersonService;
 import com.keyrus.kit.services.SearchService;
@@ -71,16 +70,16 @@ public class DefaultSearchService implements SearchService {
                         menuUtils.showInput();
                 }
 
-            }catch (NumberFormatException  e) {
+            } catch (NumberFormatException e) {
                 menuUtils.showErrorNumber();
                 menuUtils.showException(e.toString());
-            }catch (BloodTypeException e){
+            } catch (BloodTypeException e) {
                 menuUtils.showErrorBloodType();
                 menuUtils.showException(e.toString());
-            }catch (NationalityException e){
+            } catch (NationalityException e) {
                 menuUtils.showErrorCountry();
                 menuUtils.showException(e.toString());
-            }catch (IllegalArgumentException e) {
+            } catch (IllegalArgumentException e) {
                 menuUtils.showError();
                 menuUtils.showException(e.toString());
             } catch (Exception e) {

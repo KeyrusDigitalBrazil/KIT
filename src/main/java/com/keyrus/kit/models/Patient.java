@@ -6,7 +6,7 @@ import com.keyrus.kit.models.enums.Risk;
 
 import java.util.Objects;
 
-public class Patient extends Person implements Comparable<Patient>{
+public class Patient extends Person implements Comparable<Patient> {
 
     protected Long id;
     protected Boolean suspicious;
@@ -83,7 +83,7 @@ public class Patient extends Person implements Comparable<Patient>{
         if (this == o) return true;
         if (!(o instanceof Patient)) return false;
         Patient patient = (Patient) o;
-        return  patient.getId().equals(super.id) &&
+        return patient.getId().equals(super.id) &&
                 getId().equals(patient.getId()) &&
                 getDoc().equals(patient.getDoc());
     }

@@ -18,7 +18,8 @@ public class PatientBuilder {
     protected Boolean suspicious;
     protected Boolean confirmed;
 
-    public PatientBuilder() { }
+    public PatientBuilder() {
+    }
 
     public PatientBuilder(Long id, String name, String phoneNumber, BloodType bloodType, Nationality nationality, String doc, Integer age, Dna dna, Long idPatient, Boolean suspicious, Boolean confirmed) {
         this.id = id;

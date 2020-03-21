@@ -4,7 +4,6 @@ import com.keyrus.kit.models.Patient;
 import com.keyrus.kit.models.enums.BloodType;
 import com.keyrus.kit.models.enums.Nationality;
 
-import java.util.List;
 import java.util.Set;
 
 public interface PersonFilter {

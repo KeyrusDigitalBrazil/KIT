@@ -2,7 +2,7 @@ package com.keyrus.kit.models.enums;
 
 import com.keyrus.kit.exceptions.BloodTypeException;
 
-public enum  BloodType {
+public enum BloodType {
 
     A_POSITIVE("A+"),
     A_NEGATIVE("A-"),
@@ -15,9 +15,11 @@ public enum  BloodType {
 
     private final String label;
 
-    BloodType(String label) { this.label = label; }
+    BloodType(String label) {
+        this.label = label;
+    }
 
-    public static BloodType getBloodType(String type)  {
+    public static BloodType getBloodType(String type) {
         for (BloodType bt : BloodType.values()) {
             if (bt.label.equals(type.toUpperCase())) return bt;
         }
@@ -25,6 +27,8 @@ public enum  BloodType {
     }
 
     @Override
-    public String toString() { return label; }
+    public String toString() {
+        return label;
+    }
 
 }

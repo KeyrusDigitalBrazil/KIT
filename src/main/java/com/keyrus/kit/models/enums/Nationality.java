@@ -16,7 +16,7 @@ public enum Nationality {
     AFG;
 
 
-    public static Nationality getNationality(String type)  {
+    public static Nationality getNationality(String type) {
         for (Nationality bt : Nationality.values()) {
             if (bt.equals(type.toUpperCase())) return bt;
         }

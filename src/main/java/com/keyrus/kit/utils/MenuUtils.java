@@ -76,12 +76,19 @@ public interface MenuUtils {
      * Show invalid option
      */
     void showInput();
+
     /**
      * Show Exception message
      */
     void showException(String msg);
 
+    /**
+     * Show Nationality Exception  message
+     */
     void showErrorCountry();
 
+    /**
+     * Show BloodType Exception message
+     */
     void showErrorBloodType();
 }
