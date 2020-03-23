@@ -5,24 +5,22 @@ import com.keyrus.kit.models.Patient;
 import com.keyrus.kit.models.enums.BloodType;
 import com.keyrus.kit.models.enums.Nationality;
 
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class PatientBuilder {
+public class PatientBuilderTest {
     private static Patient patient;
     private static Set<Patient> patientSet;
 
-    public PatientBuilder() {
+    public PatientBuilderTest() {
         patient = new Patient(1L, "José Alves", "+55(11)91234-5678", BloodType.A_NEGATIVE, Nationality.BRA,
                 "08172367082", 25, new Dna(1L, "3D8F825"), 1L, Boolean.FALSE, Boolean.FALSE);
     }
 
     public static Patient defaultValues() {
-        new PatientBuilder();
+        new PatientBuilderTest();
         return patient;
     }
 

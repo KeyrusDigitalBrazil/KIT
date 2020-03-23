@@ -1,6 +1,6 @@
 package com.keyrus.kit.filter;
 
-import com.keyrus.kit.builder.PatientBuilder;
+import com.keyrus.kit.builder.PatientBuilderTest;
 import com.keyrus.kit.data.PatientDnaData;
 import com.keyrus.kit.filter.impl.DefaultPersonFilter;
 import com.keyrus.kit.models.Patient;
@@ -23,9 +23,9 @@ public class DefaultPersonFilterTest {
     public void setUp() {
         defaultPersonFilter = new DefaultPersonFilter();
         defaultPersonFilterEmpty = new DefaultPersonFilter();
-        patient = PatientBuilder.defaultValues();
-        defaultPersonFilter.setPatientList(PatientBuilder.patientBuilderList());
-        defaultPersonFilterEmpty.setPatientList(PatientBuilder.patientBuilderListEmpty());
+        patient = PatientBuilderTest.defaultValues();
+        defaultPersonFilter.setPatientList(PatientBuilderTest.patientBuilderList());
+        defaultPersonFilterEmpty.setPatientList(PatientBuilderTest.patientBuilderListEmpty());
         patientDnaData = new PatientDnaData(patient, patient.getDna());
     }
 
