@@ -21,7 +21,7 @@ public class DefaultPersonUtils implements PersonUtils {
     @Override
     public void searchAllPatients() {
         Set<Patient> patients = personFilter.getPatientAll();
-        patients.forEach(System.out::println);
+        patients.forEach(patient -> System.out.println(patient.toPrint()));
     }
 
     public void setPersonFilter(PersonFilter personFilter) {

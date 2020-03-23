@@ -141,14 +141,14 @@ public class DefaultMenuUtils implements MenuUtils {
         System.out.println("                                                        ERROR                                                             ");
         System.out.println("                                               Insert a Blood code valid                                                  ");
         System.out.println("" +
-                "                                                          A+ for Blood A+,\n" +
-                "                                                          A- for Blood A-,\n" +
-                "                                                          B+ for Blood B+,\n" +
-                "                                                          B- for Blood B-,\n" +
-                "                                                          AB+ for Blood AB+,\n" +
-                "                                                          AB- for Blood AB-,\n" +
-                "                                                          O+ for Blood O+,\n" +
-                "                                                          O- for Blood O-");
+                "                                                     A+ for Blood A+,\n" +
+                "                                                     A- for Blood A-,\n" +
+                "                                                     B+ for Blood B+,\n" +
+                "                                                     B- for Blood B-,\n" +
+                "                                                     AB+ for Blood AB+,\n" +
+                "                                                     AB- for Blood AB-,\n" +
+                "                                                     O+ for Blood O+,\n" +
+                "                                                     O- for Blood O-");
         System.out.println("==========================================================================================================================");
     }
 

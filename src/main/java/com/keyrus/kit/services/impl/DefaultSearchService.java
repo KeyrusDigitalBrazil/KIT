@@ -204,7 +204,7 @@ public class DefaultSearchService implements SearchService {
                 String nationalityOpt = systemUtils.generateStringScanner();
                 menuUtils.showMenuSearchByBloodType();
                 String bloodOpt = systemUtils.generateStringScanner();
-                Set<Patient> patientsNationality = personFilter.getPatientCombineByBloodAndNationality(getBloodType(bloodOpt), Nationality.getNationality(nationalityOpt));
+                Set<Patient> patientsNationality = personFilter.getPatientCombineByBloodAndNationality(Nationality.getNationality(nationalityOpt),getBloodType(bloodOpt));
                 searchUtils.validEmptyResultList(patientsNationality);
                 break;
             case "0":

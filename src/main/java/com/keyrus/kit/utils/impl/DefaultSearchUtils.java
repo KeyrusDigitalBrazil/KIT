@@ -50,7 +50,7 @@ public class DefaultSearchUtils implements SearchUtils {
             menuUtils.showEmptyResult();
         } else {
             patients.forEach(this::accept);
-            patients.forEach(System.out::println);
+            patients.forEach(patient -> System.out.println(patient.toPrint()));
         }
     }
 

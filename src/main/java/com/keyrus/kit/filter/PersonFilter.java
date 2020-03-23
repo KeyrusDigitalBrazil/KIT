@@ -93,7 +93,7 @@ public interface PersonFilter {
      * @param nationality
      * @return Set of com.keyrus.kit.models.Patient
      */
-    Set<Patient> getPatientCombineByBloodAndNationality(BloodType bloodType, Nationality nationality);
+    Set<Patient> getPatientCombineByBloodAndNationality(Nationality nationality, BloodType bloodType);
 
     /**
      * Get all patients
