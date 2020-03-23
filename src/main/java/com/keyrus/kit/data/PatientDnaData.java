@@ -3,20 +3,29 @@ package com.keyrus.kit.data;
 import com.keyrus.kit.models.Dna;
 import com.keyrus.kit.models.Patient;
 
+import java.lang.reflect.Field;
+
 public class PatientDnaData {
 
-    protected Patient patient;
-    protected Dna dna;
+    private Patient patient;
+    private Dna dna;
 
     public PatientDnaData() {
     }
+
     public PatientDnaData(Patient patient, Dna dna) {
         this.patient = patient;
         this.dna = dna;
     }
 
-    @Override
-    public String toString() {
+    public boolean checkNull() throws IllegalAccessException {
+        for (Field f : getClass().getDeclaredFields())
+            if (f.get(this) != null)
+                return false;
+        return true;
+    }
+
+    public String toPrint() {
         return "==========================================================================================================================" +
                 "\n Dna " +
                 "\n ID: " + dna.getId() +

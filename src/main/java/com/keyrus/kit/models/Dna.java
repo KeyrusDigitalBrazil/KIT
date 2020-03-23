@@ -1,5 +1,7 @@
 package com.keyrus.kit.models;
 
+import java.lang.reflect.Field;
+
 public class Dna {
 
     private Long id;
@@ -29,8 +31,14 @@ public class Dna {
         this.dna = dna;
     }
 
-    @Override
-    public String toString() {
+    public boolean checkNull() throws IllegalAccessException {
+        for (Field f : getClass().getDeclaredFields())
+            if (f.get(this) != null)
+                return false;
+        return true;
+    }
+
+    public String toPrint() {
         return "==========================================================================================================================" +
                 "\nDna " +
                 "\nID: '" + id + "\'" +
