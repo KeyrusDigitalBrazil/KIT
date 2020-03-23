@@ -1,19 +1,22 @@
 package com.keyrus.kit.services.impl;
 
-import com.keyrus.kit.data.PatientDnaData;
 import com.keyrus.kit.exceptions.BloodTypeException;
 import com.keyrus.kit.exceptions.NationalityException;
 import com.keyrus.kit.filter.PersonFilter;
 import com.keyrus.kit.filter.impl.DefaultPersonFilter;
-import com.keyrus.kit.models.Dna;
 import com.keyrus.kit.models.Patient;
 import com.keyrus.kit.models.enums.Nationality;
 import com.keyrus.kit.services.PersonService;
 import com.keyrus.kit.services.SearchService;
 import com.keyrus.kit.utils.MenuUtils;
+import com.keyrus.kit.utils.PersonUtils;
+import com.keyrus.kit.utils.SearchUtils;
+import com.keyrus.kit.utils.SystemUtils;
 import com.keyrus.kit.utils.impl.DefaultMenuUtils;
+import com.keyrus.kit.utils.impl.DefaultPersonUtils;
+import com.keyrus.kit.utils.impl.DefaultSearchUtils;
+import com.keyrus.kit.utils.impl.DefaultSystemUtils;
 
-import java.util.Scanner;
 import java.util.Set;
 
 import static com.keyrus.kit.models.enums.BloodType.getBloodType;
@@ -23,6 +26,9 @@ public class DefaultSearchService implements SearchService {
     private PersonService personService = new DefaultPersonService();
     private PersonFilter personFilter = new DefaultPersonFilter();
     private MenuUtils menuUtils = new DefaultMenuUtils();
+    private SearchUtils searchUtils = new DefaultSearchUtils();
+    private PersonUtils personUtils = new DefaultPersonUtils();
+    private SystemUtils systemUtils = new DefaultSystemUtils();
 
     @Override
     public void baseSearch() {
@@ -32,37 +38,37 @@ public class DefaultSearchService implements SearchService {
 
         while (!option.equals("0")) {
             generateInitialMenu();
-            Scanner opt = new Scanner(System.in);
-            option = opt.nextLine();
+
+            option = systemUtils.generateStringScanner();
 
             try {
                 switch (option) {
                     case "1":
                         menuUtils.showMenusSearchByDoc();
-                        searchByDoc(generateStringScanner());
+                        personUtils.searchByDoc(systemUtils.generateStringScanner());
                         break;
                     case "2":
                         menuUtils.showMenusSearchByDnaOpt();
-                        searchDna(generateStringScanner());
+                        searchDna(systemUtils.generateStringScanner());
                         break;
                     case "3":
                         menuUtils.showMenusSearchInfected();
-                        searchInfected(generateStringScanner());
+                        searchInfected(systemUtils.generateStringScanner());
                         break;
                     case "4":
                         menuUtils.showMenusSearchSuspicious();
-                        searchSuspicious(generateStringScanner());
+                        searchSuspicious(systemUtils.generateStringScanner());
                         break;
                     case "5":
                         menuUtils.showMenusSearchNotInfected();
-                        searchNotInfected(generateStringScanner());
+                        searchNotInfected(systemUtils.generateStringScanner());
                         break;
                     case "6":
                         menuUtils.showMenuSearchByBloodTypeOpt();
-                        searchByBlood(generateStringScanner());
+                        searchByBlood(systemUtils.generateStringScanner());
                         break;
                     case "7":
-                        searchAllPatients();
+                        personUtils.searchAllPatients();
                         break;
                     case "0":
                         System.out.println("Thanks for your time");
@@ -80,9 +86,6 @@ public class DefaultSearchService implements SearchService {
             } catch (NationalityException e) {
                 menuUtils.showErrorCountry();
                 menuUtils.showException(e.toString());
-            } catch (IllegalArgumentException e) {
-                menuUtils.showError();
-                menuUtils.showException(e.toString());
             } catch (Exception e) {
                 menuUtils.showError();
                 menuUtils.showException(e.toString());
@@ -98,20 +101,10 @@ public class DefaultSearchService implements SearchService {
 
     @Override
     public void generateData() {
-        personFilter.setPatientList(personService.generatorPatient());
-    }
+        Set<Patient> patients = personService.generatorPatient();
 
-    @Override
-    public String generateStringScanner() {
-        Scanner doc = new Scanner(System.in);
-        String docScanner = doc.nextLine();
-        return docScanner;
-    }
-
-    @Override
-    public void searchByDoc(String doc) {
-        Patient patient = personFilter.getPersonByDoc(doc);
-        validEmptyResult(patient);
+        personFilter.setPatientList(patients);
+        personUtils.setPersonFilter(personFilter);
     }
 
     @Override
@@ -119,19 +112,19 @@ public class DefaultSearchService implements SearchService {
         switch (doc) {
             case "1":
                 menuUtils.showMenusSearchByDna();
-                String str = generateStringScanner();
-                validEmptyResult(personFilter.getDnaById(Long.parseLong(str)));
+                String str = systemUtils.generateStringScanner();
+                searchUtils.validEmptyResult(personFilter.getDnaById(Long.parseLong(str)));
                 break;
             case "2":
                 menuUtils.showMenusSearchByDnaCode();
-                validEmptyResult(personFilter.getDnaByCode(generateStringScanner()));
+                searchUtils.validEmptyResult(personFilter.getDnaByCode(systemUtils.generateStringScanner()));
                 break;
             case "0":
                 break;
             default:
                 menuUtils.showInput();
                 menuUtils.showMenusSearchByDnaOpt();
-                searchDna(generateStringScanner());
+                searchDna(systemUtils.generateStringScanner());
         }
     }
 
@@ -140,19 +133,19 @@ public class DefaultSearchService implements SearchService {
         switch (id) {
             case "1":
                 Set<Patient> patients = personFilter.getInfected();
-                validEmptyResultList(patients);
+                searchUtils.validEmptyResultList(patients);
                 break;
             case "2":
                 menuUtils.showMenusSearchByNationality();
-                Set<Patient> patientsNationality = personFilter.getInfectedByNationality(Nationality.getNationality(generateStringScanner()));
-                validEmptyResultList(patientsNationality);
+                Set<Patient> patientsNationality = personFilter.getInfectedByNationality(Nationality.getNationality(systemUtils.generateStringScanner()));
+                searchUtils.validEmptyResultList(patientsNationality);
                 break;
             case "0":
                 break;
             default:
                 menuUtils.showInput();
                 menuUtils.showMenusSearchInfected();
-                searchInfected(generateStringScanner());
+                searchInfected(systemUtils.generateStringScanner());
         }
     }
 
@@ -161,19 +154,19 @@ public class DefaultSearchService implements SearchService {
         switch (id) {
             case "1":
                 Set<Patient> patients = personFilter.getSuspicious();
-                validEmptyResultList(patients);
+                searchUtils.validEmptyResultList(patients);
                 break;
             case "2":
                 menuUtils.showMenusSearchByNationality();
-                Set<Patient> patientsNationality = personFilter.getSuspiciousByNationality((Nationality.getNationality(generateStringScanner())));
-                validEmptyResultList(patientsNationality);
+                Set<Patient> patientsNationality = personFilter.getSuspiciousByNationality((Nationality.getNationality(systemUtils.generateStringScanner())));
+                searchUtils.validEmptyResultList(patientsNationality);
                 break;
             case "0":
                 break;
             default:
                 menuUtils.showInput();
                 menuUtils.showMenusSearchSuspicious();
-                searchSuspicious(generateStringScanner());
+                searchSuspicious(systemUtils.generateStringScanner());
         }
     }
 
@@ -182,19 +175,19 @@ public class DefaultSearchService implements SearchService {
         switch (id) {
             case "1":
                 Set<Patient> patients = personFilter.getNotInfected();
-                validEmptyResultList(patients);
+                searchUtils.validEmptyResultList(patients);
                 break;
             case "2":
                 menuUtils.showMenusSearchByNationality();
-                Set<Patient> patientsNationality = personFilter.getNotInfectedByNationality((Nationality.getNationality(generateStringScanner())));
-                validEmptyResultList(patientsNationality);
+                Set<Patient> patientsNationality = personFilter.getNotInfectedByNationality((Nationality.getNationality(systemUtils.generateStringScanner())));
+                searchUtils.validEmptyResultList(patientsNationality);
                 break;
             case "0":
                 break;
             default:
                 menuUtils.showInput();
                 menuUtils.showMenusSearchNotInfected();
-                searchNotInfected(generateStringScanner());
+                searchNotInfected(systemUtils.generateStringScanner());
         }
     }
 
@@ -203,60 +196,24 @@ public class DefaultSearchService implements SearchService {
         switch (opt) {
             case "1":
                 menuUtils.showMenuSearchByBloodType();
-                Set<Patient> patients = personFilter.getPatientCombineByBlood(getBloodType(generateStringScanner()));
-                validEmptyResultList(patients);
+                Set<Patient> patients = personFilter.getPatientCombineByBlood(getBloodType(systemUtils.generateStringScanner()));
+                searchUtils.validEmptyResultList(patients);
                 break;
             case "2":
                 menuUtils.showMenusSearchByNationality();
-                String nationalityOpt = generateStringScanner();
+                String nationalityOpt = systemUtils.generateStringScanner();
                 menuUtils.showMenuSearchByBloodType();
-                String bloodOpt = generateStringScanner();
+                String bloodOpt = systemUtils.generateStringScanner();
                 Set<Patient> patientsNationality = personFilter.getPatientCombineByBloodAndNationality(getBloodType(bloodOpt), Nationality.getNationality(nationalityOpt));
-                validEmptyResultList(patientsNationality);
+                searchUtils.validEmptyResultList(patientsNationality);
                 break;
             case "0":
                 break;
             default:
                 menuUtils.showInput();
                 menuUtils.showMenuSearchByBloodTypeOpt();
-                searchNotInfected(generateStringScanner());
+                searchNotInfected(systemUtils.generateStringScanner());
         }
     }
 
-    @Override
-    public void searchAllPatients() {
-        Set<Patient> patients = personFilter.getPatientAll();
-        patients.forEach(System.out::println);
-    }
-
-    @Override
-    public void validEmptyResult(Object object) {
-        if (object instanceof Patient) {
-            personService.validQuarantine((Patient) object);
-        }
-
-        if (object instanceof Patient || object instanceof Dna || object instanceof PatientDnaData) {
-            if (object == null) {
-                menuUtils.showEmptyResult();
-            } else {
-                System.out.println(object);
-            }
-        } else {
-            menuUtils.showError();
-        }
-    }
-
-    @Override
-    public void validEmptyResultList(Set<Patient> patients) {
-        if (patients.isEmpty()) {
-            menuUtils.showEmptyResult();
-        } else {
-            patients.forEach(this::accept);
-            patients.forEach(System.out::println);
-        }
-    }
-
-    private void accept(Patient patient) {
-        personService.validQuarantine(patient);
-    }
 }

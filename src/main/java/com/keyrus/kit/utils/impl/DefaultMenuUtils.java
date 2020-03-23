@@ -9,7 +9,7 @@ public class DefaultMenuUtils implements MenuUtils {
         System.out.println("==========================================================================================================================");
         System.out.println("                                                     Search Patients                                                      ");
         System.out.println("==========================================================================================================================");
-        System.out.println("Options: 1 - Doc | 2 - DNA | 3 - Infected | 4 - Suspicious | 5 - Not Infected | 6 - Blood | 7 - All Patients | 0 - Quit   ");
+        System.out.println("Options: 1 - DOC | 2 - DNA | 3 - Infected | 4 - Suspicious | 5 - Not Infected | 6 - Blood | 7 - All Patients | 0 - Quit   ");
         System.out.println("==========================================================================================================================");
     }
 
@@ -139,8 +139,8 @@ public class DefaultMenuUtils implements MenuUtils {
     public void showErrorBloodType() {
         System.out.println("==========================================================================================================================");
         System.out.println("                                                        ERROR                                                             ");
-        System.out.println("                                               Insert a Blood code valid                                                ");
-        System.out.println(" " +
+        System.out.println("                                               Insert a Blood code valid                                                  ");
+        System.out.println("" +
                 "                                                          A+ for Blood A+,\n" +
                 "                                                          A- for Blood A-,\n" +
                 "                                                          B+ for Blood B+,\n" +

@@ -1,9 +1,5 @@
 package com.keyrus.kit.services;
 
-import com.keyrus.kit.models.Patient;
-
-import java.util.Set;
-
 public interface SearchService {
 
     /**
@@ -25,20 +21,6 @@ public interface SearchService {
      * Generate section for search DNA
      */
     void searchDna(String doc);
-
-    /**
-     * Generate scanner for console
-     *
-     * @return String
-     */
-    String generateStringScanner();
-
-    /**
-     * Search patient by DOC
-     *
-     * @param doc
-     */
-    void searchByDoc(String doc);
 
     /**
      * Generate section for search infected
@@ -68,22 +50,4 @@ public interface SearchService {
      */
     void searchByBlood(String id);
 
-    /**
-     * Generate section for search all patients
-     */
-    void searchAllPatients();
-
-    /**
-     * Validate to return result or empty
-     *
-     * @param object
-     */
-    void validEmptyResult(Object object);
-
-    /**
-     * Validate to return result list or empty
-     *
-     * @param patients
-     */
-    void validEmptyResultList(Set<Patient> patients);
 }

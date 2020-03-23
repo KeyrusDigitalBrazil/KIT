@@ -16,6 +16,8 @@ public class Person {
     protected Integer age;
     protected Dna dna;
 
+    public Person () {}
+
     public Person(Long id, String name, String phoneNumber, BloodType bloodType, Nationality nationality, String doc, Integer age, Dna dna) {
         this.id = id;
         this.name = name;
@@ -59,8 +61,7 @@ public class Person {
         return dna;
     }
 
-    @Override
-    public String toString() {
+    public String toPrint() {
         return "Person { " +
                 " ID = " + id +
                 ", Name = '" + name + '\'' +

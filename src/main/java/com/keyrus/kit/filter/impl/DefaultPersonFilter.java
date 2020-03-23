@@ -7,8 +7,6 @@ import com.keyrus.kit.models.Patient;
 import com.keyrus.kit.models.Person;
 import com.keyrus.kit.models.enums.BloodType;
 import com.keyrus.kit.models.enums.Nationality;
-import com.keyrus.kit.utils.MenuUtils;
-import com.keyrus.kit.utils.impl.DefaultMenuUtils;
 
 import java.util.Optional;
 import java.util.Set;
@@ -18,8 +16,6 @@ import java.util.stream.Collectors;
 public class DefaultPersonFilter implements PersonFilter {
 
     private Set<Patient> patientList;
-
-    private MenuUtils menuUtils = new DefaultMenuUtils();
 
     @Override
     public Patient getPersonByDoc(String doc) {
@@ -33,8 +29,7 @@ public class DefaultPersonFilter implements PersonFilter {
         Optional<Patient> patient = patientList.stream().filter(p -> p.getDna().getId().equals(id)).findFirst();
 
         if (patient.isPresent() && dna.isPresent()) {
-            PatientDnaData patientDnaData = new PatientDnaData(patient.get(), dna.get());
-            return patientDnaData;
+            return new PatientDnaData(patient.get(), dna.get());
         }
 
         return new PatientDnaData();
@@ -46,8 +41,7 @@ public class DefaultPersonFilter implements PersonFilter {
         Optional<Patient> patient = patientList.stream().filter(p -> p.getDna().getDna().equals(code)).findFirst();
 
         if (patient.isPresent() && dna.isPresent()) {
-            PatientDnaData patientDnaData = new PatientDnaData(patient.get(), dna.get());
-            return patientDnaData;
+            return new PatientDnaData(patient.get(), dna.get());
         }
 
         return new PatientDnaData();

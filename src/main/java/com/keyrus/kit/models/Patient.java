@@ -4,6 +4,7 @@ import com.keyrus.kit.models.enums.BloodType;
 import com.keyrus.kit.models.enums.Nationality;
 import com.keyrus.kit.models.enums.Risk;
 
+import java.lang.reflect.Field;
 import java.util.Objects;
 
 public class Patient extends Person implements Comparable<Patient> {
@@ -13,6 +14,8 @@ public class Patient extends Person implements Comparable<Patient> {
     protected Boolean confirmed;
     protected Boolean quarantine;
     protected Risk risk;
+
+    public Patient(){}
 
     public Patient(Long id, String name, String phoneNumber, BloodType bloodType, Nationality nationality,
                    String doc, Integer age, Dna dna, Long id1, Boolean suspicious, Boolean confirmed) {
@@ -62,8 +65,14 @@ public class Patient extends Person implements Comparable<Patient> {
         this.risk = risk;
     }
 
-    @Override
-    public String toString() {
+    public boolean checkNull() throws IllegalAccessException {
+        for (Field f : getClass().getDeclaredFields())
+            if (f.get(this) != null)
+                return false;
+        return true;
+    }
+
+    public String toPrint() {
         return "==========================================================================================================================" +
                 "\n ID: " + id +
                 "\n Name: " + super.getName() +
