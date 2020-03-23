@@ -8,6 +8,8 @@ public class PatientDnaData {
     protected Patient patient;
     protected Dna dna;
 
+    public PatientDnaData() {
+    }
     public PatientDnaData(Patient patient, Dna dna) {
         this.patient = patient;
         this.dna = dna;

@@ -28,31 +28,29 @@ public class DefaultPersonFilter implements PersonFilter {
     }
 
     @Override
-    public String getDnaById(Long id) {
+    public PatientDnaData getDnaById(Long id) {
         Optional<Dna> dna = patientList.stream().filter(p -> p.getDna().getId().equals(id)).map(Person::getDna).findFirst();
         Optional<Patient> patient = patientList.stream().filter(p -> p.getDna().getId().equals(id)).findFirst();
 
         if (patient.isPresent() && dna.isPresent()) {
             PatientDnaData patientDnaData = new PatientDnaData(patient.get(), dna.get());
-            return patientDnaData.toString();
+            return patientDnaData;
         }
 
-        menuUtils.showEmptyResult();
-        return "";
+        return new PatientDnaData();
     }
 
     @Override
-    public String getDnaByCode(String code) {
+    public PatientDnaData getDnaByCode(String code) {
         Optional<Dna> dna = patientList.stream().filter(p -> p.getDna().getDna().equals(code)).map(Person::getDna).findFirst();
         Optional<Patient> patient = patientList.stream().filter(p -> p.getDna().getDna().equals(code)).findFirst();
 
         if (patient.isPresent() && dna.isPresent()) {
             PatientDnaData patientDnaData = new PatientDnaData(patient.get(), dna.get());
-            return patientDnaData.toString();
+            return patientDnaData;
         }
 
-        menuUtils.showEmptyResult();
-        return "";
+        return new PatientDnaData();
     }
 
     @Override
@@ -110,7 +108,7 @@ public class DefaultPersonFilter implements PersonFilter {
 
     @Override
     public String cleanString(String doc) {
-        return doc.replace("[^a-zA-Z0-9]", "");
+        return doc.replaceAll("[^a-zA-Z0-9]", "");
     }
 
 }

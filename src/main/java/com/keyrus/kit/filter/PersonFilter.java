@@ -1,5 +1,6 @@
 package com.keyrus.kit.filter;
 
+import com.keyrus.kit.data.PatientDnaData;
 import com.keyrus.kit.models.Patient;
 import com.keyrus.kit.models.enums.BloodType;
 import com.keyrus.kit.models.enums.Nationality;
@@ -22,7 +23,7 @@ public interface PersonFilter {
      * @param id
      * @return String
      */
-    String getDnaById(Long id);
+    PatientDnaData getDnaById(Long id);
 
     /**
      * Get DNA by code
@@ -30,7 +31,7 @@ public interface PersonFilter {
      * @param id
      * @return String
      */
-    String getDnaByCode(String id);
+    PatientDnaData getDnaByCode(String id);
 
     /**
      * Get patients infected

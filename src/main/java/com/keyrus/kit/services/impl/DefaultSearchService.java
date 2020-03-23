@@ -1,5 +1,6 @@
 package com.keyrus.kit.services.impl;
 
+import com.keyrus.kit.data.PatientDnaData;
 import com.keyrus.kit.exceptions.BloodTypeException;
 import com.keyrus.kit.exceptions.NationalityException;
 import com.keyrus.kit.filter.PersonFilter;
@@ -119,13 +120,11 @@ public class DefaultSearchService implements SearchService {
             case "1":
                 menuUtils.showMenusSearchByDna();
                 String str = generateStringScanner();
-                String dnaById = personFilter.getDnaById(Long.parseLong(str));
-                System.out.println(dnaById);
+                validEmptyResult(personFilter.getDnaById(Long.parseLong(str)));
                 break;
             case "2":
                 menuUtils.showMenusSearchByDnaCode();
-                String dnaByCode = personFilter.getDnaByCode(generateStringScanner());
-                System.out.println(dnaByCode);
+                validEmptyResult(personFilter.getDnaByCode(generateStringScanner()));
                 break;
             case "0":
                 break;
@@ -236,7 +235,7 @@ public class DefaultSearchService implements SearchService {
             personService.validQuarantine((Patient) object);
         }
 
-        if (object instanceof Patient || object instanceof Dna) {
+        if (object instanceof Patient || object instanceof Dna || object instanceof PatientDnaData) {
             if (object == null) {
                 menuUtils.showEmptyResult();
             } else {
