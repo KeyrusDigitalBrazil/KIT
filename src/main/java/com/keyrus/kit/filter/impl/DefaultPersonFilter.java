@@ -87,6 +87,9 @@ public class DefaultPersonFilter implements PersonFilter {
 
     @Override
     public Set<Patient> getPatientCombineByBloodAndNationality(Nationality nationality, BloodType bloodType) {
+        if (BloodType.O_NEGATIVE.equals(bloodType))
+            return patientList.parallelStream().filter(patient -> patient.getNationality().equals(nationality)).collect(Collectors.toCollection(TreeSet::new));
+
         return patientList.parallelStream().filter(patient -> patient.getNationality().equals(nationality) && patient.getBloodType().equals(bloodType)).collect(Collectors.toCollection(TreeSet::new));
     }
 

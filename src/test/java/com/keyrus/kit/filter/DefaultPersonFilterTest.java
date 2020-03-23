@@ -7,7 +7,7 @@ import com.keyrus.kit.models.Patient;
 import org.junit.Before;
 import org.junit.Test;
 
-import static com.keyrus.kit.models.enums.BloodType.*;
+import static com.keyrus.kit.models.enums.BloodType.A_NEGATIVE;
 import static com.keyrus.kit.models.enums.Nationality.*;
 import static org.junit.Assert.*;
 
@@ -31,7 +31,7 @@ public class DefaultPersonFilterTest {
 
     @Test
     public void getPersonByDocSuccess() {
-        assertEquals(defaultPersonFilter.getPersonByDoc("08172367082").toString(), patient.toString());
+        assertEquals(defaultPersonFilter.getPersonByDoc("08172367082").toPrint(), patient.toPrint());
     }
 
     @Test
@@ -42,7 +42,7 @@ public class DefaultPersonFilterTest {
 
     @Test
     public void getDnaByIdSuccess() {
-        assertEquals(defaultPersonFilter.getDnaById(1L).toString(), patientDnaData.toString());
+        assertEquals(defaultPersonFilter.getDnaById(1L).toPrint(), patientDnaData.toPrint());
     }
 
     @Test
@@ -52,7 +52,7 @@ public class DefaultPersonFilterTest {
 
     @Test
     public void getDnaByCodeSuccess() {
-        assertEquals(defaultPersonFilter.getDnaByCode("3D8F825").toString(), patientDnaData.toString());
+        assertEquals(defaultPersonFilter.getDnaByCode("3D8F825").toPrint(), patientDnaData.toPrint());
     }
 
     @Test
@@ -62,7 +62,7 @@ public class DefaultPersonFilterTest {
 
     @Test
     public void getInfectedSuccess() {
-        assertTrue(defaultPersonFilter.getInfected().size() > 0);
+        assertFalse(defaultPersonFilter.getInfected().isEmpty());
     }
 
     @Test
@@ -72,7 +72,7 @@ public class DefaultPersonFilterTest {
 
     @Test
     public void getInfectedByNationalitySuccess() {
-        assertTrue(defaultPersonFilter.getInfectedByNationality(CHN).size() > 0);
+        assertFalse(defaultPersonFilter.getInfectedByNationality(CHN).isEmpty());
     }
 
     @Test
@@ -82,7 +82,7 @@ public class DefaultPersonFilterTest {
 
     @Test
     public void getSuspiciousSuccess() {
-        assertTrue(defaultPersonFilter.getSuspicious().size() > 0);
+        assertFalse(defaultPersonFilter.getSuspicious().isEmpty());
     }
 
     @Test
@@ -102,7 +102,7 @@ public class DefaultPersonFilterTest {
 
     @Test
     public void getSuspiciousByNationalitySuccess() {
-        assertTrue(defaultPersonFilter.getSuspiciousByNationality(CHN).size() > 0);
+        assertFalse(defaultPersonFilter.getSuspiciousByNationality(CHN).isEmpty());
     }
 
     @Test
@@ -112,7 +112,7 @@ public class DefaultPersonFilterTest {
 
     @Test
     public void getNotInfectedSuccess() {
-        assertTrue(defaultPersonFilter.getNotInfected().size() > 0);
+        assertFalse(defaultPersonFilter.getNotInfected().isEmpty());
     }
 
     @Test
@@ -122,7 +122,7 @@ public class DefaultPersonFilterTest {
 
     @Test
     public void getNotInfectedByNationalitySuccess() {
-        assertTrue(defaultPersonFilter.getNotInfectedByNationality(BRA).size() > 0);
+        assertFalse(defaultPersonFilter.getNotInfectedByNationality(BRA).isEmpty());
     }
 
     @Test
@@ -132,7 +132,7 @@ public class DefaultPersonFilterTest {
 
     @Test
     public void getPatientCombineByBloodSuccess() {
-        assertTrue(defaultPersonFilter.getPatientCombineByBlood(A_NEGATIVE).size() > 0);
+        assertFalse(defaultPersonFilter.getPatientCombineByBlood(A_NEGATIVE).isEmpty());
     }
 
     @Test
@@ -142,17 +142,17 @@ public class DefaultPersonFilterTest {
 
     @Test
     public void getPatientCombineByBloodAndNationalitySuccess() {
-        assertTrue(defaultPersonFilter.getPatientCombineByBloodAndNationality(A_NEGATIVE, BRA).size() > 0);
+        assertFalse(defaultPersonFilter.getPatientCombineByBloodAndNationality(BRA, A_NEGATIVE).isEmpty());
     }
 
     @Test
     public void getPatientCombineByBloodAndNationalityFail() {
-        assertTrue(defaultPersonFilterEmpty.getPatientCombineByBloodAndNationality(A_NEGATIVE, BRA).isEmpty());
+        assertTrue(defaultPersonFilterEmpty.getPatientCombineByBloodAndNationality(BRA, A_NEGATIVE).isEmpty());
     }
 
     @Test
     public void getPatientAllSuccess() {
-        assertTrue(defaultPersonFilter.getPatientAll().size() > 0);
+        assertFalse(defaultPersonFilter.getPatientAll().isEmpty());
     }
 
     @Test
