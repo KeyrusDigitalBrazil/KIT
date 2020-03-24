@@ -18,18 +18,6 @@ public interface SearchService {
     void generateData();
 
     /**
-     * Generate section for search DNA
-     */
-    void searchDna(String doc);
-
-    /**
-     * Generate section for search infected
-     *
-     * @param id
-     */
-    void searchInfected(String id);
-
-    /**
      * Generate section for search suspicious
      *
      * @param id

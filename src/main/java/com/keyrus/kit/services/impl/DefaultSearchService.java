@@ -1,11 +1,14 @@
 package com.keyrus.kit.services.impl;
 
+import com.keyrus.kit.context.Context;
 import com.keyrus.kit.exceptions.BloodTypeException;
 import com.keyrus.kit.exceptions.NationalityException;
 import com.keyrus.kit.filter.PersonFilter;
 import com.keyrus.kit.filter.impl.DefaultPersonFilter;
 import com.keyrus.kit.models.Patient;
 import com.keyrus.kit.models.enums.Nationality;
+import com.keyrus.kit.search.impl.DnaSearch;
+import com.keyrus.kit.search.impl.InfectedSearch;
 import com.keyrus.kit.services.PersonService;
 import com.keyrus.kit.services.SearchService;
 import com.keyrus.kit.utils.MenuUtils;
@@ -29,6 +32,7 @@ public class DefaultSearchService implements SearchService {
     private SearchUtils searchUtils = new DefaultSearchUtils();
     private PersonUtils personUtils = new DefaultPersonUtils();
     private SystemUtils systemUtils = new DefaultSystemUtils();
+    private Context context;
 
     @Override
     public void baseSearch() {
@@ -48,12 +52,12 @@ public class DefaultSearchService implements SearchService {
                         personUtils.searchByDoc(systemUtils.generateStringScanner());
                         break;
                     case "2":
-                        menuUtils.showMenusSearchByDnaOpt();
-                        searchDna(systemUtils.generateStringScanner());
+                        context = new Context(new DnaSearch());
+                        context.executeStrategy();
                         break;
                     case "3":
-                        menuUtils.showMenusSearchInfected();
-                        searchInfected(systemUtils.generateStringScanner());
+                        context = new Context(new InfectedSearch());
+                        context.executeStrategy();
                         break;
                     case "4":
                         menuUtils.showMenusSearchSuspicious();
@@ -105,48 +109,6 @@ public class DefaultSearchService implements SearchService {
 
         personFilter.setPatientList(patients);
         personUtils.setPersonFilter(personFilter);
-    }
-
-    @Override
-    public void searchDna(String doc) {
-        switch (doc) {
-            case "1":
-                menuUtils.showMenusSearchByDna();
-                String str = systemUtils.generateStringScanner();
-                searchUtils.validEmptyResult(personFilter.getDnaById(Long.parseLong(str)));
-                break;
-            case "2":
-                menuUtils.showMenusSearchByDnaCode();
-                searchUtils.validEmptyResult(personFilter.getDnaByCode(systemUtils.generateStringScanner()));
-                break;
-            case "0":
-                break;
-            default:
-                menuUtils.showInput();
-                menuUtils.showMenusSearchByDnaOpt();
-                searchDna(systemUtils.generateStringScanner());
-        }
-    }
-
-    @Override
-    public void searchInfected(String id) {
-        switch (id) {
-            case "1":
-                Set<Patient> patients = personFilter.getInfected();
-                searchUtils.validEmptyResultList(patients);
-                break;
-            case "2":
-                menuUtils.showMenusSearchByNationality();
-                Set<Patient> patientsNationality = personFilter.getInfectedByNationality(Nationality.getNationality(systemUtils.generateStringScanner()));
-                searchUtils.validEmptyResultList(patientsNationality);
-                break;
-            case "0":
-                break;
-            default:
-                menuUtils.showInput();
-                menuUtils.showMenusSearchInfected();
-                searchInfected(systemUtils.generateStringScanner());
-        }
     }
 
     @Override
