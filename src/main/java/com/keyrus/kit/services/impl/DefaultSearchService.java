@@ -52,11 +52,15 @@ public class DefaultSearchService implements SearchService {
                         personUtils.searchByDoc(systemUtils.generateStringScanner());
                         break;
                     case "2":
-                        context = new Context(new DnaSearch());
+                        DnaSearch dnaSearch = new DnaSearch();
+                        dnaSearch.setPersonFilter(personFilter);
+                        context = new Context(dnaSearch);
                         context.executeStrategy();
                         break;
                     case "3":
-                        context = new Context(new InfectedSearch());
+                        InfectedSearch infectedSearch = new InfectedSearch();
+                        infectedSearch.setPersonFilter(personFilter);
+                        context = new Context(infectedSearch);
                         context.executeStrategy();
                         break;
                     case "4":
@@ -166,7 +170,7 @@ public class DefaultSearchService implements SearchService {
                 String nationalityOpt = systemUtils.generateStringScanner();
                 menuUtils.showMenuSearchByBloodType();
                 String bloodOpt = systemUtils.generateStringScanner();
-                Set<Patient> patientsNationality = personFilter.getPatientCombineByBloodAndNationality(Nationality.getNationality(nationalityOpt),getBloodType(bloodOpt));
+                Set<Patient> patientsNationality = personFilter.getPatientCombineByBloodAndNationality(Nationality.getNationality(nationalityOpt), getBloodType(bloodOpt));
                 searchUtils.validEmptyResultList(patientsNationality);
                 break;
             case "0":
