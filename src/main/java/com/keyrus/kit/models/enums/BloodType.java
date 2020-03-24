@@ -21,7 +21,7 @@ public enum BloodType {
 
     public static BloodType getBloodType(String type) {
         for (BloodType bt : BloodType.values()) {
-            if (bt.label.equals(type.toUpperCase())) return bt;
+            if (bt.label.equalsIgnoreCase(type)) return bt;
         }
         throw new BloodTypeException("Blood Type not found");
     }

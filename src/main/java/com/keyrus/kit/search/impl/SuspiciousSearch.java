@@ -13,36 +13,38 @@ import com.keyrus.kit.utils.impl.DefaultSystemUtils;
 
 import java.util.Set;
 
-public class InfectedSearch implements SearchStrategy {
+public class SuspiciousSearch implements SearchStrategy {
 
     private PersonFilter personFilter;
     private MenuUtils menuUtils = new DefaultMenuUtils();
     private SearchUtils searchUtils = new DefaultSearchUtils();
     private SystemUtils systemUtils = new DefaultSystemUtils();
 
-
-    public InfectedSearch(PersonFilter personFilter) {
+    public SuspiciousSearch(PersonFilter personFilter) {
         this.personFilter = personFilter;
     }
 
     @Override
     public void search() {
-        menuUtils.showMenusSearchInfected();
-        switch (systemUtils.generateStringScanner()) {
+        menuUtils.showMenusSearchSuspicious();
+        String opt = systemUtils.generateStringScanner();
+
+        switch (opt) {
             case "1":
-                Set<Patient> patients = personFilter.getInfected();
+                Set<Patient> patients = personFilter.getSuspicious();
                 searchUtils.validEmptyResultList(patients);
                 break;
             case "2":
                 menuUtils.showMenusSearchByNationality();
-                Set<Patient> patientsNationality = personFilter.getInfectedByNationality(Nationality.getNationality(systemUtils.generateStringScanner()));
+                Set<Patient> patientsNationality = personFilter.getSuspiciousByNationality((Nationality.getNationality(systemUtils.generateStringScanner())));
                 searchUtils.validEmptyResultList(patientsNationality);
                 break;
             case "0":
                 break;
             default:
                 menuUtils.showInput();
-                search();
+                menuUtils.showMenusSearchSuspicious();
+                this.search();
         }
     }
 

@@ -17,25 +17,4 @@ public interface SearchService {
      */
     void generateData();
 
-    /**
-     * Generate section for search suspicious
-     *
-     * @param id
-     */
-    void searchSuspicious(String id);
-
-    /**
-     * Generate section for search not infected
-     *
-     * @param id
-     */
-    void searchNotInfected(String id);
-
-    /**
-     * Generate section for search by blood type
-     *
-     * @param id
-     */
-    void searchByBlood(String id);
-
 }
