@@ -90,8 +90,7 @@ public class Patient extends Person implements Comparable<Patient> {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Patient)) return false;
-        Patient patient = (Patient) o;
+        if (!(o instanceof Patient patient)) return false;
         return patient.getId().equals(super.id) &&
                 getId().equals(patient.getId()) &&
                 getDoc().equals(patient.getDoc());

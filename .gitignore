@@ -92,7 +92,7 @@ fabric.properties
 .idea/**/markdown-navigator/
 .idea/misc.xml
 
-### Java ###
+### Java ###+
 # Compiled class file
 *.class
 

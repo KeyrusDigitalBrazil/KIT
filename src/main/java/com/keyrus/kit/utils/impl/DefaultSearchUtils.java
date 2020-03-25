@@ -18,26 +18,26 @@ public class DefaultSearchUtils implements SearchUtils {
     @Override
     public void validEmptyResult(Object object) {
         try {
-            if (object instanceof Patient) {
-                if (((Patient) object).checkNull()) {
+            if (object instanceof Patient patient) {
+                if (patient.checkNull()) {
                     menuUtils.showEmptyResult();
                 } else {
-                    personService.validQuarantine((Patient) object);
-                    System.out.println(((Patient) object).toPrint());
+                    personService.validQuarantine(patient);
+                    System.out.println(patient.toPrint());
                 }
             }
-            if (object instanceof Dna) {
-                if (((Dna) object).checkNull()) {
+            if (object instanceof Dna dna) {
+                if (dna.checkNull()) {
                     menuUtils.showEmptyResult();
                 } else {
-                    System.out.println(((Dna) object).toPrint());
+                    System.out.println(dna.toPrint());
                 }
             }
-            if (object instanceof PatientDnaData) {
-                if (((PatientDnaData) object).checkNull()) {
+            if (object instanceof PatientDnaData dnaData) {
+                if (dnaData.checkNull()) {
                     menuUtils.showEmptyResult();
                 } else {
-                    System.out.println(((PatientDnaData) object).toPrint());
+                    System.out.println(dnaData.toPrint());
                 }
             }
 
