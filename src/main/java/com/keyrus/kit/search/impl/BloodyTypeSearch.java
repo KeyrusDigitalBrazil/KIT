@@ -13,36 +13,44 @@ import com.keyrus.kit.utils.impl.DefaultSystemUtils;
 
 import java.util.Set;
 
-public class InfectedSearch implements SearchStrategy {
+import static com.keyrus.kit.models.enums.BloodType.getBloodType;
+
+public class BloodyTypeSearch implements SearchStrategy {
 
     private PersonFilter personFilter;
     private MenuUtils menuUtils = new DefaultMenuUtils();
     private SearchUtils searchUtils = new DefaultSearchUtils();
     private SystemUtils systemUtils = new DefaultSystemUtils();
 
-
-    public InfectedSearch(PersonFilter personFilter) {
+    public BloodyTypeSearch(PersonFilter personFilter) {
         this.personFilter = personFilter;
     }
 
     @Override
     public void search() {
-        menuUtils.showMenusSearchInfected();
-        switch (systemUtils.generateStringScanner()) {
+        menuUtils.showMenuSearchByBloodTypeOpt();
+        String opt = systemUtils.generateStringScanner();
+
+        switch (opt) {
             case "1":
-                Set<Patient> patients = personFilter.getInfected();
+                menuUtils.showMenuSearchByBloodType();
+                Set<Patient> patients = personFilter.getPatientCombineByBlood(getBloodType(systemUtils.generateStringScanner()));
                 searchUtils.validEmptyResultList(patients);
                 break;
             case "2":
                 menuUtils.showMenusSearchByNationality();
-                Set<Patient> patientsNationality = personFilter.getInfectedByNationality(Nationality.getNationality(systemUtils.generateStringScanner()));
+                String nationalityOpt = systemUtils.generateStringScanner();
+                menuUtils.showMenuSearchByBloodType();
+                String bloodOpt = systemUtils.generateStringScanner();
+                Set<Patient> patientsNationality = personFilter.getPatientCombineByBloodAndNationality(Nationality.getNationality(nationalityOpt), getBloodType(bloodOpt));
                 searchUtils.validEmptyResultList(patientsNationality);
                 break;
             case "0":
                 break;
             default:
                 menuUtils.showInput();
-                search();
+                menuUtils.showMenuSearchByBloodTypeOpt();
+                this.search();
         }
     }
 

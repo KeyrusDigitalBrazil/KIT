@@ -18,7 +18,7 @@ public enum Nationality {
 
     public static Nationality getNationality(String type) {
         for (Nationality bt : Nationality.values()) {
-            if (bt.toString().equals(type.toUpperCase())) return bt;
+            if (bt.toString().equalsIgnoreCase(type)) return bt;
         }
         throw new NationalityException("Nationality not found");
     }
