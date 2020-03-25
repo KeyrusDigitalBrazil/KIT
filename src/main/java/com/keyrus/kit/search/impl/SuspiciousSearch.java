@@ -27,24 +27,24 @@ public class SuspiciousSearch implements SearchStrategy {
     @Override
     public void search() {
         menuUtils.showMenusSearchSuspicious();
-        String opt = systemUtils.generateStringScanner();
 
-        switch (opt) {
-            case "1":
+        switch (systemUtils.generateStringScanner()) {
+            case "1" -> {
                 Set<Patient> patients = personFilter.getSuspicious();
                 searchUtils.validEmptyResultList(patients);
-                break;
-            case "2":
+            }
+            case "2" -> {
                 menuUtils.showMenusSearchByNationality();
                 Set<Patient> patientsNationality = personFilter.getSuspiciousByNationality((Nationality.getNationality(systemUtils.generateStringScanner())));
                 searchUtils.validEmptyResultList(patientsNationality);
-                break;
-            case "0":
-                break;
-            default:
+            }
+            case "0" -> {
+            }
+            default -> {
                 menuUtils.showInput();
                 menuUtils.showMenusSearchSuspicious();
                 this.search();
+            }
         }
     }
 

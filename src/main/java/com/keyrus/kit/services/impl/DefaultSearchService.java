@@ -37,41 +37,16 @@ public class DefaultSearchService implements SearchService {
 
             try {
                 switch (option) {
-                    case "1":
-                        context = new Context(new DocSearch(personFilter));
-                        context.executeStrategy();
-                        break;
-                    case "2":
-                        context = new Context(new DnaSearch(personFilter));
-                        context.executeStrategy();
-                        break;
-                    case "3":
-                        context = new Context(new InfectedSearch(personFilter));
-                        context.executeStrategy();
-                        break;
-                    case "4":
-                        context = new Context(new SuspiciousSearch(personFilter));
-                        context.executeStrategy();
-                        break;
-                    case "5":
-                        context = new Context(new NotInfectedSearch(personFilter));
-                        context.executeStrategy();
-                        break;
-                    case "6":
-                        context = new Context(new BloodyTypeSearch(personFilter));
-                        context.executeStrategy();
-                        break;
-                    case "7":
-                        context = new Context(new SearchAllSearch(personFilter));
-                        context.executeStrategy();
-                        break;
-                    case "0":
-                        System.out.println("Thanks for your time");
-                        break;
-                    default:
-                        menuUtils.showInput();
+                    case "1" -> context = new Context(new DocSearch(personFilter));
+                    case "2" -> context = new Context(new DnaSearch(personFilter));
+                    case "3" -> context = new Context(new InfectedSearch(personFilter));
+                    case "4" -> context = new Context(new SuspiciousSearch(personFilter));
+                    case "5" -> context = new Context(new NotInfectedSearch(personFilter));
+                    case "6" -> context = new Context(new BloodyTypeSearch(personFilter));
+                    case "7" -> context = new Context(new SearchAllSearch(personFilter));
+                    case "0" -> System.out.println("Thanks for your time");
+                    default -> menuUtils.showInput();
                 }
-
             } catch (NumberFormatException e) {
                 menuUtils.showErrorNumber();
                 menuUtils.showException(e.toString());

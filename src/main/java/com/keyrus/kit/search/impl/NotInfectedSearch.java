@@ -27,24 +27,24 @@ public class NotInfectedSearch implements SearchStrategy {
     @Override
     public void search() {
         menuUtils.showMenusSearchNotInfected();
-        String opt = systemUtils.generateStringScanner();
 
-        switch (opt) {
-            case "1":
+        switch (systemUtils.generateStringScanner()) {
+            case "1" -> {
                 Set<Patient> patients = personFilter.getNotInfected();
                 searchUtils.validEmptyResultList(patients);
-                break;
-            case "2":
+            }
+            case "2" -> {
                 menuUtils.showMenusSearchByNationality();
                 Set<Patient> patientsNationality = personFilter.getNotInfectedByNationality((Nationality.getNationality(systemUtils.generateStringScanner())));
                 searchUtils.validEmptyResultList(patientsNationality);
-                break;
-            case "0":
-                break;
-            default:
+            }
+            case "0" -> {
+            }
+            default -> {
                 menuUtils.showInput();
                 menuUtils.showMenusSearchNotInfected();
                 this.search();
+            }
         }
     }
 

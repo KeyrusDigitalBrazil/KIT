@@ -28,21 +28,23 @@ public class InfectedSearch implements SearchStrategy {
     @Override
     public void search() {
         menuUtils.showMenusSearchInfected();
+
         switch (systemUtils.generateStringScanner()) {
-            case "1":
+            case "1" -> {
                 Set<Patient> patients = personFilter.getInfected();
                 searchUtils.validEmptyResultList(patients);
-                break;
-            case "2":
+            }
+            case "2" -> {
                 menuUtils.showMenusSearchByNationality();
                 Set<Patient> patientsNationality = personFilter.getInfectedByNationality(Nationality.getNationality(systemUtils.generateStringScanner()));
                 searchUtils.validEmptyResultList(patientsNationality);
-                break;
-            case "0":
-                break;
-            default:
+            }
+            case "0" -> {
+            }
+            default -> {
                 menuUtils.showInput();
                 search();
+            }
         }
     }
 

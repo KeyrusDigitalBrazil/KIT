@@ -29,28 +29,28 @@ public class BloodyTypeSearch implements SearchStrategy {
     @Override
     public void search() {
         menuUtils.showMenuSearchByBloodTypeOpt();
-        String opt = systemUtils.generateStringScanner();
 
-        switch (opt) {
-            case "1":
+        switch (systemUtils.generateStringScanner()) {
+            case "1" -> {
                 menuUtils.showMenuSearchByBloodType();
                 Set<Patient> patients = personFilter.getPatientCombineByBlood(getBloodType(systemUtils.generateStringScanner()));
                 searchUtils.validEmptyResultList(patients);
-                break;
-            case "2":
+            }
+            case "2" -> {
                 menuUtils.showMenusSearchByNationality();
                 String nationalityOpt = systemUtils.generateStringScanner();
                 menuUtils.showMenuSearchByBloodType();
                 String bloodOpt = systemUtils.generateStringScanner();
                 Set<Patient> patientsNationality = personFilter.getPatientCombineByBloodAndNationality(Nationality.getNationality(nationalityOpt), getBloodType(bloodOpt));
                 searchUtils.validEmptyResultList(patientsNationality);
-                break;
-            case "0":
-                break;
-            default:
+            }
+            case "0" -> {
+            }
+            default -> {
                 menuUtils.showInput();
                 menuUtils.showMenuSearchByBloodTypeOpt();
                 this.search();
+            }
         }
     }
 
