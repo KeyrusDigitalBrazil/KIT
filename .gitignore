@@ -82,6 +82,7 @@ fabric.properties
 
 # Sonarlint plugin
 .idea/**/sonarlint/
+.idea/consolestorage/solr_region.json
 
 # SonarQube Plugin
 .idea/**/sonarIssues.xml
@@ -89,6 +90,7 @@ fabric.properties
 # Markdown Navigator plugin
 .idea/**/markdown-navigator.xml
 .idea/**/markdown-navigator/
+.idea/misc.xml
 
 ### Java ###
 # Compiled class file
@@ -134,5 +136,8 @@ gradle-app.setting
 
 ### Gradle Patch ###
 **/build/
+
+### Flexible Search ###
+.idea/consolestorage/flexible_search_region.json
 
 # End of https://www.gitignore.io/api/java,gradle,intellij

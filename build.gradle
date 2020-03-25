@@ -15,3 +15,10 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     testImplementation 'junit:junit:4.12'
 }
+
+tasks.withType(JavaCompile) {
+    options.compilerArgs += '--enable-preview'
+}
+tasks.withType(Test) {
+    jvmArgs += "--enable-preview"
+}
