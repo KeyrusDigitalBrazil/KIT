@@ -15,7 +15,6 @@ import com.keyrus.kit.utils.SystemUtils;
 import com.keyrus.kit.utils.impl.DefaultMenuUtils;
 import com.keyrus.kit.utils.impl.DefaultSystemUtils;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -26,7 +25,9 @@ public class DefaultSearchService implements SearchService {
     private PersonFilter personFilter = new DefaultPersonFilter();
     private MenuUtils menuUtils = new DefaultMenuUtils();
     private SystemUtils systemUtils = new DefaultSystemUtils();
-    private Context context;
+
+    private static final String OBSERVER = "observer";
+    private static final String STRATEGY = "strategy";
 
     @Override
     public void baseSearch() {
@@ -38,40 +39,80 @@ public class DefaultSearchService implements SearchService {
             generateInitialMenu();
 
             option = systemUtils.generateStringScanner();
-            List<SearchStrategy> searchStrategies = new ArrayList<>();
-            searchStrategies = Arrays.asList(   new DocSearch(personFilter), new DnaSearch(personFilter), new InfectedSearch(personFilter),
-                                                new SuspiciousSearch(personFilter), new NotInfectedSearch(personFilter), new BloodyTypeSearch(personFilter),
-                                                new SearchAllSearch(personFilter));
-            for (int i = Integer.valueOf(option) -1; i < searchStrategies.size(); i++) {
-                searchStrategies.get(i).search();
 
-            }
-            try {
-//                switch (option) {
-//                    case "1" -> context = new Context(new DocSearch(personFilter));
-//                    case "2" -> context = new Context(new DnaSearch(personFilter));
-//                    case "3" -> context = new Context(new InfectedSearch(personFilter));
-//                    case "4" -> context = new Context(new SuspiciousSearch(personFilter));
-//                    case "5" -> context = new Context(new NotInfectedSearch(personFilter));
-//                    case "6" -> context = new Context(new BloodyTypeSearch(personFilter));
-//                    case "7" -> context = new Context(new SearchAllSearch(personFilter));
-//                    case "0" -> System.out.println("Thanks for your time");
-//                    default -> menuUtils.showInput();
-//                }
-            } catch (NumberFormatException e) {
-                menuUtils.showErrorNumber();
-                menuUtils.showException(e.toString());
-            } catch (BloodTypeException e) {
-                menuUtils.showErrorBloodType();
-                menuUtils.showException(e.toString());
-            } catch (NationalityException e) {
-                menuUtils.showErrorCountry();
-                menuUtils.showException(e.toString());
-            } catch (Exception e) {
-                menuUtils.showError();
-                menuUtils.showException(e.toString());
+            String pattern = systemUtils.getPropertiesValue("pattern.selector");
+
+            if (pattern.equals(OBSERVER)) {
+                patternObserver(option);
+            } else if (pattern.equals(STRATEGY)) {
+                patternStrategy(option);
+            } else {
+                //Default pattern
+                patternStrategy(option);
             }
 
+        }
+    }
+
+    private void patternStrategy(String option) {
+        try {
+            switch (option) {
+                case "1" -> new Context(new DocSearch(personFilter));
+                case "2" -> new Context(new DnaSearch(personFilter));
+                case "3" -> new Context(new InfectedSearch(personFilter));
+                case "4" -> new Context(new SuspiciousSearch(personFilter));
+                case "5" -> new Context(new NotInfectedSearch(personFilter));
+                case "6" -> new Context(new BloodyTypeSearch(personFilter));
+                case "7" -> new Context(new SearchAllSearch(personFilter));
+                case "0" -> System.out.println("Thanks for your time");
+                default -> menuUtils.showInput();
+            }
+        } catch (NumberFormatException e) {
+            menuUtils.showErrorNumber();
+            menuUtils.showException(e.toString());
+        } catch (BloodTypeException e) {
+            menuUtils.showErrorBloodType();
+            menuUtils.showException(e.toString());
+        } catch (NationalityException e) {
+            menuUtils.showErrorCountry();
+            menuUtils.showException(e.toString());
+        } catch (Exception e) {
+            menuUtils.showError();
+            menuUtils.showException(e.toString());
+        }
+    }
+
+    private void patternObserver(String option) {
+        try {
+            int opt = Integer.parseInt(option);
+
+            if (opt == 0) {
+                System.out.println("Thanks for your time");
+                return;
+            }
+
+            List<SearchStrategy> searchStrategies = Arrays.asList(new DocSearch(personFilter), new DnaSearch(personFilter), new InfectedSearch(personFilter),
+                    new SuspiciousSearch(personFilter), new NotInfectedSearch(personFilter), new BloodyTypeSearch(personFilter),
+                    new SearchAllSearch(personFilter));
+
+            if (opt - 1 > searchStrategies.size() || opt - 1 < 0) {
+                menuUtils.showInput();
+                return;
+            }
+
+            searchStrategies.get(opt - 1).search();
+        } catch (NumberFormatException e) {
+            menuUtils.showErrorNumber();
+            menuUtils.showException(e.toString());
+        } catch (BloodTypeException e) {
+            menuUtils.showErrorBloodType();
+            menuUtils.showException(e.toString());
+        } catch (NationalityException e) {
+            menuUtils.showErrorCountry();
+            menuUtils.showException(e.toString());
+        } catch (Exception e) {
+            menuUtils.showError();
+            menuUtils.showException(e.toString());
         }
     }
 

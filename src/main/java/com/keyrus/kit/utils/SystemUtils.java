@@ -9,4 +9,11 @@ public interface SystemUtils {
      */
     String generateStringScanner();
 
+    /**
+     * Get properties value by key
+     * @param key
+     * @return String
+     */
+    String getPropertiesValue(String key);
+
 }
