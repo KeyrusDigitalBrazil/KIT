@@ -4,18 +4,20 @@ import com.keyrus.kit.services.SearchService;
 import com.keyrus.kit.services.impl.DefaultSearchService;
 import com.keyrus.kit.utils.DatabaseConnect;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-
 public class Main {
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) {
         SearchService searchService = new DefaultSearchService();
         searchService.baseSearch();
 
-        Connection connect = DatabaseConnect.getInstance();
-        System.out.println("Connection is closed: " + connect.isClosed());
-        connect.close();
+        try {
+            DatabaseConnect jdbcConn = DatabaseConnect.getInstance();
+            System.out.println("Mysql Connected? " + jdbcConn.checkConnection());
+            jdbcConn.closeConnection();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
 }
