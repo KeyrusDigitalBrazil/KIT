@@ -6,109 +6,151 @@ public class DefaultMenuUtils implements MenuUtils {
 
     @Override
     public void showMenuPrincipal() {
-        System.out.println("==========================================================================================================================");
-        System.out.println("                                                     Search Patients                                                      ");
-        System.out.println("==========================================================================================================================");
-        System.out.println("Options: 1 - DOC | 2 - DNA | 3 - Infected | 4 - Suspicious | 5 - Not Infected | 6 - Blood | 7 - All Patients | 0 - Quit   ");
-        System.out.println("==========================================================================================================================");
+        String showMenuPrincipalString =
+                """
+                ==========================================================================================================================
+                                                                     Search Patients
+                ==========================================================================================================================
+                Options: 1 - DOC | 2 - DNA | 3 - Infected | 4 - Suspicious | 5 - Not Infected | 6 - Blood | 7 - All Patients | 0 - Quit
+                ==========================================================================================================================""";
+        System.out.println(showMenuPrincipalString);
     }
 
     @Override
     public void showMenusSearchByDnaOpt() {
-        System.out.println("==========================================================================================================================");
-        System.out.println("                        Options: 1 - Search DNA ID | 2 - Search DNA code  | 0 - Quit                                      ");
-        System.out.println("==========================================================================================================================");
-
+        String showMenusSearchByDnaOptString =
+                """
+                ==========================================================================================================================
+                                        Options: 1 - Search DNA ID | 2 - Search DNA code  | 0 - Quit
+                ==========================================================================================================================""";
+        System.out.println(showMenusSearchByDnaOptString);
     }
 
     @Override
     public void showMenusSearchByDna() {
-        System.out.println("==========================================================================================================================");
-        System.out.println("                                                Insert your DNA ID                                                        ");
-        System.out.println("==========================================================================================================================");
-
+        String showMenusSearchByDnaString =
+                """
+                ==========================================================================================================================
+                                                                Insert your DNA ID
+                ==========================================================================================================================""";
+        System.out.println(showMenusSearchByDnaString);
     }
 
     @Override
     public void showMenusSearchByDnaCode() {
-        System.out.println("==========================================================================================================================");
-        System.out.println("                                                Insert your DNA CODE                                                      ");
-        System.out.println("==========================================================================================================================");
+        String showMenusSearchByDnaCodeString =
+                """
+                ==========================================================================================================================
+                                                                Insert your DNA CODE
+                ==========================================================================================================================""";
+        System.out.println(showMenusSearchByDnaCodeString);
     }
 
     @Override
     public void showMenusSearchByDoc() {
-        System.out.println("==========================================================================================================================");
-        System.out.println("                                                Insert your DOC code                                                      ");
-        System.out.println("==========================================================================================================================");
-
+        String showMenusSearchByDocString =
+                """
+                ==========================================================================================================================
+                                                                Insert your DOC code                                                      
+                ==========================================================================================================================""";
+        System.out.println(showMenusSearchByDocString);
     }
 
     @Override
     public void showMenusSearchInfected() {
-        System.out.println("==========================================================================================================================");
-        System.out.println("                   Options: 1 - Search all infected | 2 - Search infected by nationality  | 0 - Quit                      ");
-        System.out.println("==========================================================================================================================");
+        String showMenusSearchInfectedString =
+                """
+                ==========================================================================================================================
+                                   Options: 1 - Search all infected | 2 - Search infected by nationality  | 0 - Quit                      
+                ==========================================================================================================================""";
+        System.out.println(showMenusSearchInfectedString);
     }
 
     @Override
     public void showMenusSearchByNationality() {
-        System.out.println("==========================================================================================================================");
-        System.out.println("                                                  Insert Nationality                                                      ");
-        System.out.println("==========================================================================================================================");
+        String showMenusSearchByNationalityString =
+                """
+                ==========================================================================================================================
+                                                                  Insert Nationality                                                      
+                ==========================================================================================================================""";
+        System.out.println(showMenusSearchByNationalityString);
     }
 
     @Override
     public void showMenusSearchSuspicious() {
-        System.out.println("==========================================================================================================================");
-        System.out.println("               Options: 1 - Search all suspicious | 2 - Search suspicious by nationality  | 0 - Quit                      ");
-        System.out.println("==========================================================================================================================");
+        String showMenusSearchSuspiciousString =
+                """
+                ==========================================================================================================================
+                               Options: 1 - Search all suspicious | 2 - Search suspicious by nationality  | 0 - Quit                      
+                ==========================================================================================================================""";
+        System.out.println(showMenusSearchSuspiciousString);
     }
 
     @Override
     public void showMenusSearchNotInfected() {
-        System.out.println("==========================================================================================================================");
-        System.out.println("               Options: 1 - Search all not infected | 2 - Search not infected by nationality | 0 - Quit                   ");
-        System.out.println("==========================================================================================================================");
+        String showMenusSearchNotInfectedString =
+            """
+            ==========================================================================================================================
+                           Options: 1 - Search all not infected | 2 - Search not infected by nationality | 0 - Quit                   
+            ==========================================================================================================================""";
+        System.out.println(showMenusSearchNotInfectedString);
     }
 
     public void showMenuSearchByBloodTypeOpt() {
-        System.out.println("==========================================================================================================================");
-        System.out.println("               Options: 1 - Search by blood type | 2 - Search by blood type and nationality | 0 - Quit                    ");
-        System.out.println("==========================================================================================================================");
+        String showMenuSearchByBloodTypeOptString =
+            """
+            ==========================================================================================================================
+                           Options: 1 - Search by blood type | 2 - Search by blood type and nationality | 0 - Quit                    
+            ==========================================================================================================================""";
+        System.out.println(showMenuSearchByBloodTypeOptString);
     }
 
     public void showMenuSearchByBloodType() {
-        System.out.println("==========================================================================================================================");
-        System.out.println("                                                 Insert Blood Type                                                        ");
-        System.out.println("==========================================================================================================================");
+        String showMenuSearchByBloodTypeString =
+            """
+            ==========================================================================================================================
+                                                             Insert Blood Type                                                        
+            ==========================================================================================================================""";
+        System.out.println(showMenuSearchByBloodTypeString);
     }
 
     public void showEmptyResult() {
-        System.out.println("==========================================================================================================================");
-        System.out.println("                                                    Empty Result                                                          ");
-        System.out.println("==========================================================================================================================");
+        String showEmptyResultString =
+            """
+            ==========================================================================================================================
+                                                                Empty Result                                                          
+            ==========================================================================================================================""";
+        System.out.println(showEmptyResultString);
     }
 
     @Override
     public void showError() {
-        System.out.println("==========================================================================================================================");
-        System.out.println("                                                        ERROR                                                             ");
-        System.out.println("==========================================================================================================================");
+        String showErrorString =
+            """
+            ==========================================================================================================================
+                                                                    ERROR                                                             
+            ==========================================================================================================================""";
+        System.out.println(showErrorString);
     }
 
     @Override
     public void showErrorNumber() {
-        System.out.println("==========================================================================================================================");
-        System.out.println("                                           ERROR - Insert a DNA ID valid                                                  ");
-        System.out.println("==========================================================================================================================");
+        String showErrorNumberString =
+            """
+            ==========================================================================================================================
+                                                       ERROR - Insert a DNA ID valid                                                  
+            ==========================================================================================================================""";
+        System.out.println(showErrorNumberString);
     }
 
     @Override
     public void showInput() {
-        System.out.println("==========================================================================================================================");
-        System.out.println("                                                 Input a valid option                                                     ");
-        System.out.println("==========================================================================================================================");
+        String showInputString =
+            """
+            ==========================================================================================================================
+                                                             Input a valid option                                                     
+            ==========================================================================================================================""";
+        System.out.println(showInputString);
     }
 
     @Override
@@ -118,38 +160,43 @@ public class DefaultMenuUtils implements MenuUtils {
 
     @Override
     public void showErrorCountry() {
-        System.out.println("==========================================================================================================================");
-        System.out.println("                                                        ERROR                                                             ");
-        System.out.println("                                               Insert a country code valid                                                ");
-        System.out.println("" +
-                "                                                     BRA for Brazil,\n" +
-                "                                                     COM for Colombia,\n" +
-                "                                                     CHN for China,\n" +
-                "                                                     ITA for Italy,\n" +
-                "                                                     TUN for Tunisia,\n" +
-                "                                                     DEU for Germany,\n" +
-                "                                                     FRA for France,\n" +
-                "                                                     PRT for Portugal,\n" +
-                "                                                     CA  for Canada,\n" +
-                "                                                     AFG  for Afghanistan");
-        System.out.println("==========================================================================================================================");
+        String showErrorCountryString =
+                """
+                ==========================================================================================================================
+                                                                        ERROR                                                             
+                                                               Insert a country code valid
+                                                                    BRA for Brazil
+                                                                    COM for Colombia
+                                                                    CHN for China
+                                                                    ITA for Italy
+                                                                    TUN for Tunisia
+                                                                    DEU for Germany
+                                                                    FRA for France
+                                                                    PRT for Portugal
+                                                                    CA  for Canada
+                                                                    AFG  for Afghanistan
+                ==========================================================================================================================""";
+        System.out.println(showErrorCountryString);
     }
 
     @Override
     public void showErrorBloodType() {
-        System.out.println("==========================================================================================================================");
-        System.out.println("                                                        ERROR                                                             ");
-        System.out.println("                                               Insert a Blood code valid                                                  ");
-        System.out.println("" +
-                "                                                     A+ for Blood A+,\n" +
-                "                                                     A- for Blood A-,\n" +
-                "                                                     B+ for Blood B+,\n" +
-                "                                                     B- for Blood B-,\n" +
-                "                                                     AB+ for Blood AB+,\n" +
-                "                                                     AB- for Blood AB-,\n" +
-                "                                                     O+ for Blood O+,\n" +
-                "                                                     O- for Blood O-");
-        System.out.println("==========================================================================================================================");
+        String showErrorBloodTypeString =
+                """
+                ==========================================================================================================================
+                                                                        ERROR                                                             
+                                                               Insert a Blood code valid                                                  
+                
+                                                                     A+  for Blood   A+
+                                                                     A-  for Blood   A-
+                                                                     B+  for Blood   B+
+                                                                     B-  for Blood   B-
+                                                                     AB+ for Blood  AB+
+                                                                     AB- for Blood  AB-
+                                                                     O+  for Blood   O+
+                                                                     O-  for Blood   O-
+                ==========================================================================================================================""";
+        System.out.println(showErrorBloodTypeString);
     }
 
 }
