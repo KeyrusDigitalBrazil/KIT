@@ -28,7 +28,7 @@ public class DatabaseConnect {
         String password = systemUtils.getPropertiesValue("jdbc.password");
         String port = systemUtils.getPropertiesValue("jdbc.port");
 
-        return "jdbc:mysql://" + url + ":" + port + "/" + database + "?user=" + user + "&password=" + password;
+        return "com.keyrus.kit.jdbc:mysql://" + url + ":" + port + "/" + database + "?user=" + user + "&password=" + password;
     }
 
     private Connection getConnection() throws ClassNotFoundException, SQLException {
@@ -49,22 +49,4 @@ public class DatabaseConnect {
         conn = this.getConnection();
         conn.close();
     }
-
-//    public void select() throws SQLException, ClassNotFoundException {
-//        Connection conn = null;
-//        conn = this.getConnection();
-//    }
-//
-//    public int insert() throws SQLException, ClassNotFoundException {
-//
-//    }
-//
-//    public int update() throws SQLException, ClassNotFoundException {
-//
-//    }
-//
-//    public int delete() throws SQLException, ClassNotFoundException {
-//
-//    }
-
 }

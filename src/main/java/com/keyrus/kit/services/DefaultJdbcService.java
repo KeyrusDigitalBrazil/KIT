@@ -6,7 +6,14 @@ public class DefaultJdbcService implements JdbcService{
 
     @Override
     public boolean save(Object object) {
+
         if(object instanceof Patient patient){
+
+            String query =
+                    """
+                    INSERT INTO patient (name,phoneNumber, bloodType, nationality, doc, age, dna) 
+                    VALUES(?,?,?,?,?,?,?)
+                    """;
 
         }
         return false;
