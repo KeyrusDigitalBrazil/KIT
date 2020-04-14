@@ -2,6 +2,7 @@ package com.keyrus.kit.models;
 
 import com.keyrus.kit.models.enums.BloodType;
 import com.keyrus.kit.models.enums.Nationality;
+import com.keyrus.kit.models.enums.Risk;
 
 public class PatientBuilder {
 
@@ -17,11 +18,15 @@ public class PatientBuilder {
     protected Long idPatient;
     protected Boolean suspicious;
     protected Boolean confirmed;
+    protected Boolean quarantine;
+    protected Risk risk;
 
     public PatientBuilder() {
     }
 
-    public PatientBuilder(Long id, String name, String phoneNumber, BloodType bloodType, Nationality nationality, String doc, Integer age, Dna dna, Long idPatient, Boolean suspicious, Boolean confirmed) {
+    public PatientBuilder(Long id, String name, String phoneNumber, BloodType bloodType, Nationality nationality,
+                          String doc, Integer age, Dna dna, Long idPatient, Boolean suspicious, Boolean confirmed,
+                          Boolean quarantine, Risk risk) {
         this.id = id;
         this.name = name;
         this.phoneNumber = phoneNumber;
@@ -33,6 +38,8 @@ public class PatientBuilder {
         this.idPatient = idPatient;
         this.suspicious = suspicious;
         this.confirmed = confirmed;
+        this.quarantine = quarantine;
+        this.risk = risk;
     }
 
     public PatientBuilder setId(Long id) {
@@ -90,8 +97,18 @@ public class PatientBuilder {
         return this;
     }
 
+    public PatientBuilder setQuarantine(Boolean quarantine) {
+        this.quarantine = quarantine;
+        return this;
+    }
+
+    public PatientBuilder setRisk(Risk risk) {
+        this.risk = risk;
+        return this;
+    }
+
     public Patient build() {
         return new Patient(id, name, phoneNumber, bloodType, nationality, doc,
-                age, dna, idPatient, suspicious, confirmed);
+                age, dna, idPatient, suspicious, confirmed, quarantine, risk);
     }
 }

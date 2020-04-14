@@ -1,19 +1,26 @@
 package com.keyrus.kit.services;
 
+import com.keyrus.kit.daos.PatientDao;
+import com.keyrus.kit.models.Dna;
 import com.keyrus.kit.models.Patient;
 
-public class DefaultJdbcService implements JdbcService{
+import java.util.ArrayList;
+import java.util.List;
+
+public class DefaultJdbcService implements JdbcService {
+
+    private PatientDao patientDao = new PatientDao();
 
     @Override
     public boolean save(Object object) {
 
-        if(object instanceof Patient patient){
+        if (object instanceof Patient patient) {
 
             String query =
                     """
-                    INSERT INTO patient (name,phoneNumber, bloodType, nationality, doc, age, dna) 
-                    VALUES(?,?,?,?,?,?,?)
-                    """;
+                            INSERT INTO patient (name,phoneNumber, bloodType, nationality, doc, age, dna) 
+                            VALUES(?,?,?,?,?,?,?)
+                            """;
 
         }
         return false;
@@ -25,8 +32,25 @@ public class DefaultJdbcService implements JdbcService{
     }
 
     @Override
-    public Object select(Object object) {
-        return null;
+    public Object select(Object object, Long id) {
+        if (object instanceof Patient patient) {
+            return patientDao.getPatient(id);
+        }
+        if (object instanceof Dna dna) {
+            return new ArrayList<>();
+        }
+        return new ArrayList<>();
+    }
+
+    @Override
+    public List<Object> selectAll(Object object) {
+        if (object instanceof Patient patient) {
+            return new ArrayList<>(patientDao.getAllPatients());
+        }
+        if (object instanceof Dna dna) {
+            return new ArrayList<>();
+        }
+        return new ArrayList<>();
     }
 
     @Override

@@ -25,6 +25,16 @@ public class Patient extends Person implements Comparable<Patient> {
         this.confirmed = confirmed;
     }
 
+    public Patient(Long id, String name, String phoneNumber, BloodType bloodType, Nationality nationality,
+                   String doc, Integer age, Dna dna, Long id1, Boolean suspicious, Boolean confirmed, Boolean quarantine, Risk risk) {
+        super(id, name, phoneNumber, bloodType, nationality, doc, age, dna);
+        this.id = id1;
+        this.suspicious = suspicious;
+        this.confirmed = confirmed;
+        this.quarantine = quarantine;
+        this.risk = risk;
+    }
+
     public Long getId() {
         return id;
     }

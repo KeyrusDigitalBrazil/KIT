@@ -28,10 +28,10 @@ public class DatabaseConnect {
         String password = systemUtils.getPropertiesValue("jdbc.password");
         String port = systemUtils.getPropertiesValue("jdbc.port");
 
-        return "com.keyrus.kit.jdbc:mysql://" + url + ":" + port + "/" + database + "?user=" + user + "&password=" + password;
+        return "jdbc:mysql://" + url + ":" + port + "/" + database + "?user=" + user + "&password=" + password;
     }
 
-    private Connection getConnection() throws ClassNotFoundException, SQLException {
+    public Connection getConnection() throws ClassNotFoundException, SQLException {
         Connection con = null;
         Class.forName("com.mysql.cj.jdbc.Driver");
         con = DriverManager.getConnection(this.getUrlConnection());
