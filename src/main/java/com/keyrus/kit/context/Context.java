@@ -2,8 +2,8 @@ package com.keyrus.kit.context;
 
 import com.keyrus.kit.jdbc.JdbcStrategy;
 import com.keyrus.kit.search.SearchStrategy;
-import com.keyrus.kit.services.JdbcService;
 
+import java.beans.PropertyVetoException;
 import java.sql.SQLException;
 
 public class Context {
@@ -12,6 +12,8 @@ public class Context {
         searchStrategy.search();
     }
 
-    public Context(JdbcStrategy jdbcStrategy) throws SQLException, ClassNotFoundException {jdbcStrategy.search();}
+    public Context(JdbcStrategy jdbcStrategy) throws SQLException, PropertyVetoException {
+        jdbcStrategy.search();
+    }
 
 }
