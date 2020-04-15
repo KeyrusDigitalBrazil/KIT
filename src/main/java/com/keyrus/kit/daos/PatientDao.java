@@ -1,5 +1,6 @@
 package com.keyrus.kit.daos;
 
+import com.keyrus.kit.exceptions.PersistenceException;
 import com.keyrus.kit.exceptions.SelectPatientException;
 import com.keyrus.kit.models.Dna;
 import com.keyrus.kit.models.Patient;
@@ -37,7 +38,7 @@ public class PatientDao {
 
             return patientList;
         } catch (Exception e) {
-            throw new SelectPatientException(e.getMessage());
+            throw new PersistenceException(e.getMessage());
         }
     }
 
@@ -53,7 +54,22 @@ public class PatientDao {
             resultSet.next();
             return buildPatient(resultSet);
         } catch (Exception e) {
-            throw new SelectPatientException(e.getMessage());
+            throw new PersistenceException("Error in search Patitent: " + id.toString() + "\n" + e.getMessage());
+        }
+    }
+
+    public Boolean removePatient(Long id){
+        try{
+            String query =
+                    """
+                    DELETE FROM patient WHERE idPatient =?
+                    """;
+            Connection conn = databaseConnect.getConnection();
+            PreparedStatement preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setLong(1,id);
+            return preparedStatement.execute();
+        }catch (Exception e){
+            throw new PersistenceException("Error in remove Patient: " + id.toString() + "\n" + e.getMessage());
         }
     }
 

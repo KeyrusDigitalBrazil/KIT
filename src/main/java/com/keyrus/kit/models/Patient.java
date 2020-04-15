@@ -9,7 +9,6 @@ import java.util.Objects;
 
 public class Patient extends Person implements Comparable<Patient> {
 
-    protected Long id;
     protected Boolean suspicious;
     protected Boolean confirmed;
     protected Boolean quarantine;
@@ -33,14 +32,6 @@ public class Patient extends Person implements Comparable<Patient> {
         this.confirmed = confirmed;
         this.quarantine = quarantine;
         this.risk = risk;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Boolean getSuspicious() {

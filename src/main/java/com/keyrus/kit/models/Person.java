@@ -5,9 +5,8 @@ import com.keyrus.kit.models.enums.Nationality;
 
 import java.util.Objects;
 
-public class Person {
+public class Person  extends Principal{
 
-    protected Long id;
     protected String name;
     protected String phoneNumber;
     protected BloodType bloodType;
@@ -27,10 +26,6 @@ public class Person {
         this.doc = doc;
         this.age = age;
         this.dna = dna;
-    }
-
-    public Long getId() {
-        return id;
     }
 
     public String getName() {

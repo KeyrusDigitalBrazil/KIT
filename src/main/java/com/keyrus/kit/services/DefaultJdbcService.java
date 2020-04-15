@@ -6,6 +6,7 @@ import com.keyrus.kit.models.Patient;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class DefaultJdbcService implements JdbcService {
 
@@ -23,11 +24,6 @@ public class DefaultJdbcService implements JdbcService {
                             """;
 
         }
-        return false;
-    }
-
-    @Override
-    public boolean delete(String id) {
         return false;
     }
 
@@ -51,6 +47,17 @@ public class DefaultJdbcService implements JdbcService {
             return new ArrayList<>();
         }
         return new ArrayList<>();
+    }
+
+    @Override
+    public boolean delete(Object object){
+        if(object instanceof Patient patient){
+            return patientDao.removePatient(patient.getId());
+        }
+        if(object instanceof Dna dna){
+            return false;
+        }
+        return false;
     }
 
     @Override

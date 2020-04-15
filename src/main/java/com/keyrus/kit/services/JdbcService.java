@@ -6,7 +6,7 @@ public interface JdbcService {
 
     boolean save(Object object);
 
-    boolean delete(String id);
+    boolean delete(Object object);
 
     Object select(Object object, Long id);
 

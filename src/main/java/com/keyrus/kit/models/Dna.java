@@ -2,9 +2,8 @@ package com.keyrus.kit.models;
 
 import java.lang.reflect.Field;
 
-public class Dna {
+public class Dna extends Principal{
 
-    private Long id;
     private String dna;
 
     public Dna() {
@@ -13,14 +12,6 @@ public class Dna {
     public Dna(Long id, String dna) {
         this.id = id;
         this.dna = dna;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getDna() {
