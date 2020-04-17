@@ -8,7 +8,6 @@ import com.keyrus.kit.filter.impl.DefaultPersonFilter;
 import com.keyrus.kit.models.Patient;
 import com.keyrus.kit.search.SearchStrategy;
 import com.keyrus.kit.search.impl.*;
-import com.keyrus.kit.services.DefaultJdbcService;
 import com.keyrus.kit.services.JdbcService;
 import com.keyrus.kit.services.PersonService;
 import com.keyrus.kit.services.SearchService;
@@ -18,14 +17,17 @@ import com.keyrus.kit.utils.SystemUtils;
 import com.keyrus.kit.utils.impl.DefaultMenuUtils;
 import com.keyrus.kit.utils.impl.DefaultSystemUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
+@Service
 public class DefaultSearchService implements SearchService {
 
-    private static JdbcService jdbcService = new DefaultJdbcService();
+    @Autowired
+    private JdbcService jdbcService;
 
     private PersonService personService = new DefaultPersonService();
     private PersonFilter personFilter = new DefaultPersonFilter();

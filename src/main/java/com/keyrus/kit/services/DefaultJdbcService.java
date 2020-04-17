@@ -5,15 +5,20 @@ import com.keyrus.kit.models.Dna;
 import com.keyrus.kit.models.Patient;
 import com.keyrus.kit.repository.impl.PrincipalRepository;
 import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
+@Service
 public class DefaultJdbcService implements JdbcService {
 
-    private PatientDao patientDao = new PatientDao();
+    @Autowired
+    private PatientDao patientDao;
     private PrincipalRepository principalRepository;
+
     @Override
     public boolean save(Object object) {
 
