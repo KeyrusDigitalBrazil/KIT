@@ -1,6 +1,6 @@
 package com.keyrus.kit.models;
 
-public class Principal {
+public class PrincipalType {
 
     protected Long id;
 

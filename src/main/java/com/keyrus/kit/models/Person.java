@@ -5,7 +5,7 @@ import com.keyrus.kit.models.enums.Nationality;
 
 import java.util.Objects;
 
-public class Person  extends Principal{
+public class Person  extends PrincipalType {
 
     protected String name;
     protected String phoneNumber;

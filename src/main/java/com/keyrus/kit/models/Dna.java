@@ -2,7 +2,7 @@ package com.keyrus.kit.models;
 
 import java.lang.reflect.Field;
 
-public class Dna extends Principal{
+public class Dna extends PrincipalType {
 
     private String dna;
 
