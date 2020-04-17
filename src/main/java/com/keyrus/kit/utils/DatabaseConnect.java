@@ -2,11 +2,13 @@ package com.keyrus.kit.utils;
 
 import com.keyrus.kit.utils.impl.DefaultSystemUtils;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+import org.springframework.stereotype.Component;
 
 import java.beans.PropertyVetoException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+@Component
 public class DatabaseConnect {
 
     private static DatabaseConnect jdbc;
