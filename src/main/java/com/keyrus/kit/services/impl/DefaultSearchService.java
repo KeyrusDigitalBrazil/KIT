@@ -8,18 +8,24 @@ import com.keyrus.kit.filter.impl.DefaultPersonFilter;
 import com.keyrus.kit.models.Patient;
 import com.keyrus.kit.search.SearchStrategy;
 import com.keyrus.kit.search.impl.*;
+import com.keyrus.kit.services.DefaultJdbcService;
+import com.keyrus.kit.services.JdbcService;
 import com.keyrus.kit.services.PersonService;
 import com.keyrus.kit.services.SearchService;
+import com.keyrus.kit.utils.DatabaseConnect;
 import com.keyrus.kit.utils.MenuUtils;
 import com.keyrus.kit.utils.SystemUtils;
 import com.keyrus.kit.utils.impl.DefaultMenuUtils;
 import com.keyrus.kit.utils.impl.DefaultSystemUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
 public class DefaultSearchService implements SearchService {
+
+    private static JdbcService jdbcService = new DefaultJdbcService();
 
     private PersonService personService = new DefaultPersonService();
     private PersonFilter personFilter = new DefaultPersonFilter();
@@ -31,6 +37,8 @@ public class DefaultSearchService implements SearchService {
 
     @Override
     public void baseSearch() {
+        teste();
+
         generateData();
 
         String option = "";
@@ -126,6 +134,18 @@ public class DefaultSearchService implements SearchService {
         Set<Patient> patients = personService.generatorPatient();
 
         personFilter.setPatientList(patients);
+    }
+
+    public void teste() {
+        try {
+            DatabaseConnect jdbcConn = DatabaseConnect.getInstance();
+            System.out.println("Mysql Connected? " + jdbcConn.checkConnection());
+            jdbcConn.closeConnection();
+
+            jdbcService.selectAll(new Patient()).forEach(System.out::println);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 }
