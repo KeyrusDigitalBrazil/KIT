@@ -5,7 +5,7 @@ import com.keyrus.kit.models.Dna;
 import com.keyrus.kit.models.DnaBuilder;
 import com.keyrus.kit.utils.DatabaseConnect;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,7 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
+@Repository
 public class DnaDao {
 
     @Autowired

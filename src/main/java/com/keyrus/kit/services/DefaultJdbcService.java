@@ -4,16 +4,17 @@ import com.keyrus.kit.daos.PatientDao;
 import com.keyrus.kit.models.Dna;
 import com.keyrus.kit.models.Patient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
-@Component
+@Service
 public class DefaultJdbcService implements JdbcService {
 
-    private PatientDao patientDao = new PatientDao();
+    @Autowired
+    private PatientDao patientDao;
 
     @Override
     public boolean save(Object object) {
@@ -51,11 +52,11 @@ public class DefaultJdbcService implements JdbcService {
     }
 
     @Override
-    public boolean delete(Object object){
-        if(object instanceof Patient patient){
+    public boolean delete(Object object) {
+        if (object instanceof Patient patient) {
             return patientDao.removePatient(patient.getId());
         }
-        if(object instanceof Dna dna){
+        if (object instanceof Dna dna) {
             return false;
         }
         return false;
