@@ -7,12 +7,14 @@ import com.keyrus.kit.models.Patient;
 import com.keyrus.kit.models.Person;
 import com.keyrus.kit.models.enums.BloodType;
 import com.keyrus.kit.models.enums.Nationality;
+import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
+@Component
 public class DefaultPersonFilter implements PersonFilter {
 
     private Set<Patient> patientList;

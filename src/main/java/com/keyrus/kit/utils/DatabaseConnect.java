@@ -2,13 +2,13 @@ package com.keyrus.kit.utils;
 
 import com.keyrus.kit.utils.impl.DefaultSystemUtils;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.beans.PropertyVetoException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-@Component
+@Service("DatabaseConnect")
 public class DatabaseConnect {
 
     private static DatabaseConnect jdbc;
@@ -41,9 +41,9 @@ public class DatabaseConnect {
         dataSource = new ComboPooledDataSource();
         dataSource.setDriverClass("com.mysql.cj.jdbc.Driver");
         dataSource.setJdbcUrl(this.getUrlConnection());
-        dataSource.setMinPoolSize(3);
-        dataSource.setMaxPoolSize(100);
-        dataSource.setAcquireIncrement(5);
+        dataSource.setMinPoolSize(Integer.parseInt(systemUtils.getPropertiesValue("c3p0.min.pool.size")));
+        dataSource.setMaxPoolSize(Integer.parseInt(systemUtils.getPropertiesValue("c3p0.max.pool.size")));
+        dataSource.setAcquireIncrement(Integer.parseInt(systemUtils.getPropertiesValue("c3p0.acquire.increment")));
 
         con = dataSource.getConnection();
 

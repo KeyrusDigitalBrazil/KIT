@@ -1,7 +1,9 @@
 package com.keyrus.kit.utils.impl;
 
 import com.keyrus.kit.utils.MenuUtils;
+import org.springframework.stereotype.Component;
 
+@Component
 public class DefaultMenuUtils implements MenuUtils {
 
     @Override

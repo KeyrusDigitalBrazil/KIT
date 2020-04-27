@@ -6,12 +6,14 @@ import com.keyrus.kit.models.enums.BloodType;
 import com.keyrus.kit.models.enums.Nationality;
 import com.keyrus.kit.models.enums.Risk;
 import com.keyrus.kit.services.PersonService;
+import org.springframework.stereotype.Service;
 
 import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@Service
 public class DefaultPersonService implements PersonService {
 
     private Random randBool = new Random();

@@ -4,21 +4,18 @@ import com.keyrus.kit.context.Context;
 import com.keyrus.kit.exceptions.BloodTypeException;
 import com.keyrus.kit.exceptions.NationalityException;
 import com.keyrus.kit.filter.PersonFilter;
-import com.keyrus.kit.filter.impl.DefaultPersonFilter;
 import com.keyrus.kit.models.Patient;
+import com.keyrus.kit.repository.KitRepository;
 import com.keyrus.kit.search.SearchStrategy;
 import com.keyrus.kit.search.impl.*;
-import com.keyrus.kit.services.JdbcService;
 import com.keyrus.kit.services.PersonService;
 import com.keyrus.kit.services.SearchService;
 import com.keyrus.kit.utils.DatabaseConnect;
 import com.keyrus.kit.utils.MenuUtils;
 import com.keyrus.kit.utils.SystemUtils;
-import com.keyrus.kit.utils.impl.DefaultMenuUtils;
-import com.keyrus.kit.utils.impl.DefaultSystemUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -26,21 +23,29 @@ import java.util.Set;
 @Service
 public class DefaultSearchService implements SearchService {
 
-    @Autowired
-    private JdbcService jdbcService;
+    @Resource(name = "patientRepository")
+    private KitRepository patientRepository;
 
-    private PersonService personService = new DefaultPersonService();
-    private PersonFilter personFilter = new DefaultPersonFilter();
-    private MenuUtils menuUtils = new DefaultMenuUtils();
-    private SystemUtils systemUtils = new DefaultSystemUtils();
+    @Resource(name = "dnaRepository")
+    private KitRepository dnaRepository;
+
+    @Resource
+    private PersonService personService;
+
+    @Resource
+    private PersonFilter personFilter;
+
+    @Resource
+    private MenuUtils menuUtils;
+
+    @Resource
+    private SystemUtils systemUtils;
 
     private static final String OBSERVER = "observer";
     private static final String STRATEGY = "strategy";
 
     @Override
     public void baseSearch() {
-        teste();
-
         generateData();
 
         String option = "";
@@ -136,18 +141,6 @@ public class DefaultSearchService implements SearchService {
         Set<Patient> patients = personService.generatorPatient();
 
         personFilter.setPatientList(patients);
-    }
-
-    public void teste() {
-        try {
-            DatabaseConnect jdbcConn = DatabaseConnect.getInstance();
-            System.out.println("Mysql Connected? " + jdbcConn.checkConnection());
-            jdbcConn.closeConnection();
-
-            jdbcService.selectAll(new Patient()).forEach(System.out::println);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
     }
 
 }

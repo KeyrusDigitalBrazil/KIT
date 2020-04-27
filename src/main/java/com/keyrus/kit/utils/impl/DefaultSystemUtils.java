@@ -1,11 +1,13 @@
 package com.keyrus.kit.utils.impl;
 
 import com.keyrus.kit.utils.SystemUtils;
+import org.springframework.stereotype.Component;
 
 import java.io.InputStream;
 import java.util.Properties;
 import java.util.Scanner;
 
+@Component
 public class DefaultSystemUtils implements SystemUtils {
 
     private Properties prop = new Properties();
