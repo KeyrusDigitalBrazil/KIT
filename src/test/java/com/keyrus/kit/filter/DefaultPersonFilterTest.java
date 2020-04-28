@@ -1,23 +1,32 @@
 package com.keyrus.kit.filter;
 
 import com.keyrus.kit.builder.PatientBuilderTest;
+import com.keyrus.kit.convert.DnaConvert;
+import com.keyrus.kit.convert.PatientConvert;
 import com.keyrus.kit.data.PatientDnaData;
 import com.keyrus.kit.filter.impl.DefaultPersonFilter;
 import com.keyrus.kit.models.Patient;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
 
 import static com.keyrus.kit.models.enums.BloodType.A_NEGATIVE;
 import static com.keyrus.kit.models.enums.Nationality.*;
 import static org.junit.Assert.*;
 
-
+@Component
 public class DefaultPersonFilterTest {
 
     private DefaultPersonFilter defaultPersonFilter;
     private DefaultPersonFilter defaultPersonFilterEmpty;
     private Patient patient;
     private PatientDnaData patientDnaData;
+
+    private PatientConvert patientConvert = new PatientConvert();
+
+    private DnaConvert dnaConvert = new DnaConvert();
 
     @Before
     public void setUp() {
@@ -26,7 +35,6 @@ public class DefaultPersonFilterTest {
         patient = PatientBuilderTest.defaultValues();
         defaultPersonFilter.setPatientList(PatientBuilderTest.patientBuilderList());
         defaultPersonFilterEmpty.setPatientList(PatientBuilderTest.patientBuilderListEmpty());
-        patientDnaData = new PatientDnaData(patient, patient.getDna());
     }
 
     @Test

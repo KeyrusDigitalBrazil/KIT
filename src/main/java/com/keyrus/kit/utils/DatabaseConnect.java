@@ -15,6 +15,8 @@ public class DatabaseConnect {
     private SystemUtils systemUtils = new DefaultSystemUtils();
     private static ComboPooledDataSource dataSource;
 
+    private static Connection con;
+
     private DatabaseConnect() {
     }
 
@@ -36,17 +38,16 @@ public class DatabaseConnect {
     }
 
     public Connection getConnection() throws SQLException, PropertyVetoException {
-        Connection con = null;
+         if(con == null) {
+             dataSource = new ComboPooledDataSource();
+             dataSource.setDriverClass("com.mysql.cj.jdbc.Driver");
+             dataSource.setJdbcUrl(this.getUrlConnection());
+             dataSource.setMinPoolSize(Integer.parseInt(systemUtils.getPropertiesValue("c3p0.min.pool.size")));
+             dataSource.setMaxPoolSize(Integer.parseInt(systemUtils.getPropertiesValue("c3p0.max.pool.size")));
+             dataSource.setAcquireIncrement(Integer.parseInt(systemUtils.getPropertiesValue("c3p0.acquire.increment")));
 
-        dataSource = new ComboPooledDataSource();
-        dataSource.setDriverClass("com.mysql.cj.jdbc.Driver");
-        dataSource.setJdbcUrl(this.getUrlConnection());
-        dataSource.setMinPoolSize(Integer.parseInt(systemUtils.getPropertiesValue("c3p0.min.pool.size")));
-        dataSource.setMaxPoolSize(Integer.parseInt(systemUtils.getPropertiesValue("c3p0.max.pool.size")));
-        dataSource.setAcquireIncrement(Integer.parseInt(systemUtils.getPropertiesValue("c3p0.acquire.increment")));
-
-        con = dataSource.getConnection();
-
+             con = dataSource.getConnection();
+         }
         return con;
     }
 

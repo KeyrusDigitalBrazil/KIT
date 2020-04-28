@@ -8,10 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequestMapping(value = "/dna")
@@ -33,9 +30,9 @@ public class DnaController {
 
     @GetMapping(value = "/all")
     @ResponseBody
-    public List<DnaData> getAll() {
+    public Set<DnaData> getAll() {
         Optional<List<Dna>> optDna = Optional.ofNullable((List<Dna>) dnaRepository.getAll());
-        List<DnaData> dnaData = new ArrayList<>();
+        Set<DnaData> dnaData = new TreeSet<>();
 
         optDna.ifPresent(dnas -> dnas.stream()
                 .filter(Objects::nonNull)
@@ -76,6 +73,5 @@ public class DnaController {
             return HttpStatus.BAD_REQUEST;
         }
     }
-
 
 }

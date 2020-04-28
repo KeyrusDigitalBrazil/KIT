@@ -19,7 +19,7 @@ public class KafkaService {
         ListenableFuture<SendResult<String, PatientData>> future =
                 kafkaTemplate.send(topicName, message);
 
-        future.addCallback(new ListenableFutureCallback<SendResult<String, PatientData>>() {
+        future.addCallback(new ListenableFutureCallback<>() {
             @Override
             public void onSuccess(SendResult<String, PatientData> result) {
                 System.out.println("Success");

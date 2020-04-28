@@ -7,9 +7,13 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class DnaData {
+public class DnaData implements Comparable<DnaData> {
 
     private Long id;
     private String dna;
 
+    @Override
+    public int compareTo(DnaData o) {
+        return (int) (this.id - o.getId());
+    }
 }

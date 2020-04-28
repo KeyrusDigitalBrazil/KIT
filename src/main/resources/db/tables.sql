@@ -2,7 +2,7 @@ USE kit;
 
 CREATE TABLE IF NOT EXISTS dna (
     idDna int AUTO_INCREMENT NOT NULL,
-    dna varchar(255) NOT NULL,
+    dna varchar(255) NOT NULL UNIQUE,
     PRIMARY KEY(idDna)
 );
 

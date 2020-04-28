@@ -4,17 +4,18 @@ import com.keyrus.kit.convert.PatientConvert;
 import com.keyrus.kit.data.PatientData;
 import com.keyrus.kit.models.Patient;
 import com.keyrus.kit.repository.KitRepository;
+import com.keyrus.kit.services.KafkaService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequestMapping(value = "/patient")
+@Slf4j
 public class PatientController {
 
     @Resource(name = "patientRepository")
@@ -22,6 +23,18 @@ public class PatientController {
 
     @Resource
     private PatientConvert patientConvert;
+
+    @Resource
+    private KafkaService kafkaService;
+
+    @Value("${kafka.patient.save.topic}")
+    private String saveTopic;
+
+    @Value("${kafka.patient.update.topic}")
+    private String updateTopic;
+
+    @Value("${kafka.patient.delete.topic}")
+    private String deleteTopic;
 
     @GetMapping(value = "/{id}")
     @ResponseBody
@@ -33,9 +46,9 @@ public class PatientController {
 
     @GetMapping(value = "/all")
     @ResponseBody
-    public List<PatientData> getAll() {
+    public Set<PatientData> getAll() {
         Optional<List<Patient>> optPatient = Optional.ofNullable((List<Patient>) patientRepository.getAll());
-        List<PatientData> patientData = new ArrayList<>();
+        Set<PatientData> patientData = new TreeSet<>();
 
         optPatient.ifPresent(patients -> patients.stream()
                 .filter(Objects::nonNull)
@@ -48,7 +61,9 @@ public class PatientController {
     public HttpStatus savePatient(@RequestBody PatientData patientData) {
         try {
             patientRepository.add(patientConvert.convertData(patientData));
-
+            log.info("Saving Patient");
+            kafkaService.sendMessage(saveTopic, patientData);
+            log.info("Sending saved Patient");
             return HttpStatus.OK;
         } catch (Exception e) {
             return HttpStatus.BAD_REQUEST;
@@ -59,7 +74,9 @@ public class PatientController {
     public HttpStatus updatePatient(@RequestBody PatientData patientData) {
         try {
             patientRepository.update(patientConvert.convertData(patientData));
-
+            log.info("Updating Patient");
+            kafkaService.sendMessage(updateTopic, patientData);
+            log.info("Sending updated Patient");
             return HttpStatus.OK;
         } catch (Exception e) {
             return HttpStatus.BAD_REQUEST;
@@ -69,8 +86,13 @@ public class PatientController {
     @DeleteMapping(value = "/{id}")
     public HttpStatus deletePatient(@PathVariable Long id) {
         try {
+            Optional<Patient> optPatient = Optional.ofNullable((Patient) patientRepository.get(id));
             patientRepository.remove(id);
-
+            log.info("Deleting Patient");
+            if (optPatient.isPresent()) {
+                kafkaService.sendMessage(deleteTopic, patientConvert.convertModel(optPatient.get()));
+                log.info("Sending deleted Patient");
+            }
             return HttpStatus.OK;
         } catch (Exception e) {
             return HttpStatus.BAD_REQUEST;

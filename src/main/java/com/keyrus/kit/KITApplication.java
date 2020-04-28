@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.PostConstruct;
@@ -23,6 +24,7 @@ import java.util.Set;
 
 @SpringBootApplication
 @Slf4j
+@EnableScheduling
 public class KITApplication {
 
     @Value("${jdbc.url}")

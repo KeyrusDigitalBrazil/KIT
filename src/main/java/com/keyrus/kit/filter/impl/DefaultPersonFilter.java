@@ -1,5 +1,7 @@
 package com.keyrus.kit.filter.impl;
 
+import com.keyrus.kit.convert.DnaConvert;
+import com.keyrus.kit.convert.PatientConvert;
 import com.keyrus.kit.data.PatientDnaData;
 import com.keyrus.kit.filter.PersonFilter;
 import com.keyrus.kit.models.Dna;
@@ -32,6 +34,12 @@ public class DefaultPersonFilter implements PersonFilter {
 
     @Resource(name = "appKitRepository")
     private AppKitRepository appKitRepository;
+
+    @Resource
+    private DnaConvert dnaConvert;
+
+    @Resource
+    private PatientConvert patientConvert;
 
     @Override
     public Patient getPersonByDoc(String doc) {
