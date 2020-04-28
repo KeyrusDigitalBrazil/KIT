@@ -7,8 +7,13 @@ import com.keyrus.kit.models.Patient;
 import com.keyrus.kit.models.Person;
 import com.keyrus.kit.models.enums.BloodType;
 import com.keyrus.kit.models.enums.Nationality;
+import com.keyrus.kit.repository.KitRepository;
+import com.keyrus.kit.repository.impl.AppKitRepository;
+import com.keyrus.kit.repository.impl.PatientRepository;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
@@ -19,80 +24,76 @@ public class DefaultPersonFilter implements PersonFilter {
 
     private Set<Patient> patientList;
 
+    @Resource(name = "patientRepository")
+    private PatientRepository patientRepository;
+
+    @Resource(name = "dnaRepository")
+    private KitRepository dnaRepository;
+
+    @Resource(name = "appKitRepository")
+    private AppKitRepository appKitRepository;
+
     @Override
     public Patient getPersonByDoc(String doc) {
         String docReplace = cleanString(doc);
-        return patientList.stream().filter(patient -> patient.getDoc().equals(docReplace)).findFirst().orElse(null);
+        return appKitRepository.getByDna(docReplace);
     }
 
     @Override
-    public PatientDnaData getDnaById(Long id) {
-        Optional<Dna> dna = patientList.stream().filter(p -> p.getDna().getId().equals(id)).map(Person::getDna).findFirst();
-        Optional<Patient> patient = patientList.stream().filter(p -> p.getDna().getId().equals(id)).findFirst();
-
-        if (patient.isPresent() && dna.isPresent()) {
-            return new PatientDnaData(patient.get(), dna.get());
-        }
-
-        return new PatientDnaData();
+    public Patient getDnaById(Long id) {
+        return patientRepository.get(id);
     }
 
     @Override
-    public PatientDnaData getDnaByCode(String code) {
-        Optional<Dna> dna = patientList.stream().filter(p -> p.getDna().getDna().equals(code)).map(Person::getDna).findFirst();
-        Optional<Patient> patient = patientList.stream().filter(p -> p.getDna().getDna().equals(code)).findFirst();
+    public Patient getDnaByCode(String code) {
+        return appKitRepository.getByDna(code);
 
-        if (patient.isPresent() && dna.isPresent()) {
-            return new PatientDnaData(patient.get(), dna.get());
-        }
-
-        return new PatientDnaData();
     }
 
     @Override
     public Set<Patient> getInfected() {
-        return patientList.stream().filter(patient -> patient.getConfirmed().equals(Boolean.TRUE)).collect(Collectors.toCollection(TreeSet::new));
+        return new HashSet<>(appKitRepository.getInfected(""));
     }
 
     @Override
     public Set<Patient> getInfectedByNationality(Nationality nationality) {
-        return patientList.stream().filter(patient -> (patient.getConfirmed().equals(Boolean.TRUE) && patient.getNationality().equals(nationality))).collect(Collectors.toCollection(TreeSet::new));
+        return new HashSet<>(appKitRepository.getInfected(nationality.name()));
     }
 
     @Override
     public Set<Patient> getSuspicious() {
-        return patientList.stream().filter(patient -> patient.getSuspicious().equals(Boolean.TRUE)).collect(Collectors.toCollection(TreeSet::new));
+        return new HashSet<>(appKitRepository.getSuspicious(""));
     }
 
     @Override
     public Set<Patient> getSuspiciousByNationality(Nationality nationality) {
-        return patientList.parallelStream().filter(patient -> patient.getNationality().equals(nationality) && patient.getSuspicious().equals(Boolean.TRUE)).collect(Collectors.toCollection(TreeSet::new));
+        return new HashSet<>(appKitRepository.getSuspicious(nationality.name()));
     }
 
     @Override
     public Set<Patient> getNotInfected() {
-        return patientList.parallelStream().filter(patient -> patient.getSuspicious().equals(Boolean.FALSE)).collect(Collectors.toCollection(TreeSet::new));
+        return new HashSet<>(appKitRepository.getNotInfected(""));
     }
 
     @Override
     public Set<Patient> getNotInfectedByNationality(Nationality nationality) {
-        return patientList.parallelStream().filter(patient -> patient.getNationality().equals(nationality) && patient.getSuspicious().equals(Boolean.FALSE)).collect(Collectors.toCollection(TreeSet::new));
+        return new HashSet<>(appKitRepository.getNotInfected(nationality.name()));
     }
 
     @Override
     public Set<Patient> getPatientCombineByBlood(BloodType bloodType) {
         if (BloodType.O_NEGATIVE.equals(bloodType))
-            return new TreeSet<>(patientList);
+            return new TreeSet<>(patientRepository.getAll());
 
-        return patientList.parallelStream().filter(patient -> patient.getBloodType().equals(bloodType)).collect(Collectors.toCollection(TreeSet::new));
+        return new HashSet<>(appKitRepository.getBloodType(bloodType.name(),""));
     }
 
     @Override
     public Set<Patient> getPatientCombineByBloodAndNationality(Nationality nationality, BloodType bloodType) {
         if (BloodType.O_NEGATIVE.equals(bloodType))
-            return patientList.parallelStream().filter(patient -> patient.getNationality().equals(nationality)).collect(Collectors.toCollection(TreeSet::new));
+            return new TreeSet<>(appKitRepository.getByNationality(nationality.name()));
 
-        return patientList.parallelStream().filter(patient -> patient.getNationality().equals(nationality) && patient.getBloodType().equals(bloodType)).collect(Collectors.toCollection(TreeSet::new));
+        return new HashSet<>(appKitRepository.getBloodType(bloodType.name(),nationality.name()));
     }
 
     @Override

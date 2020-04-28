@@ -23,7 +23,7 @@ public interface PersonFilter {
      * @param id
      * @return String
      */
-    PatientDnaData getDnaById(Long id);
+    Patient getDnaById(Long id);
 
     /**
      * Get DNA by code
@@ -31,7 +31,7 @@ public interface PersonFilter {
      * @param id
      * @return String
      */
-    PatientDnaData getDnaByCode(String id);
+    Patient getDnaByCode(String id);
 
     /**
      * Get patients infected

@@ -58,6 +58,32 @@ public class AppKitRepository {
             """
                     SELECT * FROM patient WHERE confirmed = 0 
                     """;
+    private static final String FIND_PATIENT_BY_NATIONALITY =
+                    """
+                    SELECT * FROM patient WHERE nationality = ?
+                    """;
+
+    public List<Patient> getByNationality(String nationality) {
+        try {
+            String query = FIND_PATIENT_BY_NATIONALITY;
+
+            Connection conn = databaseConnect.getConnection();
+            PreparedStatement preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setString(1, nationality);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<Patient> patientList = new ArrayList<>();
+
+            while (resultSet.next()) {
+                patientList.add(buildPatient(resultSet));
+            }
+
+            return patientList;
+        } catch (Exception e) {
+            throw new PersistenceException("Error in search Patient: " + e.getMessage());
+        }
+    }
+
 
     public Patient getByDoc(String doc) {
         try {
