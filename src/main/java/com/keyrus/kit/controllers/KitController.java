@@ -8,10 +8,7 @@ import com.keyrus.kit.repository.impl.AppKitRepository;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequestMapping(value = "/kit")
@@ -42,10 +39,10 @@ public class KitController {
 
     @GetMapping(value = "/infected")
     @ResponseBody
-    public List<PatientData> findByInfected(@RequestParam(required = false) String nationality) {
+    public Set<PatientData> findByInfected(@RequestParam(required = false) String nationality) {
         Optional<List<Patient>> optPatient = Optional.ofNullable(appKitRepository.getInfected(nationality));
 
-        List<PatientData> patientData = new ArrayList<>();
+        Set<PatientData> patientData = new TreeSet<>();
 
         optPatient.ifPresent(patients -> patients.stream()
                 .filter(Objects::nonNull)
@@ -56,10 +53,10 @@ public class KitController {
 
     @GetMapping(value = "/suspicious")
     @ResponseBody
-    public List<PatientData> findBySuspicious(@RequestParam(required = false) String nationality) {
+    public Set<PatientData> findBySuspicious(@RequestParam(required = false) String nationality) {
         Optional<List<Patient>> optPatient = Optional.ofNullable(appKitRepository.getSuspicious(nationality));
 
-        List<PatientData> patientData = new ArrayList<>();
+        Set<PatientData> patientData = new TreeSet<>();
 
         optPatient.ifPresent(patients -> patients.stream()
                 .filter(Objects::nonNull)
@@ -70,10 +67,10 @@ public class KitController {
 
     @GetMapping(value = "/notinfected")
     @ResponseBody
-    public List<PatientData> findByNotInfected(@RequestParam(required = false) String nationality) {
+    public Set<PatientData> findByNotInfected(@RequestParam(required = false) String nationality) {
         Optional<List<Patient>> optPatient = Optional.ofNullable(appKitRepository.getNotInfected(nationality));
 
-        List<PatientData> patientData = new ArrayList<>();
+        Set<PatientData> patientData = new TreeSet<>();
 
         optPatient.ifPresent(patients -> patients.stream()
                 .filter(Objects::nonNull)
@@ -84,10 +81,10 @@ public class KitController {
 
     @GetMapping(value = "/blood")
     @ResponseBody
-    public List<PatientData> findByBloodType(@RequestParam String bloodType, @RequestParam(required = false) String nationality) {
+    public Set<PatientData> findByBloodType(@RequestParam String bloodType, @RequestParam(required = false) String nationality) {
         Optional<List<Patient>> optPatient = Optional.ofNullable(appKitRepository.getBloodType(bloodType, nationality));
 
-        List<PatientData> patientData = new ArrayList<>();
+        Set<PatientData> patientData = new TreeSet<>();
 
         optPatient.ifPresent(patients -> patients.stream()
                 .filter(Objects::nonNull)
@@ -98,10 +95,10 @@ public class KitController {
 
     @GetMapping(value = "/all")
     @ResponseBody
-    public List<PatientData> findByAll(@RequestParam(required = false) String nationality) {
+    public Set<PatientData> findByAll(@RequestParam(required = false) String nationality) {
         Optional<List<Patient>> optPatient = Optional.ofNullable(patientRepository.getAll());
 
-        List<PatientData> patientData = new ArrayList<>();
+        Set<PatientData> patientData = new TreeSet<>();
 
         optPatient.ifPresent(patients -> patients.stream()
                 .filter(Objects::nonNull)

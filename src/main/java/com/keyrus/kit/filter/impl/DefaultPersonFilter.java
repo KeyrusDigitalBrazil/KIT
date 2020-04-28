@@ -1,5 +1,7 @@
 package com.keyrus.kit.filter.impl;
 
+import com.keyrus.kit.convert.DnaConvert;
+import com.keyrus.kit.convert.PatientConvert;
 import com.keyrus.kit.data.PatientDnaData;
 import com.keyrus.kit.filter.PersonFilter;
 import com.keyrus.kit.models.Dna;
@@ -9,6 +11,7 @@ import com.keyrus.kit.models.enums.BloodType;
 import com.keyrus.kit.models.enums.Nationality;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
@@ -18,6 +21,12 @@ import java.util.stream.Collectors;
 public class DefaultPersonFilter implements PersonFilter {
 
     private Set<Patient> patientList;
+
+    @Resource
+    private DnaConvert dnaConvert;
+
+    @Resource
+    private PatientConvert patientConvert;
 
     @Override
     public Patient getPersonByDoc(String doc) {
@@ -30,10 +39,9 @@ public class DefaultPersonFilter implements PersonFilter {
         Optional<Dna> dna = patientList.stream().filter(p -> p.getDna().getId().equals(id)).map(Person::getDna).findFirst();
         Optional<Patient> patient = patientList.stream().filter(p -> p.getDna().getId().equals(id)).findFirst();
 
-        if (patient.isPresent() && dna.isPresent()) {
-            return new PatientDnaData(patient.get(), dna.get());
-        }
-
+        if (patient.isPresent() && dna.isPresent())
+            return new PatientDnaData(patientConvert.convertModel(patient.get()), dnaConvert.convertModel(dna.get()));
+        
         return new PatientDnaData();
     }
 
@@ -42,9 +50,8 @@ public class DefaultPersonFilter implements PersonFilter {
         Optional<Dna> dna = patientList.stream().filter(p -> p.getDna().getDna().equals(code)).map(Person::getDna).findFirst();
         Optional<Patient> patient = patientList.stream().filter(p -> p.getDna().getDna().equals(code)).findFirst();
 
-        if (patient.isPresent() && dna.isPresent()) {
-            return new PatientDnaData(patient.get(), dna.get());
-        }
+        if (patient.isPresent() && dna.isPresent())
+            return new PatientDnaData(patientConvert.convertModel(patient.get()), dnaConvert.convertModel(dna.get()));
 
         return new PatientDnaData();
     }

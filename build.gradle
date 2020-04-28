@@ -39,10 +39,6 @@ dependencies {
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.10'
 }
 
-test {
-    useJUnitPlatform()
-}
-
 tasks.withType(JavaCompile) {
     options.compilerArgs += '--enable-preview'
 }

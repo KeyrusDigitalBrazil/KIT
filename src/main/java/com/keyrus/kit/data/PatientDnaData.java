@@ -1,22 +1,18 @@
 package com.keyrus.kit.data;
 
-import com.keyrus.kit.models.Dna;
-import com.keyrus.kit.models.Patient;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.lang.reflect.Field;
 
-public class PatientDnaData {
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class PatientDnaData implements Comparable<PatientDnaData> {
 
-    private Patient patient;
-    private Dna dna;
-
-    public PatientDnaData() {
-    }
-
-    public PatientDnaData(Patient patient, Dna dna) {
-        this.patient = patient;
-        this.dna = dna;
-    }
+    private PatientData patient;
+    private DnaData dna;
 
     public boolean checkNull() throws IllegalAccessException {
         for (Field f : getClass().getDeclaredFields())
@@ -42,5 +38,10 @@ public class PatientDnaData {
                 "\n Risk: " + patient.getRisk() +
                 "\n Quarantine: " + patient.getQuarantine() +
                 "\n==========================================================================================================================\n";
+    }
+
+    @Override
+    public int compareTo(PatientDnaData o) {
+        return (int) (this.patient.getId() - o.patient.getId());
     }
 }

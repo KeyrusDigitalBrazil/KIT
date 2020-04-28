@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PatientData {
+public class PatientData implements Comparable<PatientData> {
 
     private Long id;
     private String name;
@@ -27,4 +27,8 @@ public class PatientData {
     private Boolean quarantine;
     private Risk risk;
 
+    @Override
+    public int compareTo(PatientData o) {
+        return (int) (this.id - o.getId());
+    }
 }

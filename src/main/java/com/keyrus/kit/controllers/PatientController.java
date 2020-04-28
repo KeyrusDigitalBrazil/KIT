@@ -8,10 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequestMapping(value = "/patient")
@@ -33,9 +30,9 @@ public class PatientController {
 
     @GetMapping(value = "/all")
     @ResponseBody
-    public List<PatientData> getAll() {
+    public Set<PatientData> getAll() {
         Optional<List<Patient>> optPatient = Optional.ofNullable((List<Patient>) patientRepository.getAll());
-        List<PatientData> patientData = new ArrayList<>();
+        Set<PatientData> patientData = new TreeSet<>();
 
         optPatient.ifPresent(patients -> patients.stream()
                 .filter(Objects::nonNull)
